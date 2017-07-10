@@ -38,6 +38,7 @@
     </RelativeLayout>
 
     <com.markchan.ordinaryworld.PagerView
+            android:id="@+id/pager_aty_pager_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -78,6 +79,10 @@
                 android:layout_height="16dp"
                 android:layout_weight="1" />
     </LinearLayout>
+
+    <include
+            android:id="@+id/pager_aty_view_text_alignment_panel"
+            layout="@layout/item_vp_text_alignment" />
 
     <include
             layout="@layout/include_text_panel"

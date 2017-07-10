@@ -17,9 +17,9 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-
 import com.blankj.utilcode.utils.ScreenUtils;
 import com.blankj.utilcode.utils.SizeUtils;
+import timber.log.Timber;
 
 /**
  * Created by Mark on 2017/7/8.
@@ -33,7 +33,7 @@ public class PagerView extends View {
     }
 
     public PagerView(Context context,
-                     @Nullable AttributeSet attrs) {
+            @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
@@ -44,29 +44,35 @@ public class PagerView extends View {
 
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
     public PagerView(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-                     int defStyleRes) {
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    private static final int ALIGNMENT_LEFT = -1;
-    private static final int ALIGNMENT_CENTER = 0;
-    private static final int ALIGNMENT_RIGHT = 1;
+    public static final int TEXT_ALIGNMENT_LEFT = -1;
+    public static final int TEXT_ALIGNMENT_CENTER = 0;
+    public static final int TEXT_ALIGNMENT_RIGHT = 1;
 
-    @IntDef(value = {ALIGNMENT_LEFT, ALIGNMENT_CENTER, ALIGNMENT_RIGHT})
-    public @interface ALIGNMENT {
+    @IntDef(value = {TEXT_ALIGNMENT_LEFT, TEXT_ALIGNMENT_CENTER, TEXT_ALIGNMENT_RIGHT})
+    public @interface TextAlignment {
         // no-op by default
     }
 
-    private static final float DEFAULT_TEXT_SIZE_SP = 22.0F;
-    private static final int DEFAULT_ALPHA = 255;
-
     private static final String DEFAULT_TEXT = "Like Sunday Like Raining";
+    private static final float DEFAULT_TEXT_SIZE_SP = 22.0F;
+    private static final int DEFAULT_TEXT_COLOR = Color.BLACK;
+    private static final int DEFAULT_TEXT_ALPHA = 255;
+    private static final int DEFAULT_TEXT_ALIGNMENT = TEXT_ALIGNMENT_CENTER;
 
     private Rect mTextBorder;
+
+    private Paint mTextBorderPaint;
+
     private Rect mTextRect;
 
+    private Paint mTextRectPaint;
+
     /** 文字 */
-    private String mText = DEFAULT_TEXT;
+    private String mText;
 
     /** 字体路径 */
     private String mTypefaceUri;
@@ -79,11 +85,11 @@ public class PagerView extends View {
     private int mTextColor;
 
     /** 字体透明度 */
-    private int mTextAlpha = DEFAULT_ALPHA;
+    private int mTextAlpha;
 
     /** 对齐方式 */
-    @ALIGNMENT
-    private int mAlignment;
+    @TextAlignment
+    private int mTextAlignment;
 
     /** 文字相对顶部的偏移量 */
     private float mTextOffset;
@@ -106,23 +112,28 @@ public class PagerView extends View {
 
     private TextPaint mTextPaint;
 
-    private Paint mTextBorderPaint;
-
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-                      int defStyleRes) {
-        mTextRect = new Rect();
+            int defStyleRes) {
+        mText = DEFAULT_TEXT;
+        mTextSize = SizeUtils.sp2px(DEFAULT_TEXT_SIZE_SP);
+        mTextColor = DEFAULT_TEXT_COLOR;
+        mTextAlpha = DEFAULT_TEXT_ALPHA;
+        mTextAlignment = DEFAULT_TEXT_ALIGNMENT;
+
+        mTextOffset = 0.0F;
+
         mTextBorder = new Rect();
-
-        mTextPaint = new TextPaint();
-
         mTextBorderPaint = new Paint();
         mTextBorderPaint.setColor(Color.GREEN);
 
-        mText = DEFAULT_TEXT;
-        mTextSize = SizeUtils.sp2px(DEFAULT_TEXT_SIZE_SP);
-        mTextColor = Color.BLACK;
+        mTextRect = new Rect();
+        mTextRectPaint = new Paint();
+        mTextRectPaint.setColor(Color.YELLOW);
 
-        mTextOffset = 0.0F;
+        mTextPaint = new TextPaint();
+        mTextPaint.setTextSize(mTextSize);
+        mTextPaint.setColor(mTextColor);
+        mTextPaint.setAlpha(mTextAlpha);
     }
 
     @Override
@@ -167,30 +178,43 @@ public class PagerView extends View {
         FontMetricsInt fm = mTextPaint.getFontMetricsInt();
         int textHeight = fm.bottom - fm.top;
 
-        int textRectPadding = SizeUtils.dp2px(8);
-        int textPaddingTopAndBottom = SizeUtils.dp2px(8);
-        int textPaddingLeftAndRight = SizeUtils.dp2px(12);
+        int textBorderPadding = SizeUtils.dp2px(8);
+        int textRectPaddingTopAndBottom = SizeUtils.dp2px(8);
+        int textRectPaddingLeftAndRight = SizeUtils.dp2px(12);
 
-        mTextBorder.left = textRectPadding;
-        mTextBorder.right = ScreenUtils.getScreenWidth() - textRectPadding;
-        mTextBorder.top = ScreenUtils.getScreenWidth() / 2 - textHeight / 2 - textRectPadding;
-        mTextBorder.bottom = mTextRect.top + textHeight + textRectPadding;
+        mTextBorder.left = textBorderPadding;
+        mTextBorder.right = ScreenUtils.getScreenWidth() - textBorderPadding;
+        mTextBorder.top = ScreenUtils.getScreenWidth() / 2 - textHeight / 2 - textBorderPadding;
+        mTextBorder.bottom = mTextRect.top + textHeight + textBorderPadding;
 
-//        canvas.drawRect(mTextBorder, mTextBorderPaint);
+        canvas.drawRect(mTextBorder, mTextBorderPaint);
 
-        mTextPaint.setTextAlign(Paint.Align.CENTER);
+        mTextRect.left = mTextBorder.left + textRectPaddingLeftAndRight;
+        mTextRect.right = mTextBorder.right - textRectPaddingLeftAndRight;
+        mTextRect.top = mTextBorder.top + textRectPaddingTopAndBottom;
+        mTextRect.bottom = mTextBorder.bottom - textRectPaddingTopAndBottom;
 
-        mTextRect.left = mTextBorder.left + textPaddingLeftAndRight;
-        mTextRect.right = mTextBorder.right - textPaddingLeftAndRight;
-        mTextRect.top = mTextBorder.top + textPaddingTopAndBottom;
-        mTextRect.bottom = mTextBorder.bottom - textPaddingTopAndBottom;
+        canvas.drawRect(mTextRect, mTextRectPaint);
 
-        Paint paint = new Paint();
-        paint.setColor(Color.GREEN);
-        canvas.drawRect(mTextRect, paint);
-
-        float baseLineX = ScreenUtils.getScreenWidth() / 2;
         float baseLineY = mTextRect.bottom - fm.bottom;
+        float baseLineX;
+        switch (mTextAlignment) {
+            case TEXT_ALIGNMENT_LEFT:
+                mTextPaint.setTextAlign(Paint.Align.LEFT);
+                baseLineX = mTextRect.left;
+                break;
+            case TEXT_ALIGNMENT_RIGHT:
+                mTextPaint.setTextAlign(Paint.Align.RIGHT);
+                baseLineX = mTextRect.right;
+                break;
+            case TEXT_ALIGNMENT_CENTER:
+            default:
+                mTextPaint.setTextAlign(Paint.Align.CENTER);
+                baseLineX = mTextRect.width() / 2;
+                break;
+        }
+
+        Timber.d("BaseLineX = %f, BaseLineY = %f", baseLineX, baseLineY);
 
         canvas.drawText(mText, baseLineX, baseLineY, mTextPaint);
     }
@@ -200,13 +224,21 @@ public class PagerView extends View {
     }
 
     public void setText(String text) {
+        if (TextUtils.isEmpty(text)) {
+            text = DEFAULT_TEXT;
+        }
         mText = text;
     }
 
-    private Typeface getTypeface(String uri) {
-        boolean isAsset = true;
-        if (uri.equals("xx")) {
-        }
-        return null;
+    @Override
+    @TextAlignment
+    public int getTextAlignment() {
+        return mTextAlignment;
+    }
+
+    @Override
+    public void setTextAlignment(@TextAlignment int textAlignment) {
+        mTextAlignment = textAlignment;
+        invalidate();
     }
 }
