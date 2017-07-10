@@ -1,6 +1,6 @@
 package com.markchan.ordinaryworld.layout;
 
-import static com.markchan.ordinaryworld.layout.TextHelper.vectorToString;
+import static com.markchan.ordinaryworld.TextHelper.vectorToString;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -14,6 +14,9 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.markchan.ordinaryworld.TextHelper;
+
 import java.util.Vector;
 
 /**

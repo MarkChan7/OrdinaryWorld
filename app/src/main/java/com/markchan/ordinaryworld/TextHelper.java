@@ -1,4 +1,4 @@
-package com.markchan.ordinaryworld.layout;
+package com.markchan.ordinaryworld;
 
 import android.graphics.Paint;
 import android.text.TextPaint;
@@ -67,7 +67,7 @@ public class TextHelper {
         return fm.bottom - fm.top;
     }
 
-    public static float getFontHeighet( Paint paint) {
+    public static float getFontHeight( Paint paint) {
         Paint.FontMetrics fm = paint.getFontMetrics();
         return fm.bottom - fm.top;
     }
