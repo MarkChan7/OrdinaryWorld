@@ -13,20 +13,21 @@ public class TextHelper {
     /**
      * 将文字拆分成每一行放到Vector里
      */
-    public static Vector<String> getTextLinesVector(TextPaint paint, String text, float maxHeight, float maxWidth) {
+    public static Vector<String> getTextLinesVector(TextPaint textPaint, String text,
+            float maxWidth, float maxHeight) {
         Vector<String> vector = new Vector<>();
         int line = 0;
         char ch;
         int w = 0;
         int newLineStartPos = 0;
-        float fontHeight = getFontHeight(paint);
+        float fontHeight = getFontHeight(textPaint);
         int maxLine = (int) (maxHeight / fontHeight);
         int count = text.length();
         for (int i = 0; i < count; i++) {
             ch = text.charAt(i);
             float[] widths = new float[1];
             String str = String.valueOf(ch);
-            paint.getTextWidths(str, widths);
+            textPaint.getTextWidths(str, widths);
             if (ch == '\n') {
                 line++;
                 vector.addElement(text.substring(newLineStartPos, i));
@@ -62,12 +63,12 @@ public class TextHelper {
         return sb.toString();
     }
 
-    public static float getFontHeight(TextPaint paint) {
-        Paint.FontMetrics fm = paint.getFontMetrics();
+    public static float getFontHeight(TextPaint textPaint) {
+        Paint.FontMetrics fm = textPaint.getFontMetrics();
         return fm.bottom - fm.top;
     }
 
-    public static float getFontHeight( Paint paint) {
+    public static float getFontHeight(Paint paint) {
         Paint.FontMetrics fm = paint.getFontMetrics();
         return fm.bottom - fm.top;
     }

@@ -1,6 +1,7 @@
 package com.markchan.ordinaryworld;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import com.markchan.ordinaryworld.panel.TextAlignmentPanel;
@@ -8,6 +9,8 @@ import com.markchan.ordinaryworld.panel.TextAlignmentPanel;
 public class PagerActivity extends AppCompatActivity {
 
     private PagerView mPagerView;
+
+    private ViewPager mTextPanelViewPager;
     private View mTextAlignmentPanelView;
 
     private TextAlignmentPanel mTextAlignmentPanel;
