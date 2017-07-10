@@ -29,7 +29,8 @@ public class DrawCenterAtSpecPosView extends View {
     }
 
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
-    public DrawCenterAtSpecPosView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public DrawCenterAtSpecPosView(Context context, AttributeSet attrs, int defStyleAttr,
+                                   int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -55,8 +56,8 @@ public class DrawCenterAtSpecPosView extends View {
         super.onDraw(canvas);
         canvas.drawColor(Color.WHITE);
 
-        // --------------------------------------------------
         String text = "asdfghjkl";
+
         int centerY = 200;
         int baseLineX = 0;
 
@@ -65,13 +66,13 @@ public class DrawCenterAtSpecPosView extends View {
 
         Paint.FontMetricsInt fm = mPaint.getFontMetricsInt();
 
+        int baseLineY = centerY + (fm.bottom - fm.top) / 2 - fm.bottom;
+        canvas.drawText(text, baseLineX, baseLineY, mPaint);
+
         // center line
         canvas.drawLine(baseLineX, centerY, getWidth(), centerY, mCenterLinePaint);
 
         // base line
-        int baseLineY = centerY + (fm.bottom - fm.top) / 2 - fm.bottom;
         canvas.drawLine(baseLineX, baseLineY, getWidth(), baseLineY, mBaseLinePaint);
-
-        canvas.drawText(text, baseLineX, baseLineY, mPaint);
     }
 }

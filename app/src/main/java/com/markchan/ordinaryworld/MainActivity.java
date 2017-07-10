@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
 import com.markchan.ordinaryworld.app.DrawAtSpecPosActivity;
 import com.markchan.ordinaryworld.app.DrawCenterAtRectActivity;
 import com.markchan.ordinaryworld.app.DrawCenterAtSpecPosActivity;
@@ -16,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void pager(View v) {
+        startActivity(new Intent(this, PagerActivity.class));
     }
 
     public void basicDrawText(View v) {

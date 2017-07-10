@@ -30,7 +30,8 @@ public class DrawAtSpecPosView extends View {
     }
 
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
-    public DrawAtSpecPosView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public DrawAtSpecPosView(Context context, AttributeSet attrs, int defStyleAttr,
+                             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -56,28 +57,29 @@ public class DrawAtSpecPosView extends View {
         super.onDraw(canvas);
         canvas.drawColor(Color.WHITE);
 
-        // --------------------------------------------------
-        String text = "asdfghjkl";
-        int top = 200;
-        int x = 0;
-
         mPaint.setTextSize(200);
         mPaint.setTextAlign(Paint.Align.LEFT);
+
+        String text = "asdfghjkl";
+
+        int topCoordX = 0;
+        int topCoordY = 200;
+
+        // top line
+        canvas.drawLine(topCoordX, topCoordY, getWidth(), topCoordY, mTopLinePaint);
 
         Paint.FontMetricsInt fm = mPaint.getFontMetricsInt();
 
         // text bounds
         float width = (int) mPaint.measureText(text);
-        RectF rectF = new RectF(x, top, x + width, top + fm.bottom - fm.top);
+        int textHeight = fm.bottom - fm.top;
+        RectF rectF = new RectF(topCoordX, topCoordY, topCoordX + width, topCoordY + textHeight);
         canvas.drawRect(rectF, mBoundsPaint);
 
-        // top line
-        canvas.drawLine(x, top, getWidth(), top, mTopLinePaint);
+        int baseLineY = topCoordY - fm.top;
 
-        // base line
-        int baseLineY = top - fm.top;
-        canvas.drawLine(x, baseLineY, getWidth(), baseLineY, mBaseLinePaint);
+        canvas.drawText(text, topCoordX, baseLineY, mPaint);
 
-        canvas.drawText(text, x, baseLineY, mPaint);
+        canvas.drawLine(topCoordX, baseLineY, getWidth(), baseLineY, mBaseLinePaint);
     }
 }

@@ -8,8 +8,7 @@ import timber.log.Timber.DebugTree;
 /**
  * Created by Mark on 17/1/19.
  */
-
-public class App extends Application {
+public class OrdinaryWorldApplication extends Application {
 
     @Override
     public void onCreate() {

@@ -30,7 +30,8 @@ public class DrawCenterAtRectView extends View {
     }
 
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
-    public DrawCenterAtRectView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public DrawCenterAtRectView(Context context, AttributeSet attrs, int defStyleAttr,
+                                int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -50,20 +51,29 @@ public class DrawCenterAtRectView extends View {
         super.onDraw(canvas);
         canvas.drawColor(Color.WHITE);
 
-        // --------------------------------------------------
-        String text = "asdfghjkl";
-//        String text = "asdfghjkl\nasd";
         mPaint.setColor(Color.BLACK);
         mPaint.setTextSize(120);
-        mPaint.setTextAlign(Paint.Align.CENTER);
 
         Paint.FontMetrics fm = mPaint.getFontMetrics();
         float textHeight = fm.descent - fm.ascent;
 
+        String text = "asdfghjkl";
+
         // 绘制文字的矩形框范围
-        RectF rectF = new RectF(200, 200, 800, 200 + textHeight);
+        float left = 200;
+        float top = 200;
+        float right = 800;
+        float bottom = 200 + textHeight;
+        RectF rectF = new RectF(left, top, right, bottom + textHeight);
+
         canvas.drawRect(rectF, mBoundsPaint);
 
-        canvas.drawText(text, rectF.left + rectF.width() / 2, rectF.bottom - fm.descent, mPaint);
+        mPaint.setTextAlign(Paint.Align.CENTER);
+
+        // centerX of rect
+        float baseLineX = rectF.left + rectF.width() / 2;
+        // baseLineY + fm.descent = rect.bottom
+        float baseLineY = rectF.bottom - fm.descent;
+        canvas.drawText(text, baseLineX, baseLineY, mPaint);
     }
 }

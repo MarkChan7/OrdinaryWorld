@@ -10,12 +10,12 @@ import android.os.Build.VERSION_CODES;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
-import com.blankj.utilcode.utils.ScreenUtils;
+
+import timber.log.Timber;
 
 /**
  * Created by Mark on 17/1/19.
  */
-
 public class TextBoundsView extends View {
 
     public TextBoundsView(Context context) {
@@ -46,11 +46,14 @@ public class TextBoundsView extends View {
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
         mHelperPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mHelperPaint.setColor(Color.RED);
         mHelperPaint.setStrokeWidth(1);
+
         mBoundsPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBoundsPaint.setColor(Color.YELLOW);
+
         mWrapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mWrapPaint.setColor(Color.GREEN);
     }
@@ -67,6 +70,7 @@ public class TextBoundsView extends View {
         float baseLineY = 200;
 
         Paint.FontMetrics fm = mPaint.getFontMetrics();
+
         float topCoordY = baseLineY + fm.top;
         float ascentCoordY = baseLineY + fm.ascent;
         float descentCoordY = baseLineY + fm.descent;
@@ -74,20 +78,26 @@ public class TextBoundsView extends View {
 
         // text bounds
         float width = (int) mPaint.measureText(text);
-        RectF rectF = new RectF(baseLineX, topCoordY, baseLineY + width, bottomCoordY);
+        RectF rectF = new RectF(baseLineX, topCoordY, baseLineX + width, bottomCoordY);
         canvas.drawRect(rectF, mBoundsPaint);
 
         // wrap bounds
         Rect wrapBounds = new Rect();
         mPaint.getTextBounds(text, 0, text.length(), wrapBounds);
+        // 以(baseLineX, baseLineY)作为坐标系, X轴向下为+, Y轴向右为+
+        // [6,-92][479,26]
+        Timber.d("TextBounds is " + wrapBounds.toShortString());
+
+        // 转换为Android坐标系的坐标, 在X轴的坐标统一为baseLineX
         wrapBounds.top = (int) (baseLineY + wrapBounds.top);
         wrapBounds.bottom = (int) (baseLineY + wrapBounds.bottom);
+
         mPaint.setColor(Color.RED);
         canvas.drawRect(wrapBounds, mWrapPaint);
 
-        // basic line
-        canvas.drawLine(baseLineX, baseLineY, baseLineX + ScreenUtils.getScreenWidth(), baseLineY, mHelperPaint);
-
         canvas.drawText(text, baseLineX, baseLineY, mPaint);
+
+        // base line
+        canvas.drawLine(baseLineX, baseLineY, baseLineX + getWidth(), baseLineY, mHelperPaint);
     }
 }

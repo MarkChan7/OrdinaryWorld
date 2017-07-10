@@ -9,7 +9,6 @@ import android.os.Build.VERSION_CODES;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
-import com.blankj.utilcode.utils.ScreenUtils;
 
 /**
  * Created by Mark on 17/1/19.
@@ -54,32 +53,38 @@ public class TextAlignView extends View {
 
         mPaint.setColor(Color.BLACK);
         mPaint.setTextSize(120);
+
         String text = "asdfghjkl";
-        float x = getWidth() / 2;
+
+        float centerX = getWidth() / 2;
         float y = 200;
 
-        // center vertical line
+        // horizontal center line
         canvas.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight(), mHelperPaint);
 
-        // basic line
+        // left(default)
+        canvas.drawLine(centerX, y, centerX + getWidth(), y, mHelperPaint);
         mPaint.setTextAlign(Align.LEFT);
-        canvas.drawLine(x, y, x + ScreenUtils.getScreenWidth(), y, mHelperPaint);
-        canvas.drawText(text, x, y, mPaint);
+        canvas.drawText(text, centerX, y, mPaint);
 
-        // center
         canvas.save();
         canvas.translate(0, 200);
+
+        // center
+        canvas.drawLine(centerX, y, centerX + getWidth(), y, mHelperPaint);
         mPaint.setTextAlign(Align.CENTER);
-        canvas.drawLine(x, y, x + ScreenUtils.getScreenWidth(), y, mHelperPaint);
-        canvas.drawText(text, x, y, mPaint);
+        canvas.drawText(text, centerX, y, mPaint);
+
         canvas.restore();
 
-        // right
         canvas.save();
         canvas.translate(0, 400);
+
+        // right
+        canvas.drawLine(centerX, y, centerX + getWidth(), y, mHelperPaint);
         mPaint.setTextAlign(Align.RIGHT);
-        canvas.drawLine(x, y, x + ScreenUtils.getScreenWidth(), y, mHelperPaint);
-        canvas.drawText(text, x, y, mPaint);
+        canvas.drawText(text, centerX, y, mPaint);
+
         canvas.restore();
     }
 }

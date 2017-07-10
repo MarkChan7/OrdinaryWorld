@@ -29,7 +29,8 @@ public class BasicDrawTextView extends View {
     }
 
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
-    public BasicDrawTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public BasicDrawTextView(Context context, AttributeSet attrs, int defStyleAttr,
+                             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -52,8 +53,10 @@ public class BasicDrawTextView extends View {
 
         mPaint.setColor(Color.BLACK);
         mPaint.setTextSize(120);
+
         String text = "asdfghjkl";
-        float baseLineX = 0 ;
+
+        float baseLineX = 0;
         float baseLineY = 200;
 
         // basic line
