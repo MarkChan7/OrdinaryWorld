@@ -52,6 +52,7 @@ public class DrawCenterAtRectView extends View {
 
         // --------------------------------------------------
         String text = "asdfghjkl";
+//        String text = "asdfghjkl\nasd";
         mPaint.setColor(Color.BLACK);
         mPaint.setTextSize(120);
         mPaint.setTextAlign(Paint.Align.CENTER);

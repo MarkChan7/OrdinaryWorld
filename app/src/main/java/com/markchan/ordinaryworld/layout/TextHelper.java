@@ -66,4 +66,9 @@ public class TextHelper {
         Paint.FontMetrics fm = paint.getFontMetrics();
         return fm.bottom - fm.top;
     }
+
+    public static float getFontHeighet( Paint paint) {
+        Paint.FontMetrics fm = paint.getFontMetrics();
+        return fm.bottom - fm.top;
+    }
 }

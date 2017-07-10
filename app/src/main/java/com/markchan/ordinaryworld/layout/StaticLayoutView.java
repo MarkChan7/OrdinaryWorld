@@ -63,8 +63,7 @@ public class StaticLayoutView extends View {
         String text = "这是一串需要进行换行显示的文字。这是一串需要进行换行显示的文字。这是一串需要进行换行显示的文字。";
 
         // 文字自动换行
-        StaticLayout layout = new StaticLayout(text, mPaint, rect.width(), Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F,
-                true);
+        StaticLayout layout = new StaticLayout(text, mPaint, rect.width(), Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F, true);
         canvas.save();
         mPaint.setTextAlign(Paint.Align.LEFT);
         // 文字的位置
