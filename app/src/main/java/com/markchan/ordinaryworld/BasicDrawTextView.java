@@ -53,7 +53,7 @@ public class BasicDrawTextView extends View {
         mPaint.setColor(Color.BLACK);
         mPaint.setTextSize(120);
         String text = "asdfghjkl";
-        float baseLineX = 0;
+        float baseLineX = 0 ;
         float baseLineY = 200;
 
         // basic line
