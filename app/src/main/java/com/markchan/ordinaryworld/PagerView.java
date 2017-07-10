@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Paint.FontMetricsInt;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -17,6 +18,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.blankj.utilcode.utils.ScreenUtils;
 import com.blankj.utilcode.utils.SizeUtils;
 
 /**
@@ -55,6 +57,7 @@ public class PagerView extends View {
         // no-op by default
     }
 
+    private static final float DEFAULT_TEXT_SIZE_SP = 22.0F;
     private static final int DEFAULT_ALPHA = 255;
 
     private static final String DEFAULT_TEXT = "Like Sunday Like Raining";
@@ -103,6 +106,8 @@ public class PagerView extends View {
 
     private TextPaint mTextPaint;
 
+    private Paint mTextBorderPaint;
+
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
                       int defStyleRes) {
         mTextRect = new Rect();
@@ -110,9 +115,13 @@ public class PagerView extends View {
 
         mTextPaint = new TextPaint();
 
-        mText = "Perfect";
-        mTextSize = 120.0F;
+        mTextBorderPaint = new Paint();
+        mTextBorderPaint.setColor(Color.GREEN);
+
+        mText = DEFAULT_TEXT;
+        mTextSize = SizeUtils.sp2px(DEFAULT_TEXT_SIZE_SP);
         mTextColor = Color.BLACK;
+
         mTextOffset = 0.0F;
     }
 
@@ -131,10 +140,6 @@ public class PagerView extends View {
     protected void onDraw(Canvas canvas) {
         if (DEBUG) {
             canvas.drawARGB(64, 255, 0, 0);
-        }
-
-        if (TextUtils.isEmpty(mText)) {
-            mText = DEFAULT_TEXT;
         }
 
         if (!TextUtils.isEmpty(mTypefaceUri)) {
@@ -163,16 +168,29 @@ public class PagerView extends View {
         int textHeight = fm.bottom - fm.top;
 
         int textRectPadding = SizeUtils.dp2px(8);
-        int textPaddingTopAndBottom =  SizeUtils.dp2px(8);
-        int textPaddingLeftAndRight =  SizeUtils.dp2px(12);
+        int textPaddingTopAndBottom = SizeUtils.dp2px(8);
+        int textPaddingLeftAndRight = SizeUtils.dp2px(12);
 
         mTextBorder.left = textRectPadding;
-        mTextBorder.right = getWidth() - textRectPadding;
-        mTextBorder.top = getHeight() / 2 - textHeight / 2 - textRectPadding;
+        mTextBorder.right = ScreenUtils.getScreenWidth() - textRectPadding;
+        mTextBorder.top = ScreenUtils.getScreenWidth() / 2 - textHeight / 2 - textRectPadding;
         mTextBorder.bottom = mTextRect.top + textHeight + textRectPadding;
 
-        float baseLineX = 0;
-        float baseLineY = 0;
+//        canvas.drawRect(mTextBorder, mTextBorderPaint);
+
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
+
+        mTextRect.left = mTextBorder.left + textPaddingLeftAndRight;
+        mTextRect.right = mTextBorder.right - textPaddingLeftAndRight;
+        mTextRect.top = mTextBorder.top + textPaddingTopAndBottom;
+        mTextRect.bottom = mTextBorder.bottom - textPaddingTopAndBottom;
+
+        Paint paint = new Paint();
+        paint.setColor(Color.GREEN);
+        canvas.drawRect(mTextRect, paint);
+
+        float baseLineX = ScreenUtils.getScreenWidth() / 2;
+        float baseLineY = mTextRect.bottom - fm.bottom;
 
         canvas.drawText(mText, baseLineX, baseLineY, mTextPaint);
     }
