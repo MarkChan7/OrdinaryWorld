@@ -5,4 +5,11 @@
     <string name="pager_aty_background_photo">底图</string>
     <string name="pager">Pager</string>
     <string name="complete">Complete</string>
+
+    <array name="text_panel_title_array">
+        <item>字体</item>
+        <item>字号</item>
+        <item>位移</item>
+        <item>颜色</item>
+    </array>
 </resources>

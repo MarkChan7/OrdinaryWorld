@@ -8,13 +8,14 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.markchan.ordinaryworld.R;
-import com.ogaclejapan.smarttablayout.SmartTabLayout;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import com.markchan.ordinaryworld.R;
+import com.markchan.ordinaryworld.adapter.TextPanelPagerAdapter;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Mark Chan <a href="markchan2gm@gmail.com">Contact me.</a>
@@ -32,12 +33,36 @@ public class TextPanelFragment extends Fragment {
 
     private Unbinder mUnbinder;
 
+    private TextPanelPagerAdapter mTextPanelPagerAdapter;
+    private List<View> mViews;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_text_panel, container, false);
         mUnbinder = ButterKnife.bind(this, view);
+
+        mViews = new ArrayList<>();
+        View typefacePanelView = LayoutInflater.from(getActivity())
+                .inflate(R.layout.item_vp_typeface, container, false);
+        mViews.add(typefacePanelView);
+        View textSizePanelView = LayoutInflater.from(getActivity())
+                .inflate(R.layout.item_vp_text_size, container, false);
+        mViews.add(textSizePanelView);
+        View textAlignmentPanelView = LayoutInflater.from(getActivity())
+                .inflate(R.layout.item_vp_text_alignment, container, false);
+        mViews.add(textAlignmentPanelView);
+        View textColorPanel = LayoutInflater.from(getActivity())
+                .inflate(R.layout.item_vp_text_color, container, false);
+        mViews.add(textColorPanel);
+
+        mTextPanelPagerAdapter = new TextPanelPagerAdapter(getActivity(), mViews);
+
+        mViewPager.setAdapter(mTextPanelPagerAdapter);
+
+        mViewPagerTab.setViewPager(mViewPager);
+
         return view;
     }
 
