@@ -236,7 +236,7 @@ public class PagerView extends View {
                 case TEXT_ALIGNMENT_CENTER:
                 default:
                     mTextPaint.setTextAlign(Paint.Align.CENTER);
-                    baseLineX = mTextRect.width() / 2;
+                    baseLineX = ScreenUtils.getScreenWidth() / 2;
                     break;
             }
 
