@@ -4,8 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetricsInt;
+import android.graphics.Paint.Style;
+import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Build.VERSION_CODES;
@@ -17,10 +21,13 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+
 import com.blankj.utilcode.utils.ScreenUtils;
 import com.blankj.utilcode.utils.SizeUtils;
 import com.github.lzyzsd.randomcolor.RandomColor;
+
 import java.util.Vector;
+
 import timber.log.Timber;
 
 /**
@@ -35,7 +42,7 @@ public class PagerView extends View {
     }
 
     public PagerView(Context context,
-            @Nullable AttributeSet attrs) {
+                     @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
@@ -46,7 +53,7 @@ public class PagerView extends View {
 
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
     public PagerView(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+                     int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -123,10 +130,14 @@ public class PagerView extends View {
 
     private TextPaint mTextPaint;
 
+    private Paint mTextBorderPaint;
+
     private Paint mHelperPaint;
 
+    private boolean mShowDashRect = false;
+
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+                      int defStyleRes) {
         mText = DEFAULT_TEXT;
         mTextSize = DEFAULT_TEXT_SIZE;
         mTextColor = DEFAULT_TEXT_COLOR;
@@ -145,6 +156,14 @@ public class PagerView extends View {
         mTextPaint.setTextSize(mTextSize);
         mTextPaint.setColor(mTextColor);
         mTextPaint.setAlpha(mTextAlpha);
+
+        mTextBorderPaint = new Paint();
+        mTextBorderPaint.setStyle(Style.STROKE);
+        mTextBorderPaint.setStrokeWidth(SizeUtils.dp2px(1.0F));
+        float interval = SizeUtils.dp2px(4.0F);
+        DashPathEffect dashPathEffect = new DashPathEffect(
+                new float[]{interval, interval, interval, interval}, 0);
+        mTextBorderPaint.setPathEffect(dashPathEffect);
 
         FontMetricsInt fm = mTextPaint.getFontMetricsInt();
         int textHeight = fm.bottom - fm.top;
@@ -167,6 +186,9 @@ public class PagerView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        canvas.setDrawFilter(
+                new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
+
         if (DEBUG) {
             canvas.drawARGB(64, 255, 0, 0);
         }
@@ -211,6 +233,16 @@ public class PagerView extends View {
         if (DEBUG) {
             mHelperPaint.setColor(Color.GRAY);
             canvas.drawRect(mTextBorder, mHelperPaint);
+        }
+
+        if (mShowDashRect) { // draw dash rectangle
+            Path textBorderPath = new Path();
+            textBorderPath.moveTo(mTextBorder.left, mTextBorder.top);
+            textBorderPath.lineTo(mTextBorder.right, mTextBorder.top);
+            textBorderPath.lineTo(mTextBorder.right, mTextBorder.bottom);
+            textBorderPath.lineTo(mTextBorder.left, mTextBorder.bottom);
+            textBorderPath.close();
+            canvas.drawPath(textBorderPath, mTextBorderPaint);
         }
 
         for (int i = 0; i < textLinesVector.size(); i++) {
