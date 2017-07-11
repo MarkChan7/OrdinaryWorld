@@ -1,99 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="com.markchan.ordinaryworld.PagerActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.markchan.ordinaryworld.PagerActivity">
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:paddingLeft="@dimen/title_bar_padding_left_and_right"
+        android:paddingRight="@dimen/title_bar_padding_left_and_right"
+        android:background="@color/title_bar_background">
 
-        <android.support.v7.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:text="Discard" />
+        <android.support.v7.widget.AppCompatImageButton
+            style="@style/TransparentButtonStyle"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/pager_aty_acib_discard"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_discard_24dp" />
 
         <TextView
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Pager"
-                android:textSize="22sp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/pager"
+            android:id="@+id/pager_aty_tv_title"
+            android:textColor="@color/title_bar_title_text_color"
+            android:textSize="@dimen/title_bar_title_text_size" />
 
-        <android.support.v7.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="Save" />
+        <android.support.v7.widget.AppCompatImageButton
+            style="@style/TransparentButtonStyle"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/pager_aty_acib_save"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_save_24dp" />
 
     </RelativeLayout>
 
     <com.markchan.ordinaryworld.PagerView
-            android:id="@+id/pager_aty_pager_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:id="@+id/pager_aty_pager_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/pager_aty_ll_panels"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/panel_background"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
-        <android.support.v4.widget.Space
+            <android.support.v4.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="16dp"
                 android:layout_weight="1" />
 
-        <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="文字" />
+                android:orientation="vertical">
 
-        <android.support.v4.widget.Space
+                <TextView
+                    style="@style/PanelTitleStyle"
+                    android:text="@string/pager_aty_text" />
+
+                <AppCompatImageButton
+                    android:id="@+id/pager_aty_ib_text_panel"
+                    android:contentDescription="@string/pager_aty_text"
+                    style="@style/PanelIconStyle"
+                    android:src="@drawable/ic_text_56dp" />
+
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
                 android:layout_width="16dp"
                 android:layout_height="16dp" />
 
-        <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="底色" />
-        <android.support.v4.widget.Space
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/PanelTitleStyle"
+                    android:text="@string/pager_aty_background_color" />
+
+                <AppCompatImageButton
+                    android:id="@+id/pager_aty_ib_bg_color_panel"
+                    android:contentDescription="@string/pager_aty_background_color"
+                    style="@style/PanelIconStyle"
+                    android:src="@drawable/ic_background_color_56dp" />
+
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
                 android:layout_width="16dp"
                 android:layout_height="16dp" />
 
-        <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="底图" />
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:orientation="vertical">
 
-        <android.support.v4.widget.Space
+                <TextView
+                    style="@style/PanelTitleStyle"
+                    android:text="@string/pager_aty_background_photo" />
+
+                <AppCompatImageButton
+                    android:id="@+id/pager_aty_ib_bg_photo_panel"
+                    android:contentDescription="@string/pager_aty_background_photo"
+                    style="@style/PanelIconStyle"
+                    android:src="@drawable/ic_background_photo_56dp" />
+
+            </LinearLayout>
+
+            <android.support.v4.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="16dp"
                 android:layout_weight="1" />
-    </LinearLayout>
 
-    <include
-            android:id="@+id/pager_aty_view_text_alignment_panel"
-            layout="@layout/item_vp_text_alignment" />
+        </LinearLayout>
 
-    <include
-            layout="@layout/include_text_panel"
-            android:visibility="invisible" />
+        <FrameLayout
+            android:id="@+id/pager_aty_fl_panel_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
-    <include
-            layout="@layout/include_background_color_panel"
-            android:visibility="invisible" />
-
-    <include
-            layout="@layout/include_background_image_panel"
-            android:visibility="invisible" />
+    </FrameLayout>
 
 </LinearLayout>
