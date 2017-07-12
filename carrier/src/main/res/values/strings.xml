@@ -1,10 +1,14 @@
 <resources>
-    <string name="app_name">Carrier</string>
+    <string name="app_name">简图</string>
+
     <string name="pager_aty_text">文字</string>
     <string name="pager_aty_background_color">底色</string>
     <string name="pager_aty_background_photo">底图</string>
-    <string name="pager">Pager</string>
-    <string name="complete">Complete</string>
+
+    <string name="default_text">写在这里</string>
+
+    <string name="complete">完成</string>
+    <string name="confirm">确认</string>
 
     <array name="text_panel_title_array">
         <item>字体</item>
@@ -12,4 +16,51 @@
         <item>位移</item>
         <item>颜色</item>
     </array>
+
+    <string name="text_panel_text_size">文字大小</string>
+    <string name="text_panel_drag_text_tips">上下可以拖动简图的文字</string>
+    <string name="text_panel_drag_text_color">颜色</string>
+    <string name="text_panel_drag_text_alpha">透明度</string>
+
+    <string name="background_color_panel_color">颜色</string>
+    <string-array name="background_color_panel_color_name_array">
+        <item>纯白</item>
+        <item>乌云</item>
+        <item>墨黑</item>
+        <item>午夜</item>
+        <item>香草</item>
+        <item>抹茶</item>
+        <item>咖啡</item>
+        <item>红泥</item>
+        <item>玫瑰</item>
+        <item>甜橙</item>
+        <item>芒果</item>
+        <item>蜜桃</item>
+        <item>薰衣草</item>
+        <item>晴天</item>
+        <item>青葱</item>
+    </string-array>
+    <string name="background_color_panel_vein">纹理</string>
+    <array name="background_color_panel_vein_name_array">
+        <item>纯平</item>
+        <item>石灰</item>
+        <item>笔记本</item>
+        <item>棉布</item>
+        <item>传统</item>
+        <item>牛皮纸</item>
+        <item>油漆</item>
+        <item>粉笔</item>
+        <item>毛发</item>
+        <item>针织</item>
+        <item>折纸</item>
+        <item>作业本</item>
+        <item>水渍</item>
+        <item>粉末</item>
+        <item>纤维</item>
+        <item>牛仔</item>
+    </array>
+
+
+    <string name="font_manager">字体管理</string>
+    <string name="font_manager_item">字体下载与管理</string>
 </resources>

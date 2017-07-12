@@ -1,4 +1,4 @@
-package com.markchan.carrier;
+package com.markchan.carrier.core;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -25,6 +25,8 @@ import android.view.View;
 import com.blankj.utilcode.utils.ScreenUtils;
 import com.blankj.utilcode.utils.SizeUtils;
 import com.github.lzyzsd.randomcolor.RandomColor;
+import com.markchan.carrier.util.Scheme;
+import com.markchan.carrier.util.TextHelper;
 
 import java.util.Vector;
 
@@ -67,6 +69,8 @@ public class PagerView extends View {
         // no-op by default
     }
 
+    private static final int DEFAULT_BACKGROUND_COLOR = Color.WHITE;
+
     private static final String DEFAULT_TEXT = "Like Sunday Like Raining\nToday is Sunnday";
     private static final float DEFAULT_TEXT_SIZE = SizeUtils.dp2px(22);
     private static final int DEFAULT_TEXT_COLOR = Color.BLACK;
@@ -93,7 +97,7 @@ public class PagerView extends View {
     private String mText;
 
     /** 字体路径 */
-    private String mTypefaceUri;
+    private String mTypefaceUrl;
 
     /** 字体大小 */
     private float mTextSize;
@@ -112,14 +116,14 @@ public class PagerView extends View {
     /** 文字相对顶部的偏移量 */
     private int mTextOffset;
 
-    /** 纹理颜色 */
+    /** 背景颜色 */
     @ColorInt
-    private int mVeinColor;
+    private int mBackgroundColor;
 
     /** 纹理 */
     private Bitmap mVeinBitmap;
 
-    /** 背景 */
+    /** 背景图片 */
     private Bitmap mBackgroundBitmap;
 
     /** 背景高斯模糊半径 */
@@ -136,8 +140,12 @@ public class PagerView extends View {
 
     private boolean mShowDashRect = false;
 
+    private boolean mResetOffsetFlag = false;
+
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
                       int defStyleRes) {
+        mBackgroundColor = DEFAULT_BACKGROUND_COLOR;
+
         mText = DEFAULT_TEXT;
         mTextSize = DEFAULT_TEXT_SIZE;
         mTextColor = DEFAULT_TEXT_COLOR;
@@ -165,11 +173,6 @@ public class PagerView extends View {
                 new float[]{interval, interval, interval, interval}, 0);
         mTextBorderPaint.setPathEffect(dashPathEffect);
 
-        FontMetricsInt fm = mTextPaint.getFontMetricsInt();
-        int textHeight = fm.bottom - fm.top;
-
-        mTextOffset = ScreenUtils.getScreenWidth() / 2 - textHeight / 2;
-
         mHelperPaint = new Paint();
     }
 
@@ -189,15 +192,13 @@ public class PagerView extends View {
         canvas.setDrawFilter(
                 new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
 
-        if (DEBUG) {
-            canvas.drawARGB(64, 255, 0, 0);
-        }
+        canvas.drawColor(mBackgroundColor);
 
-        if (!TextUtils.isEmpty(mTypefaceUri)) {
-            Scheme scheme = Scheme.ofUri(mTypefaceUri);
+        if (!TextUtils.isEmpty(mTypefaceUrl)) {
+            Scheme scheme = Scheme.ofUri(mTypefaceUrl);
             if (scheme == Scheme.ASSETS || scheme == Scheme.FILE) {
                 try {
-                    String path = scheme.crop(mTypefaceUri);
+                    String path = scheme.crop(mTypefaceUrl);
                     Typeface typeface;
                     if (scheme == Scheme.ASSETS) {
                         typeface = Typeface.createFromAsset(getContext().getAssets(), path);
@@ -225,7 +226,14 @@ public class PagerView extends View {
 
         int lines = textLinesVector.size();
 
+        // change by user touch
         mTextOffset = ScreenUtils.getScreenWidth() / 2 - textHeight * lines / 2;
+        mTextOffset /= 2;
+
+        if (mResetOffsetFlag) {
+            mTextOffset = ScreenUtils.getScreenWidth() / 2 - textHeight * lines / 2;
+            mResetOffsetFlag = false;
+        }
 
         mTextBorder.top = mTextOffset - TEXT_PADDING_TOP_AND_BOTTOM;
         mTextBorder.bottom = mTextOffset + textHeight * lines + TEXT_PADDING_TOP_AND_BOTTOM;
@@ -290,6 +298,42 @@ public class PagerView extends View {
         invalidate();
     }
 
+    public String getTypefaceUrl() {
+        return mTypefaceUrl;
+    }
+
+    public void setTypefaceUrl(String typefaceUrl) {
+        mTypefaceUrl = typefaceUrl;
+        invalidate();
+    }
+
+    public float getTextSize() {
+        return mTextSize;
+    }
+
+    public void setTextSize(float textSize) {
+        mTextSize = textSize;
+        invalidate();
+    }
+
+    public int getTextColor() {
+        return mTextColor;
+    }
+
+    public void setTextColor(int textColor) {
+        mTextColor = textColor;
+        invalidate();
+    }
+
+    public int getTextAlpha() {
+        return mTextAlpha;
+    }
+
+    public void setTextAlpha(int textAlpha) {
+        mTextAlpha = textAlpha;
+        invalidate();
+    }
+
     @Override
     @TextAlignment
     public int getTextAlignment() {
@@ -299,6 +343,11 @@ public class PagerView extends View {
     @Override
     public void setTextAlignment(@TextAlignment int textAlignment) {
         mTextAlignment = textAlignment;
+        invalidate();
+    }
+
+    public void resetTextOffset() {
+        mResetOffsetFlag = true;
         invalidate();
     }
 }

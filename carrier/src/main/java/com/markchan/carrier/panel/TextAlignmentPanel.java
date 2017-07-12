@@ -1,46 +1,58 @@
 package com.markchan.carrier.panel;
 
+import android.content.Context;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 
-import com.markchan.carrier.PagerView;
 import com.markchan.carrier.R;
+import com.markchan.carrier.core.PagerView;
+import com.markchan.carrier.event.PagerViewEventBus;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Mark on 2017/7/11.
  */
-public class TextAlignmentPanel implements OnClickListener {
+public class TextAlignmentPanel extends AbsPanel {
 
-    private final PagerView mPagerView;
-    private final View mRootView;
+    private ImageButton mLeftAlignmentBtn;
+    private ImageButton mCenterAlignmentBtn;
+    private ImageButton mRightAlignmentBtn;
 
-    private Button mLeftBtn;
-    private Button mCenterBtn;
-    private Button mRightBtn;
+    public TextAlignmentPanel(Context context, View view) {
+        super(context, view);
+    }
 
-    public TextAlignmentPanel(PagerView pagerView, View rootView) {
-        mPagerView = pagerView;
-        mRootView = rootView;
-        mLeftBtn = (Button) rootView.findViewById(R.id.text_alignment_vp_item_btn_left);
-        mLeftBtn.setOnClickListener(this);
-        mCenterBtn = (Button) rootView.findViewById(R.id.text_alignment_vp_item_btn_center);
-        mCenterBtn.setOnClickListener(this);
-        mRightBtn = (Button) rootView.findViewById(R.id.text_alignment_vp_item_btn_right);
-        mRightBtn.setOnClickListener(this);
+    @Override
+    protected void initView(View view) {
+        mLeftAlignmentBtn = (ImageButton) view.findViewById(R.id.text_alignment_vp_item_btn_left);
+        mLeftAlignmentBtn.setOnClickListener(this);
+        mCenterAlignmentBtn = (ImageButton) view
+                .findViewById(R.id.text_alignment_vp_item_btn_center);
+        mCenterAlignmentBtn.setOnClickListener(this);
+        mRightAlignmentBtn = (ImageButton) view.findViewById(R.id.text_alignment_vp_item_btn_right);
+        mRightAlignmentBtn.setOnClickListener(this);
+        view.findViewById(R.id.text_alignment_vp_item_btn_restore_default_location)
+                .setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.text_alignment_vp_item_btn_left:
-                mPagerView.setTextAlignment(PagerView.TEXT_ALIGNMENT_LEFT);
+                EventBus.getDefault().post(new PagerViewEventBus.TextAlignmentEvent(
+                        PagerView.TEXT_ALIGNMENT_LEFT));
                 break;
             case R.id.text_alignment_vp_item_btn_center:
-                mPagerView.setTextAlignment(PagerView.TEXT_ALIGNMENT_CENTER);
+                EventBus.getDefault().post(new PagerViewEventBus.TextAlignmentEvent(
+                        PagerView.TEXT_ALIGNMENT_CENTER));
                 break;
             case R.id.text_alignment_vp_item_btn_right:
-                mPagerView.setTextAlignment(PagerView.TEXT_ALIGNMENT_RIGHT);
+                EventBus.getDefault().post(new PagerViewEventBus.TextAlignmentEvent(
+                        PagerView.TEXT_ALIGNMENT_RIGHT));
+                break;
+            case R.id.text_alignment_vp_item_btn_restore_default_location:
+                EventBus.getDefault().post(new PagerViewEventBus.TextOffsetEvent());
                 break;
             default:
                 break;

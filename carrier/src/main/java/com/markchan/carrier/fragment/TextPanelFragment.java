@@ -1,16 +1,19 @@
-package com.markchan.carrier.panel;
+package com.markchan.carrier.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.markchan.carrier.R;
 import com.markchan.carrier.adapter.TextPanelPagerAdapter;
+import com.markchan.carrier.panel.TextAlignmentPanel;
+import com.markchan.carrier.panel.TextColorAndAlphaPanel;
+import com.markchan.carrier.panel.TextSizePanel;
+import com.markchan.carrier.panel.TypefacePanel;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import java.util.ArrayList;
@@ -31,8 +34,6 @@ public class TextPanelFragment extends Fragment {
     SmartTabLayout mViewPagerTab;
     @BindView(R.id.text_panel_fragment_vp)
     ViewPager mViewPager;
-    @BindView(R.id.text_panel_fragment_acbtn_complete)
-    AppCompatButton mCompleteBtn;
 
     private Unbinder mUnbinder;
 
@@ -42,22 +43,30 @@ public class TextPanelFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_text_panel, container, false);
+
         mUnbinder = ButterKnife.bind(this, view);
 
         mViews = new ArrayList<>();
         View typefacePanelView = LayoutInflater.from(getActivity())
                 .inflate(R.layout.item_vp_typeface, container, false);
+        TypefacePanel typefacePanel = new TypefacePanel(getActivity(), typefacePanelView);
         mViews.add(typefacePanelView);
+
         View textSizePanelView = LayoutInflater.from(getActivity())
                 .inflate(R.layout.item_vp_text_size, container, false);
+        TextSizePanel textSizePanel = new TextSizePanel(getActivity(), textSizePanelView);
         mViews.add(textSizePanelView);
+
         View textAlignmentPanelView = LayoutInflater.from(getActivity())
                 .inflate(R.layout.item_vp_text_alignment, container, false);
+        TextAlignmentPanel textAlignmentPanel = new TextAlignmentPanel(getActivity(), textAlignmentPanelView);
         mViews.add(textAlignmentPanelView);
+
         View textColorPanel = LayoutInflater.from(getActivity())
-                .inflate(R.layout.item_vp_text_color, container, false);
+                .inflate(R.layout.item_vp_text_color_and_alpha, container, false);
+        TextColorAndAlphaPanel textColorAndAlphaPanel = new TextColorAndAlphaPanel(getActivity(), textColorPanel);
         mViews.add(textColorPanel);
 
         mTextPanelPagerAdapter = new TextPanelPagerAdapter(getActivity(), mViews);

@@ -17,7 +17,6 @@
     <style name="PanelTitleStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/panel_title_padding</item>
         <item name="android:textSize">@dimen/panel_title_text_size</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textColor">@color/panel_title_text_color</item>

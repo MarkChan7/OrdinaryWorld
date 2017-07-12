@@ -1,96 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
 
     <android.support.v4.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="上下可以拖动简图的文字" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="上下可以拖动简图的文字" />
 
     <android.support.v4.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <android.support.v4.widget.Space
-                android:layout_width="0dp"
-                android:layout_height="16dp"
-                android:layout_weight="1" />
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_weight="1" />
 
-        <Button
-                android:id="@+id/text_alignment_vp_item_btn_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:background="#009688"
-                android:onClick="basicDrawText"
-                android:text="LEFT"
-                android:textColor="#FFFFFFFF" />
+        <ImageButton
+            android:id="@+id/text_alignment_vp_item_btn_left"
+            style="@style/TransparentButtonStyle"
+            android:src="@drawable/ic_text_alignment_left_normal" />
 
         <android.support.v4.widget.Space
-                android:layout_width="16dp"
-                android:layout_height="16dp" />
+            android:layout_width="16dp"
+            android:layout_height="16dp" />
 
-        <Button
-                android:id="@+id/text_alignment_vp_item_btn_center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:background="#009688"
-                android:onClick="basicDrawText"
-                android:text="CENTER"
-                android:textColor="#FFFFFFFF" />
+        <ImageButton
+            android:id="@+id/text_alignment_vp_item_btn_center"
+            style="@style/TransparentButtonStyle"
+            android:src="@drawable/ic_text_alignment_center_normal" />
 
         <android.support.v4.widget.Space
-                android:layout_width="16dp"
-                android:layout_height="16dp" />
+            android:layout_width="16dp"
+            android:layout_height="16dp" />
 
-        <Button
-                android:id="@+id/text_alignment_vp_item_btn_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:background="#009688"
-                android:onClick="basicDrawText"
-                android:text="RIGHT"
-                android:textColor="#FFFFFFFF" />
+        <ImageButton
+            android:id="@+id/text_alignment_vp_item_btn_right"
+            style="@style/TransparentButtonStyle"
+            android:src="@drawable/ic_text_alignment_right_normal" />
 
         <android.support.v4.widget.Space
-                android:layout_width="0dp"
-                android:layout_height="16dp"
-                android:layout_weight="1" />
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_weight="1" />
 
     </LinearLayout>
 
     <android.support.v4.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <android.support.v7.widget.AppCompatButton
-            android:id="@+id/text_alignment_vp_item_btn_restore_default_location"
-            style="@style/TransparentButtonStyle"
-            android:text="恢复默认位置" />
+        android:id="@+id/text_alignment_vp_item_btn_restore_default_location"
+        style="@style/TransparentButtonStyle"
+        android:text="恢复默认位置" />
 
     <android.support.v4.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.markchan.carrier;
+package com.markchan.carrier.util;
 
 import android.graphics.Paint;
 import android.text.TextPaint;
