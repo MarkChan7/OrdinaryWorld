@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="text_panel_array_text_size">
+        <item>@dimen/text_panel_text_size_small</item>
+        <item>@dimen/text_panel_text_size_medium</item>
+        <item>@dimen/text_panel_text_size_standard</item>
+        <item>@dimen/text_panel_text_size_large</item>
+    </array>
+
+    <integer-array name="text_panel_array_text_color">
+        <item>@color/text_panel_text_color_1</item>
+        <item>@color/text_panel_text_color_2</item>
+        <item>@color/text_panel_text_color_3</item>
+        <item>@color/text_panel_text_color_4</item>
+        <item>@color/text_panel_text_color_5</item>
+    </integer-array>
+
+    <string-array name="background_color_panel_array_color_name">
+        <item>纯白</item>
+        <item>乌云</item>
+        <item>墨黑</item>
+        <item>午夜</item>
+        <item>香草</item>
+        <item>抹茶</item>
+        <item>咖啡</item>
+        <item>红泥</item>
+        <item>玫瑰</item>
+        <item>甜橙</item>
+        <item>芒果</item>
+        <item>蜜桃</item>
+        <item>薰衣草</item>
+        <item>晴天</item>
+        <item>青葱</item>
+    </string-array>
+
+    <string name="background_color_panel_array_vein_name">
+        <item>纯平</item>
+        <item>石灰</item>
+        <item>笔记本</item>
+        <item>棉布</item>
+        <item>传统</item>
+        <item>牛皮纸</item>
+        <item>油漆</item>
+        <item>粉笔</item>
+        <item>毛发</item>
+        <item>针织</item>
+        <item>折纸</item>
+        <item>作业本</item>
+        <item>水渍</item>
+        <item>粉末</item>
+        <item>纤维</item>
+        <item>牛仔</item>
+    </string>
+
+    <array name="background_color_panel_array_vein_drawable">
+        <item>@drawable/texture_lime</item>
+        <item>@drawable/texture_notebook</item>
+        <item>@drawable/texture_cotton</item>
+        <item>@drawable/texture_tradition</item>
+        <item>@drawable/texture_kraft</item>
+        <item>@drawable/texture_oil_paint</item>
+        <item>@drawable/texture_chalk</item>
+        <item>@drawable/texture_hair</item>
+        <item>@drawable/texture_knit</item>
+        <item>@drawable/texture_paper_folding</item>
+        <item>@drawable/texture_exercise_book</item>
+        <item>@drawable/texture_water_stains</item>
+        <item>@drawable/texture_powder</item>
+        <item>@drawable/texture_fibre</item>
+        <item>@drawable/texture_jean</item>
+    </array>
+
+    <string-array name="wheel_picker_default_array">
+        <item>AigeStudio</item>
+        <item>Aige</item>
+        <item>爱哥</item>
+        <item>الحب  اخي</item>
+        <item>jeg elsker</item>
+        <item>사랑해요 형</item>
+        <item>Amor de irmão</item>
+        <item>armastan</item>
+        <item>愛の兄</item>
+        <item>обичам те</item>
+        <item>любовь - братa</item>
+        <item>miłość bracie</item>
+        <item>Liebe</item>
+        <item>Lamour</item>
+        <item>rakastan sinua</item>
+        <item>láska..</item>
+        <item>dragostea.</item>
+        <item>jag älskar</item>
+        <item>ljubezen, brat.</item>
+        <item>愛哥</item>
+        <item>ชอบพี่</item>
+        <item>αγάπη μου</item>
+        <item>a szerelem.</item>
+        <item>Amore, fratello.</item>
+    </string-array>
+
+</resources>

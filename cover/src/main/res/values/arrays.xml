@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="a">
+        <item>纯白</item>
+        <item>乌云</item>
+        <item>墨黑</item>
+        <item>午夜</item>
+        <item>香草</item>
+        <item>抹茶</item>
+        <item>咖啡</item>
+        <item>红泥</item>
+        <item>玫瑰</item>
+        <item>甜橙</item>
+        <item>芒果</item>
+        <item>蜜桃</item>
+        <item>薰衣草</item>
+        <item>晴天</item>
+        <item>青葱</item>
+    </string-array>
+    <array name="b">
+        <item>@color/bl</item>
+        <item>@color/ba</item>
+        <item>@color/b6</item>
+        <item>@color/b7</item>
+        <item>@color/bk</item>
+        <item>@color/bd</item>
+        <item>@color/b_</item>
+        <item>@color/b9</item>
+        <item>@color/bh</item>
+        <item>@color/be</item>
+        <item>@color/bc</item>
+        <item>@color/bf</item>
+        <item>@color/bg</item>
+        <item>@color/b8</item>
+        <item>@color/bb</item>
+    </array>
+
+    <array name="c">
+        <item>@color/ab</item>
+        <item>@color/ac</item>
+        <item>@color/ad</item>
+        <item>@color/ae</item>
+        <item>@color/af</item>
+    </array>
+
+    <array name="d">
+        <item>@color/bi</item>
+        <item>@color/bj</item>
+        <item>@color/bi</item>
+        <item>@color/bj</item>
+        <item>@color/bi</item>
+        <item>@color/bj</item>
+        <item>@color/bi</item>
+        <item>@color/bj</item>
+        <item>@color/bi</item>
+        <item>@color/bj</item>
+        <item>@color/bi</item>
+        <item>@color/bj</item>
+        <item>@color/bi</item>
+        <item>@color/bj</item>
+        <item>@color/bi</item>
+        <item>@color/bj</item>
+    </array>
+    <string-array name="e">
+        <item>纯平</item>
+        <item>石灰</item>
+        <item>笔记本</item>
+        <item>棉布</item>
+        <item>传统</item>
+        <item>牛皮纸</item>
+        <item>油漆</item>
+        <item>粉笔</item>
+        <item>毛发</item>
+        <item>针织</item>
+        <item>折纸</item>
+        <item>作业本</item>
+        <item>水渍</item>
+        <item>粉末</item>
+        <item>纤维</item>
+        <item>牛仔</item>
+    </string-array>
+</resources>

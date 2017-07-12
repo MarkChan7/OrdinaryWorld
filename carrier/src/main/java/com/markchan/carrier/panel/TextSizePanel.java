@@ -1,9 +1,11 @@
 package com.markchan.carrier.panel;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageButton;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.ImageButton;
 import com.markchan.carrier.R;
 import com.markchan.carrier.event.PagerViewEventBus;
 
@@ -16,10 +18,10 @@ import org.greenrobot.eventbus.EventBus;
  */
 public class TextSizePanel extends AbsPanel {
 
-    private Button mTextSizeVpItemBtnSmall;
-    private Button mTextSizeVpItemBtnMedium;
-    private Button mTextSizeVpItemBtnStandard;
-    private Button mTextSizeVpItemBtnLarge;
+    private AppCompatImageButton mTextSizeVpItemBtnSmall;
+    private AppCompatImageButton mTextSizeVpItemBtnMedium;
+    private AppCompatImageButton mTextSizeVpItemBtnStandard;
+    private AppCompatImageButton mTextSizeVpItemBtnLarge;
 
     private float mSmallTextSize;
     private float mMediumTextSize;
@@ -28,19 +30,19 @@ public class TextSizePanel extends AbsPanel {
 
     public TextSizePanel(Context context, View view) {
         super(context, view);
-        mSmallTextSize = context.getResources().getDimension(R.dimen.text_size_small);
-        mMediumTextSize = context.getResources().getDimension(R.dimen.text_size_medium);
-        mStandardTextSize = context.getResources().getDimension(R.dimen.text_size_standard);
-        mLargeTextSize = context.getResources().getDimension(R.dimen.text_size_large);
+        mSmallTextSize = context.getResources().getDimension(R.dimen.text_panel_text_size_small);
+        mMediumTextSize = context.getResources().getDimension(R.dimen.text_panel_text_size_medium);
+        mStandardTextSize = context.getResources().getDimension(R.dimen.text_panel_text_size_standard);
+        mLargeTextSize = context.getResources().getDimension(R.dimen.text_panel_text_size_large);
     }
 
     @Override
     protected void initView(View view) {
-        mTextSizeVpItemBtnSmall = (Button) view.findViewById(R.id.text_size_vp_item_btn_small);
-        mTextSizeVpItemBtnMedium = (Button) view.findViewById(R.id.text_size_vp_item_btn_medium);
-        mTextSizeVpItemBtnStandard = (Button) view
+        mTextSizeVpItemBtnSmall = (AppCompatImageButton) view.findViewById(R.id.text_size_vp_item_btn_small);
+        mTextSizeVpItemBtnMedium = (AppCompatImageButton) view.findViewById(R.id.text_size_vp_item_btn_medium);
+        mTextSizeVpItemBtnStandard = (AppCompatImageButton) view
                 .findViewById(R.id.text_size_vp_item_btn_standard);
-        mTextSizeVpItemBtnLarge = (Button) view.findViewById(R.id.text_size_vp_item_btn_large);
+        mTextSizeVpItemBtnLarge = (AppCompatImageButton) view.findViewById(R.id.text_size_vp_item_btn_large);
 
         mTextSizeVpItemBtnSmall.setOnClickListener(this);
         mTextSizeVpItemBtnMedium.setOnClickListener(this);

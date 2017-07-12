@@ -12,6 +12,7 @@
         android:text="颜色" />
 
     <android.support.v4.view.ViewPager
+            android:background="#f0f"
         android:id="@+id/bg_color_frg_vp_bg_color"
         android:layout_width="match_parent"
         android:layout_height="48dp" />

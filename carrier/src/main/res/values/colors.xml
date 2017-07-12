@@ -15,5 +15,14 @@
     <color name="text_panel_tab_text_color_enabled">#FFFFFF</color>
     <color name="text_panel_tab_text_color_disable">#AEAEAE</color>
 
+    <color name="text_panel_text_color_1">@color/white</color>
+    <color name="text_panel_text_color_2">#FFB7B7B7</color>
+    <color name="text_panel_text_color_3">#FF707070</color>
+    <color name="text_panel_text_color_4">#FF434343</color>
+    <color name="text_panel_text_color_5">@color/black</color>
+
     <color name="complete_text_color">#FFD824</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>

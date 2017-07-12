@@ -51,13 +51,15 @@ public class BackgroundColorPanelFragment extends Fragment {
 
         mBackgroundColors = new ArrayList<>();
         String[] colorNameArr = getResources()
-                .getStringArray(R.array.background_color_panel_color_name_array);
+                .getStringArray(R.array.background_color_panel_array_color_name);
         RandomColor randomColor = new RandomColor();
+        List<View> views = new ArrayList<>();
         for (String colorName : colorNameArr) {
+            views.add(LayoutInflater.from(getActivity()).inflate(R.layout.item_vp_background_color, null));
             mBackgroundColors.add(new BackgroundColor(colorName, randomColor.randomColor()));
         }
         BackgroundColorPagerAdapter colorAdapter = new BackgroundColorPagerAdapter(getActivity(),
-                mBackgroundColors);
+                views, mBackgroundColors);
         mColorViewPager.setAdapter(colorAdapter);
 
         return view;

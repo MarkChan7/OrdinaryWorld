@@ -18,7 +18,12 @@ public abstract class AbsPanel implements OnClickListener {
         mContext = context;
         mView = view;
         initView(view);
+        initData();
     }
 
     protected abstract void initView(View view);
+
+    protected void initData() {
+        // no-op by default
+    }
 }

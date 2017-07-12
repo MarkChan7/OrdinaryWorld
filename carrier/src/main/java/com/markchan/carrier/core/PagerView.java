@@ -44,7 +44,7 @@ public class PagerView extends View {
     }
 
     public PagerView(Context context,
-                     @Nullable AttributeSet attrs) {
+            @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
@@ -55,7 +55,7 @@ public class PagerView extends View {
 
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
     public PagerView(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-                     int defStyleRes) {
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -98,6 +98,7 @@ public class PagerView extends View {
 
     /** 字体路径 */
     private String mTypefaceUrl;
+    private String mTempTypefaceUrl;
 
     /** 字体大小 */
     private float mTextSize;
@@ -115,6 +116,8 @@ public class PagerView extends View {
 
     /** 文字相对顶部的偏移量 */
     private int mTextOffset;
+
+    private int mTextCenterY;
 
     /** 背景颜色 */
     @ColorInt
@@ -138,12 +141,12 @@ public class PagerView extends View {
 
     private Paint mHelperPaint;
 
-    private boolean mShowDashRect = false;
+    private boolean mShowDashRect;
 
-    private boolean mResetOffsetFlag = false;
+    private boolean mResetOffsetFlag;
 
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-                      int defStyleRes) {
+            int defStyleRes) {
         mBackgroundColor = DEFAULT_BACKGROUND_COLOR;
 
         mText = DEFAULT_TEXT;
@@ -174,6 +177,8 @@ public class PagerView extends View {
         mTextBorderPaint.setPathEffect(dashPathEffect);
 
         mHelperPaint = new Paint();
+
+        mTextCenterY = ScreenUtils.getScreenWidth() / 2;
     }
 
     @Override
@@ -194,6 +199,7 @@ public class PagerView extends View {
 
         canvas.drawColor(mBackgroundColor);
 
+        boolean typefaceDefaultFlag = true;
         if (!TextUtils.isEmpty(mTypefaceUrl)) {
             Scheme scheme = Scheme.ofUri(mTypefaceUrl);
             if (scheme == Scheme.ASSETS || scheme == Scheme.FILE) {
@@ -206,10 +212,15 @@ public class PagerView extends View {
                         typeface = Typeface.createFromFile(path);
                     }
                     mTextPaint.setTypeface(typeface);
+                    mTempTypefaceUrl = null;
+                    typefaceDefaultFlag = false;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+        }
+        if (typefaceDefaultFlag && !TextUtils.isEmpty(mTempTypefaceUrl)) {
+            mTypefaceUrl = mTempTypefaceUrl;
         }
 
         mTextPaint.setTextSize(mTextSize);
@@ -226,14 +237,7 @@ public class PagerView extends View {
 
         int lines = textLinesVector.size();
 
-        // change by user touch
-        mTextOffset = ScreenUtils.getScreenWidth() / 2 - textHeight * lines / 2;
-        mTextOffset /= 2;
-
-        if (mResetOffsetFlag) {
-            mTextOffset = ScreenUtils.getScreenWidth() / 2 - textHeight * lines / 2;
-            mResetOffsetFlag = false;
-        }
+        mTextOffset = mTextCenterY - textHeight * lines / 2;
 
         mTextBorder.top = mTextOffset - TEXT_PADDING_TOP_AND_BOTTOM;
         mTextBorder.bottom = mTextOffset + textHeight * lines + TEXT_PADDING_TOP_AND_BOTTOM;
@@ -303,7 +307,8 @@ public class PagerView extends View {
     }
 
     public void setTypefaceUrl(String typefaceUrl) {
-        mTypefaceUrl = typefaceUrl;
+        mTempTypefaceUrl = mTypefaceUrl;
+        mTypefaceUrl = typefaceUrl.trim();
         invalidate();
     }
 
@@ -347,7 +352,7 @@ public class PagerView extends View {
     }
 
     public void resetTextOffset() {
-        mResetOffsetFlag = true;
+        mTextCenterY = ScreenUtils.getScreenWidth() / 2;
         invalidate();
     }
 }

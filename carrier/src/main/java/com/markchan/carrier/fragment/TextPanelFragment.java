@@ -7,21 +7,21 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import com.markchan.carrier.R;
 import com.markchan.carrier.adapter.TextPanelPagerAdapter;
+import com.markchan.carrier.event.BackToPanelsEvent;
 import com.markchan.carrier.panel.TextAlignmentPanel;
 import com.markchan.carrier.panel.TextColorAndAlphaPanel;
 import com.markchan.carrier.panel.TextSizePanel;
 import com.markchan.carrier.panel.TypefacePanel;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * @author Mark Chan <a href="markchan2gm@gmail.com">Contact me.</a>
@@ -43,7 +43,7 @@ public class TextPanelFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_text_panel, container, false);
 
         mUnbinder = ButterKnife.bind(this, view);
@@ -61,12 +61,14 @@ public class TextPanelFragment extends Fragment {
 
         View textAlignmentPanelView = LayoutInflater.from(getActivity())
                 .inflate(R.layout.item_vp_text_alignment, container, false);
-        TextAlignmentPanel textAlignmentPanel = new TextAlignmentPanel(getActivity(), textAlignmentPanelView);
+        TextAlignmentPanel textAlignmentPanel = new TextAlignmentPanel(getActivity(),
+                textAlignmentPanelView);
         mViews.add(textAlignmentPanelView);
 
         View textColorPanel = LayoutInflater.from(getActivity())
                 .inflate(R.layout.item_vp_text_color_and_alpha, container, false);
-        TextColorAndAlphaPanel textColorAndAlphaPanel = new TextColorAndAlphaPanel(getActivity(), textColorPanel);
+        TextColorAndAlphaPanel textColorAndAlphaPanel = new TextColorAndAlphaPanel(getActivity(),
+                textColorPanel);
         mViews.add(textColorPanel);
 
         mTextPanelPagerAdapter = new TextPanelPagerAdapter(getActivity(), mViews);
@@ -76,6 +78,11 @@ public class TextPanelFragment extends Fragment {
         mViewPagerTab.setViewPager(mViewPager);
 
         return view;
+    }
+
+    @OnClick({R.id.text_panel_fragment_acbtn_complete})
+    public void complete() {
+        EventBus.getDefault().post(new BackToPanelsEvent());
     }
 
     @Override

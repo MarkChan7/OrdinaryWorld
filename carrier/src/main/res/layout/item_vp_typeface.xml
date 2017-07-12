@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="字体" />
+    <com.markchan.carrier.widget.wheelpicker.WheelPicker
+            android:id="@+id/typeface_vp_item_wp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:wheel_atmospheric="true"
+            app:wheel_item_text_color="#A7A7DB"
+            app:wheel_item_space="4dp"
+            app:wheel_item_text_size="24sp"
+            app:wheel_selected_item_text_color="#536D8A" />
 
-    <Button
-            android:id="@+id/type_vp_item_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:background="#009688"
-            android:text="Code"
-            android:textColor="#FFFFFFFF" />
-</LinearLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
+            android:padding="8dp"
+            android:background="#40333333">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_right" />
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_left" />
+    </RelativeLayout>
+</RelativeLayout>
