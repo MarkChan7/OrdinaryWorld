@@ -20,14 +20,11 @@
         <activity android:name=".TextAlignActivity" />
         <activity android:name=".FontMetricsActivity" />
         <activity android:name=".TextBoundsActivity" />
-        <activity android:name=".app.DrawAtSpecPosActivity" />
-        <activity android:name=".app.DrawCenterAtSpecPosActivity" />
-        <activity android:name=".app.DrawCenterAtRectActivity" />
+        <activity android:name=".apply.DrawAtSpecPosActivity" />
+        <activity android:name=".apply.DrawCenterAtSpecPosActivity" />
+        <activity android:name=".apply.DrawCenterAtRectActivity" />
         <activity android:name=".layout.StaticLayoutActivity" />
         <activity android:name=".layout.CenterStaticLayoutActivity" />
-        <activity
-                android:name=".PagerActivity"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.markchan.ordinaryworld.app.DrawAtSpecPosActivity;
-import com.markchan.ordinaryworld.app.DrawCenterAtRectActivity;
-import com.markchan.ordinaryworld.app.DrawCenterAtSpecPosActivity;
+import com.markchan.ordinaryworld.apply.DrawAtSpecPosActivity;
+import com.markchan.ordinaryworld.apply.DrawCenterAtRectActivity;
+import com.markchan.ordinaryworld.apply.DrawCenterAtSpecPosActivity;
 import com.markchan.ordinaryworld.layout.CenterStaticLayoutActivity;
 import com.markchan.ordinaryworld.layout.StaticLayoutActivity;
 
