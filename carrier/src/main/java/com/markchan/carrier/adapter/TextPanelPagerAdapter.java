@@ -4,7 +4,9 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import com.markchan.ordinaryworld.R;
+
+import com.markchan.carrier.R;
+
 import java.util.ArrayList;
 import java.util.List;
 

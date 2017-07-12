@@ -8,14 +8,17 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.markchan.carrier.R;
+import com.markchan.carrier.adapter.TextPanelPagerAdapter;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import com.markchan.ordinaryworld.R;
-import com.markchan.carrier.adapter.TextPanelPagerAdapter;
-import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Mark Chan <a href="markchan2gm@gmail.com">Contact me.</a>

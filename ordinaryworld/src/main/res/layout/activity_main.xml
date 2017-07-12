@@ -13,21 +13,6 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/pager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:background="#009688"
-            android:onClick="pager"
-            android:text="Pager"
-            android:textColor="#FFFFFFFF" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="16dp"
-            android:layout_height="16dp" />
-
-        <Button
             android:id="@+id/basicDrawText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

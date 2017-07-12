@@ -19,10 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void pager(View v) {
-        startActivity(new Intent(this, PagerActivity.class));
-    }
-
     public void basicDrawText(View v) {
         startActivity(new Intent(this, BasicDrawTextActivity.class));
     }
