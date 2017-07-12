@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetricsInt;
 import android.graphics.Paint.Style;
@@ -124,7 +125,7 @@ public class PagerView extends View {
     private int mBackgroundColor;
 
     /** 纹理 */
-    private Bitmap mVeinBitmap;
+    private Bitmap mTextureBitmap;
 
     /** 背景图片 */
     private Bitmap mBackgroundBitmap;
@@ -134,6 +135,8 @@ public class PagerView extends View {
 
     /** 背景亮度 */
     private float mBackgroundLight;
+
+    private Paint mBackgroundPaint;
 
     private TextPaint mTextPaint;
 
@@ -197,7 +200,18 @@ public class PagerView extends View {
         canvas.setDrawFilter(
                 new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
 
-        canvas.drawColor(mBackgroundColor);
+        if (mTextureBitmap != null && !mTextureBitmap.isRecycled()) {
+            if (mBackgroundPaint == null) {
+                mBackgroundPaint = new Paint();
+            }
+            int width = mTextureBitmap.getWidth();
+            int height = mTextureBitmap.getHeight();
+            Matrix matrix = new Matrix();
+            matrix.postScale(getWidth() * 1.0F / width, getHeight() * 1.0F / height);
+            canvas.drawBitmap(mTextureBitmap, matrix, mBackgroundPaint);
+        }
+
+//        canvas.drawColor(mBackgroundColor);
 
         boolean typefaceDefaultFlag = true;
         if (!TextUtils.isEmpty(mTypefaceUrl)) {
@@ -354,5 +368,16 @@ public class PagerView extends View {
     public void resetTextOffset() {
         mTextCenterY = ScreenUtils.getScreenWidth() / 2;
         invalidate();
+    }
+
+    public Bitmap getTextureBitmap() {
+        return mTextureBitmap;
+    }
+
+    public void setTextureBitmap(Bitmap textureBitmap) {
+        if (textureBitmap != null && !textureBitmap.isRecycled()) {
+            mTextureBitmap = textureBitmap;
+            invalidate();
+        }
     }
 }

@@ -1,1 +1,1 @@
-include ':ordinaryworld', ':carrier', ':cover'
+include ':ordinaryworld', ':carrier'

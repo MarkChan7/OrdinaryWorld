@@ -1,6 +1,7 @@
 package com.markchan.carrier.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,22 +12,22 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.blankj.utilcode.utils.ToastUtils;
-import com.markchan.carrier.R;
-import com.markchan.carrier.core.PagerView;
-import com.markchan.carrier.event.PagerViewEventBus;
-import com.markchan.carrier.event.BackToPanelsEvent;
-import com.markchan.carrier.fragment.BackgroundColorPanelFragment;
-import com.markchan.carrier.fragment.TextPanelFragment;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.blankj.utilcode.utils.ToastUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.markchan.carrier.R;
+import com.markchan.carrier.core.PagerView;
+import com.markchan.carrier.event.BackToPanelsEvent;
+import com.markchan.carrier.event.PagerViewEventBus;
+import com.markchan.carrier.fragment.BackgroundColorPanelFragment;
+import com.markchan.carrier.fragment.TextPanelFragment;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class PagerActivity extends AppCompatActivity {
 
@@ -82,22 +83,37 @@ public class PagerActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPagerViewTextColorEvent(PagerViewEventBus.TextColorEvent event) {
-        mPagerView.setTextColor(event.color);
+        mPagerView.setTextColor(event.textColor);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPagerViewTextAlphaEvent(PagerViewEventBus.TextAlphaEvent event) {
-        mPagerView.setTextAlpha(event.alpha);
+        mPagerView.setTextAlpha(event.textAlpha);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPagerViewTextAlignmentEvent(PagerViewEventBus.TextAlignmentEvent event) {
-        mPagerView.setTextAlignment(event.alignment);
+        mPagerView.setTextAlignment(event.textAlignment);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPagerViewTextOffsetEvent(PagerViewEventBus.TextOffsetEvent event) {
         mPagerView.resetTextOffset();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onPagerViewTextureEvent(PagerViewEventBus.TextureEvent event) {
+        Glide.with(this)
+                .load(R.drawable.texture_fibre)
+                .asBitmap()
+                .into(new SimpleTarget<Bitmap>() {
+
+                    @Override
+                    public void onResourceReady(Bitmap resource,
+                            GlideAnimation<? super Bitmap> glideAnimation) {
+                        mPagerView.setTextureBitmap(resource);
+                    }
+                });
     }
 
     @OnClick({R.id.pager_aty_acib_discard, R.id.pager_aty_acib_save, R.id.pager_aty_ib_text_panel,

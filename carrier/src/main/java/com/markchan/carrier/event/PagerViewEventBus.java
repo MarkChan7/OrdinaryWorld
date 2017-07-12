@@ -29,33 +29,42 @@ public final class PagerViewEventBus {
 
     public static class TextColorEvent {
 
-        public final int color;
+        public final int textColor;
 
-        public TextColorEvent(int color) {
-            this.color = color;
+        public TextColorEvent(int textColor) {
+            this.textColor = textColor;
         }
     }
 
     public static class TextAlphaEvent {
 
-        public final int alpha;
+        public final int textAlpha;
 
-        public TextAlphaEvent(int alpha) {
-            this.alpha = alpha;
+        public TextAlphaEvent(int textAlpha) {
+            this.textAlpha = textAlpha;
         }
     }
 
     public static class TextAlignmentEvent {
 
         @TextAlignment
-        public final int alignment;
+        public final int textAlignment;
 
-        public TextAlignmentEvent(@TextAlignment int alignment) {
-            this.alignment = alignment;
+        public TextAlignmentEvent(@TextAlignment int textAlignment) {
+            this.textAlignment = textAlignment;
         }
     }
 
     public static class TextOffsetEvent {
         // no-op by default
+    }
+
+    public static class TextureEvent {
+
+        public final String textureUrl;
+
+        public TextureEvent(String textureUrl) {
+            this.textureUrl = textureUrl;
+        }
     }
 }

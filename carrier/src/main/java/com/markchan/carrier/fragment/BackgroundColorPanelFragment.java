@@ -8,22 +8,18 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.github.lzyzsd.randomcolor.RandomColor;
-import com.markchan.carrier.R;
-import com.markchan.carrier.adapter.BackgroundColorPagerAdapter;
-import com.markchan.carrier.domain.BackgroundColor;
-import com.markchan.carrier.event.BackToPanelsEvent;
-
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import com.github.lzyzsd.randomcolor.RandomColor;
+import com.markchan.carrier.R;
+import com.markchan.carrier.adapter.BackgroundColorPagerAdapter;
+import com.markchan.carrier.domain.BackgroundColor;
+import com.markchan.carrier.event.PagerViewEventBus;
+import java.util.ArrayList;
+import java.util.List;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Mark on 2017/7/12.
@@ -78,6 +74,6 @@ public class BackgroundColorPanelFragment extends Fragment {
 
     @OnClick(R.id.bg_color_frg_btn_confirm)
     public void onViewClicked() {
-        EventBus.getDefault().post(new BackToPanelsEvent());
+        EventBus.getDefault().post(new PagerViewEventBus.TextureEvent(""));
     }
 }
