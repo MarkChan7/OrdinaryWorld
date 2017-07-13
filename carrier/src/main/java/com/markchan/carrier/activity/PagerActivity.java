@@ -10,11 +10,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageButton;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import com.blankj.utilcode.utils.KeyboardUtils;
 import com.blankj.utilcode.utils.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -27,14 +33,9 @@ import com.markchan.carrier.event.PagerViewEventBus;
 import com.markchan.carrier.fragment.BgColorAndTexturePanelFragment;
 import com.markchan.carrier.fragment.TextPanelFragment;
 import com.markchan.carrier.util.Scheme;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class PagerActivity extends AppCompatActivity {
 
@@ -56,6 +57,12 @@ public class PagerActivity extends AppCompatActivity {
     RelativeLayout mPanelsRelativeLayout;
     @BindView(R.id.pager_aty_fl_panel_container)
     FrameLayout mPanelContainerFrameLayout;
+    @BindView(R.id.pager_aty_ll_input_root)
+    LinearLayout mInputRootLinearLayout;
+    @BindView(R.id.pager_aty_et)
+    EditText mEditText;
+    @BindView(R.id.pager_aty_acib_confirm_text)
+    AppCompatImageButton mConfirmTextImageBtn;
 
     static {
         System.loadLibrary("NativeImageProcessor");
@@ -80,13 +87,10 @@ public class PagerActivity extends AppCompatActivity {
 
             @Override
             public void onTextTap(String text) {
-                mUiHandler.postDelayed(new Runnable() {
+                mEditText.setText(text);
+                mInputRootLinearLayout.setVisibility(View.VISIBLE);
 
-                    @Override
-                    public void run() {
-                        mPagerView.setText("Hi Eleanor!");
-                    }
-                }, 2000);
+                KeyboardUtils.showSoftInput(mEditText);
             }
         });
 
@@ -153,7 +157,8 @@ public class PagerActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.pager_aty_acib_discard, R.id.pager_aty_acib_save, R.id.pager_aty_ib_text_panel,
-            R.id.pager_aty_ib_bg_color_panel, R.id.pager_aty_ib_bg_photo_panel})
+            R.id.pager_aty_ib_bg_color_panel, R.id.pager_aty_ib_bg_photo_panel,
+            R.id.pager_aty_acib_confirm_text})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.pager_aty_acib_discard:
@@ -180,6 +185,14 @@ public class PagerActivity extends AppCompatActivity {
                 break;
             case R.id.pager_aty_ib_bg_photo_panel:
 
+                break;
+            case R.id.pager_aty_acib_confirm_text:
+                KeyboardUtils.hideSoftInput(this);
+                mInputRootLinearLayout.setVisibility(View.INVISIBLE);
+                String text = mEditText.getText().toString();
+                if (!TextUtils.isEmpty(text) && !text.equals(mPagerView.getText())) {
+                    mPagerView.setText(text);
+                }
                 break;
             default:
                 break;
