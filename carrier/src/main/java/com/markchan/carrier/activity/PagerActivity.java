@@ -3,6 +3,8 @@ package com.markchan.carrier.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +21,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.markchan.carrier.R;
 import com.markchan.carrier.core.PagerView;
+import com.markchan.carrier.core.PagerView.OnTextTapListener;
 import com.markchan.carrier.event.BackToPanelsEvent;
 import com.markchan.carrier.event.PagerViewEventBus;
 import com.markchan.carrier.fragment.BgColorAndTexturePanelFragment;
@@ -65,11 +68,28 @@ public class PagerActivity extends AppCompatActivity {
     private TextPanelFragment mTextPanelFragment;
     private BgColorAndTexturePanelFragment mBgColorAndTexturePanelFragment;
 
+    private Handler mUiHandler = new Handler(Looper.getMainLooper());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pager);
         ButterKnife.bind(this);
+
+        mPagerView.setOnTextTapListener(new OnTextTapListener() {
+
+            @Override
+            public void onTextTap(String text) {
+                mUiHandler.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        mPagerView.setText("Hi Eleanor!");
+                    }
+                }, 2000);
+            }
+        });
+
         mFragmentManager = getSupportFragmentManager();
     }
 
@@ -120,7 +140,7 @@ public class PagerActivity extends AppCompatActivity {
 
                         @Override
                         public void onResourceReady(Bitmap resource,
-                                                    GlideAnimation<? super Bitmap> glideAnimation) {
+                                GlideAnimation<? super Bitmap> glideAnimation) {
                             mPagerView.setTextureBitmap(resource);
                         }
                     });

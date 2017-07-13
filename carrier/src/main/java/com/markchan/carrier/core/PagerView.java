@@ -21,11 +21,15 @@ import android.support.annotation.RequiresApi;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnDoubleTapListener;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import com.blankj.utilcode.utils.ScreenUtils;
 import com.blankj.utilcode.utils.SizeUtils;
+import com.blankj.utilcode.utils.ToastUtils;
 import com.github.lzyzsd.randomcolor.RandomColor;
 import com.markchan.carrier.R;
 import com.markchan.carrier.util.Scheme;
@@ -102,12 +106,6 @@ public class PagerView extends View {
     /** 文字 */
     private String mText;
 
-    private Vector<String> mTextLinesVector;
-
-    private int mLines;
-
-    private int mTextHeight;
-
     /** 字体路径 */
     private String mTypefaceUrl;
     private String mTempTypefaceUrl;
@@ -165,6 +163,23 @@ public class PagerView extends View {
     private float mLastTouchY;
 
     private boolean mDragging;
+
+    private GestureDetector mGestureDetector;
+
+    private OnTextTapListener mOnTextTapListener;
+
+    public interface OnTextTapListener {
+
+        void onTextTap(String text);
+    }
+
+    public OnTextTapListener getOnTextTapListener() {
+        return mOnTextTapListener;
+    }
+
+    public void setOnTextTapListener(OnTextTapListener onTextTapListener) {
+        mOnTextTapListener = onTextTapListener;
+    }
 
     private void setupDefaultValue(Context context) {
         DEFAULT_TEXT = getResources().getString(R.string.pager_view_default_text);
@@ -227,6 +242,30 @@ public class PagerView extends View {
 
         final ViewConfiguration vc = ViewConfiguration.get(context);
         mTouchSlop = vc.getScaledTouchSlop();
+
+        mGestureDetector = new GestureDetector(context, new SimpleOnGestureListener());
+        mGestureDetector.setOnDoubleTapListener(new OnDoubleTapListener() {
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                ToastUtils.showShortToast("tap text");
+                if (mOnTextTapListener != null) {
+                    mOnTextTapListener.onTextTap(mText);
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public boolean onDoubleTapEvent(MotionEvent e) {
+                return false;
+            }
+        });
     }
 
     @Override
@@ -273,6 +312,9 @@ public class PagerView extends View {
                 invalidate();
                 break;
         }
+
+        mGestureDetector.onTouchEvent(event);
+
         return true;
     }
 
@@ -326,25 +368,25 @@ public class PagerView extends View {
 
         FontMetricsInt fm = mTextPaint.getFontMetricsInt();
 
-        mTextHeight = fm.bottom - fm.top;
+        int textHeight = fm.bottom - fm.top;
 
-        mTextLinesVector = TextHelper
+        Vector<String> textLinesVector = TextHelper
                 .getTextLinesVector(mTextPaint, mText, TEXT_RECT_MAX_WIDTH, TEXT_RECT_MAX_HEIGHT);
 
-        mLines = mTextLinesVector.size();
+        int lines = textLinesVector.size();
 
-        mTextOffset = mTextCenterY - mTextHeight * mLines / 2;
+        mTextOffset = mTextCenterY - textHeight * lines / 2;
 
         if (mTextOffset < MIN_TEXT_OFFSET) {
             mTextOffset = MIN_TEXT_OFFSET;
-            mTextCenterY = mTextOffset + mTextHeight * mLines / 2;
-        } else if (mTextOffset + mLines * mTextHeight > MAX_TEXT_OFFSET) {
-            mTextOffset = MAX_TEXT_OFFSET - mLines * mTextHeight;
-            mTextCenterY = mTextOffset + mTextHeight * mLines / 2;
+            mTextCenterY = mTextOffset + textHeight * lines / 2;
+        } else if (mTextOffset + lines * textHeight > MAX_TEXT_OFFSET) {
+            mTextOffset = MAX_TEXT_OFFSET - lines * textHeight;
+            mTextCenterY = mTextOffset + textHeight * lines / 2;
         }
 
         mTextBorder.top = mTextOffset - TEXT_PADDING_TOP_AND_BOTTOM;
-        mTextBorder.bottom = mTextOffset + mTextHeight * mLines + TEXT_PADDING_TOP_AND_BOTTOM;
+        mTextBorder.bottom = mTextOffset + textHeight * lines + TEXT_PADDING_TOP_AND_BOTTOM;
 
         if (DEBUG) {
             mHelperPaint.setColor(Color.GRAY);
@@ -361,9 +403,9 @@ public class PagerView extends View {
             canvas.drawPath(textBorderPath, mTextBorderPaint);
         }
 
-        for (int i = 0; i < mTextLinesVector.size(); i++) {
-            mTextRect.top = mTextOffset + (i * mTextHeight);
-            mTextRect.bottom = mTextRect.top + mTextHeight;
+        for (int i = 0; i < textLinesVector.size(); i++) {
+            mTextRect.top = mTextOffset + (i * textHeight);
+            mTextRect.bottom = mTextRect.top + textHeight;
 
             if (DEBUG) {
                 mHelperPaint.setColor(new RandomColor().randomColor());
@@ -390,12 +432,8 @@ public class PagerView extends View {
 
             Timber.d("BaseLineX = %f, BaseLineY = %f", baseLineX, baseLineY);
 
-            canvas.drawText(mTextLinesVector.elementAt(i), baseLineX, baseLineY, mTextPaint);
+            canvas.drawText(textLinesVector.elementAt(i), baseLineX, baseLineY, mTextPaint);
         }
-    }
-
-    private void getTextHeight() {
-
     }
 
     public String getText() {
