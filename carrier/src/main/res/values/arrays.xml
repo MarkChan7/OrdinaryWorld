@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="text_panel_title_array">
+        <item>@string/text_panel_tab_typeface</item>
+        <item>@string/text_panel_tab_text_size</item>
+        <item>@string/text_panel_tab_translation</item>
+        <item>@string/text_panel_tab_bg_color_and_texture</item>
+    </string-array>
+
     <array name="text_panel_array_text_size">
         <item>@dimen/text_panel_text_size_small</item>
         <item>@dimen/text_panel_text_size_medium</item>
@@ -17,41 +24,41 @@
     </integer-array>
 
     <string-array name="background_color_panel_array_color_name">
-        <item>纯白</item>
-        <item>乌云</item>
-        <item>墨黑</item>
-        <item>午夜</item>
-        <item>香草</item>
-        <item>抹茶</item>
-        <item>咖啡</item>
-        <item>红泥</item>
-        <item>玫瑰</item>
-        <item>甜橙</item>
-        <item>芒果</item>
-        <item>蜜桃</item>
-        <item>薰衣草</item>
-        <item>晴天</item>
-        <item>青葱</item>
+        <item>@string/bg_color_pure</item>
+        <item>@string/bg_color_black_clouds</item>
+        <item>@string/bg_color_black</item>
+        <item>@string/bg_color_midnight</item>
+        <item>@string/bg_color_vanilla</item>
+        <item>@string/bg_color_matcha</item>
+        <item>@string/bg_color_caffee</item>
+        <item>@string/bg_color_red_mud</item>
+        <item>@string/bg_color_rose</item>
+        <item>@string/bg_color_orange</item>
+        <item>@string/bg_color_manguo</item>
+        <item>@string/bg_color_honey_peach</item>
+        <item>@string/bg_color_lavender</item>
+        <item>@string/bg_color_sunday</item>
+        <item>@string/bg_color_scallion</item>
     </string-array>
 
-    <string name="background_color_panel_array_vein_name">
-        <item>纯平</item>
-        <item>石灰</item>
-        <item>笔记本</item>
-        <item>棉布</item>
-        <item>传统</item>
-        <item>牛皮纸</item>
-        <item>油漆</item>
-        <item>粉笔</item>
-        <item>毛发</item>
-        <item>针织</item>
-        <item>折纸</item>
-        <item>作业本</item>
-        <item>水渍</item>
-        <item>粉末</item>
-        <item>纤维</item>
-        <item>牛仔</item>
-    </string>
+    <string-array name="background_color_panel_array_vein_name">
+        <item>@string/texture_pure</item>
+        <item>@string/texture_lime</item>
+        <item>@string/texture_notebook</item>
+        <item>@string/texture_cotton</item>
+        <item>@string/texture_tradition</item>
+        <item>@string/texture_kraft</item>
+        <item>@string/texture_oil_paint</item>
+        <item>@string/texture_chalk</item>
+        <item>@string/texture_hair</item>
+        <item>@string/texture_knit</item>
+        <item>@string/texture_paper_folding</item>
+        <item>@string/texture_exercise_book</item>
+        <item>@string/texture_water_stains</item>
+        <item>@string/texture_powder</item>
+        <item>@string/texture_fibre</item>
+        <item>@string/texture_jean</item>
+    </string-array>
 
     <array name="background_color_panel_array_vein_drawable">
         <item>@drawable/texture_lime</item>

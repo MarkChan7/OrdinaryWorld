@@ -44,8 +44,7 @@
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/text_panel_fragment_acbtn_complete"
-        style="@style/TransparentButtonStyle"
+        style="@style/CompleteButtonStyle"
         android:layout_gravity="center_horizontal"
-        android:text="@string/complete"
-        android:textColor="@color/complete_text_color" />
+        android:text="@string/complete" />
 </LinearLayout>

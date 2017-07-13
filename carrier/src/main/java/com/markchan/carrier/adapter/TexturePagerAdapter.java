@@ -20,13 +20,13 @@ import java.util.List;
  * @version 1.0
  * @since 17/7/12
  */
-public class VeinPagerAdapter extends PagerAdapter {
+public class TexturePagerAdapter extends PagerAdapter {
 
     private Context mContext;
     private List<Vein> mData;
     private List<View> mViews;
 
-    public VeinPagerAdapter(Context context, List<Vein> data) {
+    public TexturePagerAdapter(Context context, List<Vein> data) {
         mContext = context;
         mData = data == null ? new ArrayList<Vein>() : data;
         mViews = new ArrayList<>();
@@ -34,7 +34,7 @@ public class VeinPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_vp_vein, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_vp_texture, null);
 
         TextView textView = (TextView) view.findViewById(R.id.vein_vp_item_tv);
         textView.setText(mData.get(position).getName());

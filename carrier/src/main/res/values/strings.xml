@@ -1,66 +1,62 @@
 <resources>
     <string name="app_name">简图</string>
 
-    <string name="pager_aty_text">文字</string>
-    <string name="pager_aty_background_color">底色</string>
-    <string name="pager_aty_background_photo">底图</string>
+    <string name="pager_aty_panel_text">文字</string>
+    <string name="pager_aty_panel_bg_color">底色</string>
+    <string name="pager_aty_panel_bg_photo">底图</string>
 
     <string name="default_text">写在这里</string>
 
     <string name="complete">完成</string>
     <string name="confirm">确认</string>
 
-    <array name="text_panel_title_array">
-        <item>字体</item>
-        <item>字号</item>
-        <item>位移</item>
-        <item>颜色</item>
-    </array>
+    <string name="text_panel_tab_typeface">字体</string>
+    <string name="text_panel_tab_text_size">字号</string>
+    <string name="text_panel_tab_translation">位移</string>
+    <string name="text_panel_tab_bg_color_and_texture">颜色</string>
 
     <string name="text_panel_text_size">文字大小</string>
     <string name="text_panel_drag_text_tips">上下可以拖动简图的文字</string>
     <string name="text_panel_drag_text_color">颜色</string>
     <string name="text_panel_drag_text_alpha">透明度</string>
 
-    <string name="background_color_panel_color">颜色</string>
-    <string-array name="background_color_panel_color_name_array">
-        <item>纯白</item>
-        <item>乌云</item>
-        <item>墨黑</item>
-        <item>午夜</item>
-        <item>香草</item>
-        <item>抹茶</item>
-        <item>咖啡</item>
-        <item>红泥</item>
-        <item>玫瑰</item>
-        <item>甜橙</item>
-        <item>芒果</item>
-        <item>蜜桃</item>
-        <item>薰衣草</item>
-        <item>晴天</item>
-        <item>青葱</item>
-    </string-array>
-    <string name="background_color_panel_vein">纹理</string>
-    <array name="background_color_panel_vein_name_array">
-        <item>纯平</item>
-        <item>石灰</item>
-        <item>笔记本</item>
-        <item>棉布</item>
-        <item>传统</item>
-        <item>牛皮纸</item>
-        <item>油漆</item>
-        <item>粉笔</item>
-        <item>毛发</item>
-        <item>针织</item>
-        <item>折纸</item>
-        <item>作业本</item>
-        <item>水渍</item>
-        <item>粉末</item>
-        <item>纤维</item>
-        <item>牛仔</item>
-    </array>
+    <string name="bg_color_and_texture_panel_bg_color">颜色</string>
+    <string name="bg_color_and_texture_panel_texture">纹理</string>
 
-
-    <string name="font_manager">字体管理</string>
+    <string name="font_manager_aty_name">字体管理</string>
     <string name="font_manager_item">字体下载与管理</string>
+
+    <string name="bg_color_pure">纯白</string>
+    <string name="bg_color_black_clouds">乌云</string>
+    <string name="bg_color_black">墨黑</string>
+    <string name="bg_color_midnight">午夜</string>
+    <string name="bg_color_vanilla">香草</string>
+    <string name="bg_color_matcha">抹茶</string>
+    <string name="bg_color_caffee">咖啡</string>
+    <string name="bg_color_red_mud">红泥</string>
+    <string name="bg_color_rose">玫瑰</string>
+    <string name="bg_color_orange">甜橙</string>
+    <string name="bg_color_manguo">芒果</string>
+    <string name="bg_color_honey_peach">蜜桃</string>
+    <string name="bg_color_lavender">薰衣草</string>
+    <string name="bg_color_sunday">晴天</string>
+    <string name="bg_color_scallion">青葱</string>
+
+    <string name="texture_pure">纯平</string>
+    <string name="texture_lime">石灰</string>
+    <string name="texture_notebook">笔记本</string>
+    <string name="texture_cotton">棉布</string>
+    <string name="texture_tradition">传统</string>
+    <string name="texture_kraft">牛皮纸</string>
+    <string name="texture_oil_paint">油漆</string>
+    <string name="texture_chalk">粉笔</string>
+    <string name="texture_hair">毛发</string>
+    <string name="texture_knit">针织</string>
+    <string name="texture_paper_folding">折纸</string>
+    <string name="texture_exercise_book">作业本</string>
+    <string name="texture_water_stains">水渍</string>
+    <string name="texture_powder">粉末</string>
+    <string name="texture_fibre">纤维</string>
+    <string name="texture_jean">牛仔</string>
+
 </resources>

@@ -10,11 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageButton;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.blankj.utilcode.utils.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -25,9 +23,14 @@ import com.markchan.carrier.event.BackToPanelsEvent;
 import com.markchan.carrier.event.PagerViewEventBus;
 import com.markchan.carrier.fragment.BackgroundColorPanelFragment;
 import com.markchan.carrier.fragment.TextPanelFragment;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PagerActivity extends AppCompatActivity {
 
@@ -45,8 +48,8 @@ public class PagerActivity extends AppCompatActivity {
     AppCompatImageButton mBackgroundColorPanelImageBtn;
     @BindView(R.id.pager_aty_ib_bg_photo_panel)
     AppCompatImageButton mBackgroundPhotoPanelImageBtn;
-    @BindView(R.id.pager_aty_ll_panels)
-    LinearLayout mPanelsLinearLayout;
+    @BindView(R.id.pager_aty_rl_panels)
+    RelativeLayout mPanelsRelativeLayout;
     @BindView(R.id.pager_aty_fl_panel_container)
     FrameLayout mPanelContainerFrameLayout;
 
@@ -127,7 +130,7 @@ public class PagerActivity extends AppCompatActivity {
                 ToastUtils.showShortToast("Wait for minute");
                 break;
             case R.id.pager_aty_ib_text_panel:
-                mPanelsLinearLayout.setVisibility(View.INVISIBLE);
+                mPanelsRelativeLayout.setVisibility(View.INVISIBLE);
                 mPanelContainerFrameLayout.setVisibility(View.VISIBLE);
                 if (mTextPanelFragment == null) {
                     mTextPanelFragment = new TextPanelFragment();
@@ -135,7 +138,7 @@ public class PagerActivity extends AppCompatActivity {
                 showPanel(mTextPanelFragment);
                 break;
             case R.id.pager_aty_ib_bg_color_panel:
-                mPanelsLinearLayout.setVisibility(View.INVISIBLE);
+                mPanelsRelativeLayout.setVisibility(View.INVISIBLE);
                 mPanelContainerFrameLayout.setVisibility(View.VISIBLE);
                 if (mBackgroundColorPanelFragment == null) {
                     mBackgroundColorPanelFragment = new BackgroundColorPanelFragment();
@@ -157,7 +160,7 @@ public class PagerActivity extends AppCompatActivity {
 
     private void backToPanels() {
         mPanelContainerFrameLayout.setVisibility(View.GONE);
-        mPanelsLinearLayout.setVisibility(View.VISIBLE);
+        mPanelsRelativeLayout.setVisibility(View.VISIBLE);
         mInConcretePanel = false;
     }
 

@@ -8,18 +8,22 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
+
 import com.github.lzyzsd.randomcolor.RandomColor;
 import com.markchan.carrier.R;
 import com.markchan.carrier.adapter.BackgroundColorPagerAdapter;
 import com.markchan.carrier.domain.BackgroundColor;
 import com.markchan.carrier.event.PagerViewEventBus;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.greenrobot.eventbus.EventBus;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by Mark on 2017/7/12.
@@ -51,7 +55,7 @@ public class BackgroundColorPanelFragment extends Fragment {
         RandomColor randomColor = new RandomColor();
         List<View> views = new ArrayList<>();
         for (String colorName : colorNameArr) {
-            views.add(LayoutInflater.from(getActivity()).inflate(R.layout.item_vp_background_color, null));
+            views.add(LayoutInflater.from(getActivity()).inflate(R.layout.item_vp_background_color, container, false));
             mBackgroundColors.add(new BackgroundColor(colorName, randomColor.randomColor()));
         }
         BackgroundColorPagerAdapter colorAdapter = new BackgroundColorPagerAdapter(getActivity(),

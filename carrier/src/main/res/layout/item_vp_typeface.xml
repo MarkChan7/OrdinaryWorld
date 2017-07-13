@@ -19,7 +19,7 @@
             android:layout_height="32dp"
             android:layout_centerInParent="true"
             android:padding="8dp"
-            android:background="#40333333">
+            android:background="#804A4A4A">
 
         <ImageView
                 android:layout_width="wrap_content"

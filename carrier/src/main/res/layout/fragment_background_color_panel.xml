@@ -5,34 +5,30 @@
               android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/BgColorAndTexturePanelLabelStyle"
         android:layout_gravity="center_horizontal"
-        android:drawableBottom="@drawable/ic_arrow_down"
-        android:text="颜色" />
+        android:text="@string/bg_color_and_texture_panel_bg_color" />
 
     <android.support.v4.view.ViewPager
-            android:background="#f0f"
         android:id="@+id/bg_color_frg_vp_bg_color"
         android:layout_width="match_parent"
-        android:layout_height="48dp" />
+        android:layout_height="48dp"
+        android:background="#f0f" />
 
     <!--<com.tmall.ultraviewpager.UltraViewPager-->
-        <!--android:id="@+id/bg_color_frg_vp_bg_color"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="48dp"-->
-        <!--android:background="@android:color/darker_gray" />-->
+    <!--android:id="@+id/bg_color_frg_vp_bg_color"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="48dp"-->
+    <!--android:background="@android:color/darker_gray" />-->
 
     <android.support.v4.widget.Space
         android:layout_width="16dp"
         android:layout_height="16dp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/BgColorAndTexturePanelLabelStyle"
         android:layout_gravity="center_horizontal"
-        android:drawableBottom="@drawable/ic_arrow_down"
-        android:text="纹理" />
+        android:text="@string/bg_color_and_texture_panel_texture" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/bg_color_frg_vp_vein"
@@ -40,10 +36,10 @@
         android:layout_height="48dp" />
 
     <!--<com.tmall.ultraviewpager.UltraViewPager-->
-        <!--android:id="@+id/bg_color_frg_vp_vein"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="48dp"-->
-        <!--android:background="@android:color/darker_gray" />-->
+    <!--android:id="@+id/bg_color_frg_vp_vein"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="48dp"-->
+    <!--android:background="@android:color/darker_gray" />-->
 
     <android.support.v4.widget.Space
         android:layout_width="16dp"
@@ -51,8 +47,7 @@
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/bg_color_frg_btn_confirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/CompleteButtonStyle"
         android:layout_gravity="center_horizontal"
-        android:text="确认" />
+        android:text="@string/confirm" />
 </LinearLayout>

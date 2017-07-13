@@ -3,23 +3,39 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="pager_view_default_text_size">18sp</dimen>
+
     <dimen name="title_bar_height">48dp</dimen>
     <dimen name="title_bar_title_text_size">18sp</dimen>
 
-    <dimen name="panel_title_text_size">12sp</dimen>
-    <dimen name="panel_title_space">4dp</dimen>
-    <dimen name="panel_icon_width">56dp</dimen>
-    <dimen name="panel_icon_height">56dp</dimen>
+    <dimen name="pager_aty_menu_width">56dp</dimen>
+    <dimen name="pager_aty_menu_height">48dp</dimen>
+
+    <dimen name="panel_width">56dp</dimen>
+    <dimen name="panel_height">56dp</dimen>
+    <dimen name="panel_padding_left_and_right">4dp</dimen>
+    <dimen name="panel_lab_text_size">12sp</dimen>
+    <dimen name="panel_vertical_space">4dp</dimen>
+    <dimen name="panel_horizontal_space">16dp</dimen>
 
     <dimen name="text_panel_text_size_small">12sp</dimen>
     <dimen name="text_panel_text_size_medium">16sp</dimen>
     <dimen name="text_panel_text_size_standard">18sp</dimen>
     <dimen name="text_panel_text_size_large">22sp</dimen>
 
-    <dimen name="pager_view_default_text_size">18sp</dimen>
+    <dimen name="text_panel_text_size_diam_small">12dp</dimen>
+    <dimen name="text_panel_text_size_diam_medium">16dp</dimen>
+    <dimen name="text_panel_text_size_diam_standard">18dp</dimen>
+    <dimen name="text_panel_text_size_diam_large">22dp</dimen>
+
+    <dimen name="text_alignment_space">16dp</dimen>
+
+    <dimen name="bg_color_and_texture_panel_label_text_size">12sp</dimen>
+    <dimen name="bg_color_and_texture_panel_label_drawable_padding">2dp</dimen>
 
     <dimen name="wheel_picker_item_default_text_size">24sp</dimen>
     <dimen name="wheel_picker_item_default_space">12dp</dimen>
     <dimen name="wheel_picker_indicator_size">2dp</dimen>
     <dimen name="wheel_picker_default_margin">8dp</dimen>
+
 </resources>

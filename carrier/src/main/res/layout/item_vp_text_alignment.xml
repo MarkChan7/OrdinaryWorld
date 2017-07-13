@@ -33,26 +33,26 @@
 
         <ImageButton
             android:id="@+id/text_alignment_vp_item_btn_left"
-            style="@style/TransparentButtonStyle"
-            android:src="@drawable/ic_text_alignment_left_normal" />
+            style="@style/TextAlignmentButtonStyle"
+            android:src="@drawable/ic_text_alignment_left_36dp_normal" />
 
         <android.support.v4.widget.Space
-            android:layout_width="16dp"
-            android:layout_height="16dp" />
+            android:layout_width="@dimen/text_alignment_space"
+            android:layout_height="@dimen/text_alignment_space" />
 
         <ImageButton
             android:id="@+id/text_alignment_vp_item_btn_center"
-            style="@style/TransparentButtonStyle"
-            android:src="@drawable/ic_text_alignment_center_normal" />
+            style="@style/TextAlignmentButtonStyle"
+            android:src="@drawable/ic_text_alignment_center_36dp_normal" />
 
         <android.support.v4.widget.Space
-            android:layout_width="16dp"
-            android:layout_height="16dp" />
+            android:layout_width="@dimen/text_alignment_space"
+            android:layout_height="@dimen/text_alignment_space" />
 
         <ImageButton
             android:id="@+id/text_alignment_vp_item_btn_right"
-            style="@style/TransparentButtonStyle"
-            android:src="@drawable/ic_text_alignment_right_normal" />
+            style="@style/TextAlignmentButtonStyle"
+            android:src="@drawable/ic_text_alignment_right_36dp_normal" />
 
         <android.support.v4.widget.Space
             android:layout_width="0dp"
