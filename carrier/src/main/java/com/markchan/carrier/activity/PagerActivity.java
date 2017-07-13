@@ -106,7 +106,7 @@ public class PagerActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPagerViewTextOffsetEvent(PagerViewEventBus.TextOffsetEvent event) {
-        mPagerView.resetTextOffset();
+        mPagerView.resetTextLocation();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

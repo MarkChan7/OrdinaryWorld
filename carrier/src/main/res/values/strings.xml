@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">简图</string>
 
+    <string name="pager_view_default_text">Like Sunday Like Raining</string>
+
     <string name="pager_aty_panel_text">文字</string>
     <string name="pager_aty_panel_bg_color">底色</string>
     <string name="pager_aty_panel_bg_photo">底图</string>

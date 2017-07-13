@@ -23,24 +23,20 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
 import android.view.ViewConfiguration;
 import com.blankj.utilcode.utils.ScreenUtils;
 import com.blankj.utilcode.utils.SizeUtils;
 import com.github.lzyzsd.randomcolor.RandomColor;
+import com.markchan.carrier.R;
 import com.markchan.carrier.util.Scheme;
 import com.markchan.carrier.util.TextHelper;
-
 import java.util.Vector;
-
 import timber.log.Timber;
 
 /**
  * Created by Mark on 2017/7/8.
  */
 public class PagerView extends View {
-
-    public static final boolean DEBUG = true;
 
     public PagerView(Context context) {
         this(context, null);
@@ -72,31 +68,32 @@ public class PagerView extends View {
         // no-op by default
     }
 
-    private static final int DEFAULT_BACKGROUND_COLOR = Color.WHITE;
-
     // A\nB\nC\nD\nE\nF\nG\na\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl\nm\nn\no\np\nq\nr\ns\nt\nu\nv\nw\nx\ny\nx
+    private static String DEFAULT_TEXT;
 
-    private static final String DEFAULT_TEXT = "Like Sunday Like Raining\nToday is Sunnday";
-    private static final float DEFAULT_TEXT_SIZE = SizeUtils.dp2px(22);
+    private static float DEFAULT_TEXT_SIZE;
     private static final int DEFAULT_TEXT_COLOR = Color.BLACK;
     private static final int DEFAULT_TEXT_ALPHA = 255;
     private static final int DEFAULT_TEXT_ALIGNMENT = TEXT_ALIGNMENT_CENTER;
 
-    private static final int TEXT_BORDER_PADDING = SizeUtils.dp2px(8);
-    private static final int TEXT_PADDING_LEFT_AND_RIGHT = SizeUtils.dp2px(12);
-    private static final int TEXT_PADDING_TOP_AND_BOTTOM = SizeUtils.dp2px(8);
+    private static final int DEFAULT_BACKGROUND_COLOR = Color.WHITE;
 
-    private static final int TEXT_RECT_MAX_HEIGHT =
-            ScreenUtils.getScreenWidth() - TEXT_BORDER_PADDING * 2
-                    - TEXT_PADDING_TOP_AND_BOTTOM * 2;
+    private static int TEXT_BORDER_PADDING;
+    private static int TEXT_PADDING_LEFT_AND_RIGHT;
+    private static int TEXT_PADDING_TOP_AND_BOTTOM;
 
-    private static final int TEXT_RECT_MAX_WIDTH =
-            ScreenUtils.getScreenWidth() - TEXT_BORDER_PADDING * 2
-                    - TEXT_PADDING_LEFT_AND_RIGHT * 2;
+    private static int TEXT_RECT_MAX_HEIGHT;
 
-    private static final int MIN_TEXT_OFFSET = TEXT_BORDER_PADDING * 2;
+    private static int TEXT_RECT_MAX_WIDTH;
 
-    private static final int MAX_TEXT_OFFSET = MIN_TEXT_OFFSET + TEXT_RECT_MAX_HEIGHT;
+    private static int MIN_TEXT_OFFSET;
+
+    private static int MAX_TEXT_OFFSET;
+
+    public static boolean DEBUG = true;
+
+    private static final int mWidth = ScreenUtils.getScreenWidth();
+    private static final int mHeight = mWidth;
 
     private Rect mTextBorder;
 
@@ -169,11 +166,31 @@ public class PagerView extends View {
 
     private boolean mDragging;
 
-    private int mLastTextCenterY;
+    private void setupDefaultValue(Context context) {
+        DEFAULT_TEXT = getResources().getString(R.string.pager_view_default_text);
+
+        DEFAULT_TEXT_SIZE = getResources().getDimension(R.dimen.pager_view_default_text_size);
+
+        TEXT_BORDER_PADDING = (int) getResources()
+                .getDimension(R.dimen.pager_view_text_border_padding);
+
+        TEXT_PADDING_LEFT_AND_RIGHT = (int) getResources()
+                .getDimension(R.dimen.pager_view_text_padding_left_and_right);
+        TEXT_PADDING_TOP_AND_BOTTOM = (int) getResources()
+                .getDimension(R.dimen.pager_view_text_padding_top_and_bottom);
+
+        TEXT_RECT_MAX_HEIGHT = mHeight - TEXT_BORDER_PADDING * 2 - TEXT_PADDING_TOP_AND_BOTTOM * 2;
+
+        TEXT_RECT_MAX_WIDTH = mWidth - TEXT_BORDER_PADDING * 2 - TEXT_PADDING_LEFT_AND_RIGHT * 2;
+
+        MIN_TEXT_OFFSET = TEXT_BORDER_PADDING * 2;
+
+        MAX_TEXT_OFFSET = MIN_TEXT_OFFSET + TEXT_RECT_MAX_HEIGHT;
+    }
 
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
-        mBackgroundColor = DEFAULT_BACKGROUND_COLOR;
+        setupDefaultValue(context);
 
         mText = DEFAULT_TEXT;
         mTextSize = DEFAULT_TEXT_SIZE;
@@ -181,9 +198,11 @@ public class PagerView extends View {
         mTextAlpha = DEFAULT_TEXT_ALPHA;
         mTextAlignment = DEFAULT_TEXT_ALIGNMENT;
 
+        mBackgroundColor = DEFAULT_BACKGROUND_COLOR;
+
         mTextBorder = new Rect();
         mTextBorder.left = TEXT_BORDER_PADDING;
-        mTextBorder.right = ScreenUtils.getScreenWidth() - TEXT_BORDER_PADDING;
+        mTextBorder.right = mWidth - TEXT_BORDER_PADDING;
 
         mTextRect = new Rect();
         mTextRect.left = mTextBorder.left + TEXT_PADDING_LEFT_AND_RIGHT;
@@ -204,7 +223,7 @@ public class PagerView extends View {
 
         mHelperPaint = new Paint();
 
-        mTextCenterY = ScreenUtils.getScreenWidth() / 2;
+        mTextCenterY = mHeight / 2;
 
         final ViewConfiguration vc = ViewConfiguration.get(context);
         mTouchSlop = vc.getScaledTouchSlop();
@@ -241,13 +260,7 @@ public class PagerView extends View {
                 }
 
                 if (mDragging) {
-                    if (mTextOffset < MIN_TEXT_OFFSET
-                            || mTextOffset + mLines * mTextHeight > MAX_TEXT_OFFSET) {
-                        mTextCenterY = mLastTextCenterY;
-                    } else {
-                        mTextCenterY += dy;
-                        mLastTextCenterY = mTextCenterY;
-                    }
+                    mTextCenterY += dy;
 
                     mLastTouchX = x;
                     mLastTouchY = y;
@@ -371,7 +384,7 @@ public class PagerView extends View {
                 case TEXT_ALIGNMENT_CENTER:
                 default:
                     mTextPaint.setTextAlign(Paint.Align.CENTER);
-                    baseLineX = ScreenUtils.getScreenWidth() / 2;
+                    baseLineX = mWidth / 2;
                     break;
             }
 
@@ -446,8 +459,8 @@ public class PagerView extends View {
         invalidate();
     }
 
-    public void resetTextOffset() {
-        mTextCenterY = ScreenUtils.getScreenWidth() / 2;
+    public void resetTextLocation() {
+        mTextCenterY = mHeight / 2;
         invalidate();
     }
 
