@@ -83,7 +83,7 @@
 
                     <android.support.v7.widget.AppCompatImageButton
                         android:id="@+id/pager_aty_ib_text_panel"
-                        style="@style/TransparentButtonStyle"
+                        style="@style/PanelIconStyle"
                         android:contentDescription="@string/pager_aty_panel_text"
                         android:src="@drawable/ic_text_52dp" />
 
@@ -105,7 +105,7 @@
 
                     <android.support.v7.widget.AppCompatImageButton
                         android:id="@+id/pager_aty_ib_bg_color_panel"
-                        style="@style/TransparentButtonStyle"
+                        style="@style/PanelIconStyle"
                         android:contentDescription="@string/pager_aty_panel_bg_color"
                         android:src="@drawable/ic_background_color_52dp" />
 
@@ -127,7 +127,7 @@
 
                     <android.support.v7.widget.AppCompatImageButton
                         android:id="@+id/pager_aty_ib_bg_photo_panel"
-                        style="@style/TransparentButtonStyle"
+                        style="@style/PanelIconStyle"
                         android:contentDescription="@string/pager_aty_panel_bg_photo"
                         android:src="@drawable/ic_background_photo_52dp" />
 

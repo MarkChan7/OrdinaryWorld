@@ -24,24 +24,42 @@
     </integer-array>
 
     <string-array name="background_color_panel_array_color_name">
-        <item>@string/bg_color_pure</item>
-        <item>@string/bg_color_black_clouds</item>
-        <item>@string/bg_color_black</item>
-        <item>@string/bg_color_midnight</item>
-        <item>@string/bg_color_vanilla</item>
-        <item>@string/bg_color_matcha</item>
-        <item>@string/bg_color_caffee</item>
-        <item>@string/bg_color_red_mud</item>
-        <item>@string/bg_color_rose</item>
-        <item>@string/bg_color_orange</item>
-        <item>@string/bg_color_manguo</item>
-        <item>@string/bg_color_honey_peach</item>
-        <item>@string/bg_color_lavender</item>
-        <item>@string/bg_color_sunday</item>
-        <item>@string/bg_color_scallion</item>
+        <item>@string/bg_color_name_pure</item>
+        <item>@string/bg_color_name_black_clouds</item>
+        <item>@string/bg_color_name_black</item>
+        <item>@string/bg_color_name_midnight</item>
+        <item>@string/bg_color_name_vanilla</item>
+        <item>@string/bg_color_name_matcha</item>
+        <item>@string/bg_color_name_caffee</item>
+        <item>@string/bg_color_name_red_mud</item>
+        <item>@string/bg_color_name_rose</item>
+        <item>@string/bg_color_name_orange</item>
+        <item>@string/bg_color_name_manguo</item>
+        <item>@string/bg_color_name_honey_peach</item>
+        <item>@string/bg_color_name_lavender</item>
+        <item>@string/bg_color_name_sunday</item>
+        <item>@string/bg_color_name_scallion</item>
     </string-array>
 
-    <string-array name="background_color_panel_array_vein_name">
+    <integer-array name="background_color_panel_array_color">
+        <item>@color/bg_color_pure</item>
+        <item>@color/bg_color_black_clouds</item>
+        <item>@color/bg_color_black</item>
+        <item>@color/bg_color_midnight</item>
+        <item>@color/bg_color_vanilla</item>
+        <item>@color/bg_color_matcha</item>
+        <item>@color/bg_color_caffee</item>
+        <item>@color/bg_color_red_mud</item>
+        <item>@color/bg_color_rose</item>
+        <item>@color/bg_color_orange</item>
+        <item>@color/bg_color_manguo</item>
+        <item>@color/bg_color_honey_peach</item>
+        <item>@color/bg_color_lavender</item>
+        <item>@color/bg_color_sunday</item>
+        <item>@color/bg_color_scallion</item>
+    </integer-array>
+
+    <string-array name="background_color_panel_array_texture_name">
         <item>@string/texture_pure</item>
         <item>@string/texture_lime</item>
         <item>@string/texture_notebook</item>
@@ -60,23 +78,23 @@
         <item>@string/texture_jean</item>
     </string-array>
 
-    <array name="background_color_panel_array_vein_drawable">
-        <item>@drawable/texture_lime</item>
-        <item>@drawable/texture_notebook</item>
-        <item>@drawable/texture_cotton</item>
-        <item>@drawable/texture_tradition</item>
-        <item>@drawable/texture_kraft</item>
-        <item>@drawable/texture_oil_paint</item>
-        <item>@drawable/texture_chalk</item>
-        <item>@drawable/texture_hair</item>
-        <item>@drawable/texture_knit</item>
-        <item>@drawable/texture_paper_folding</item>
-        <item>@drawable/texture_exercise_book</item>
-        <item>@drawable/texture_water_stains</item>
-        <item>@drawable/texture_powder</item>
-        <item>@drawable/texture_fibre</item>
-        <item>@drawable/texture_jean</item>
-    </array>
+    <string-array name="background_color_panel_array_texture_drawable_name">
+        <item>texture_lime</item>
+        <item>texture_notebook</item>
+        <item>texture_cotton</item>
+        <item>texture_tradition</item>
+        <item>texture_kraft</item>
+        <item>texture_oil_paint</item>
+        <item>texture_chalk</item>
+        <item>texture_hair</item>
+        <item>texture_knit</item>
+        <item>texture_paper_folding</item>
+        <item>texture_exercise_book</item>
+        <item>texture_water_stains</item>
+        <item>texture_powder</item>
+        <item>texture_fibre</item>
+        <item>texture_jean</item>
+    </string-array>
 
     <string-array name="wheel_picker_default_array">
         <item>AigeStudio</item>

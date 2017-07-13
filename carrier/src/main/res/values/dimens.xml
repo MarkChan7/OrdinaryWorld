@@ -12,8 +12,8 @@
     <dimen name="pager_aty_menu_height">48dp</dimen>
 
     <dimen name="panel_width">56dp</dimen>
-    <dimen name="panel_height">56dp</dimen>
-    <dimen name="panel_padding_left_and_right">4dp</dimen>
+    <dimen name="panel_icon_height">52dp</dimen>
+    <dimen name="panel_padding_left_and_right">2dp</dimen>
     <dimen name="panel_lab_text_size">12sp</dimen>
     <dimen name="panel_vertical_space">4dp</dimen>
     <dimen name="panel_horizontal_space">16dp</dimen>
@@ -31,7 +31,7 @@
     <dimen name="text_alignment_space">16dp</dimen>
 
     <dimen name="bg_color_and_texture_panel_label_text_size">12sp</dimen>
-    <dimen name="bg_color_and_texture_panel_label_drawable_padding">2dp</dimen>
+    <dimen name="bg_color_and_texture_panel_label_drawable_padding">-4dp</dimen>
 
     <dimen name="wheel_picker_item_default_text_size">24sp</dimen>
     <dimen name="wheel_picker_item_default_space">12dp</dimen>

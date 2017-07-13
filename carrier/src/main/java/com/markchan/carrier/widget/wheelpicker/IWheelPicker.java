@@ -75,7 +75,7 @@ public interface IWheelPicker {
      * {@link #setSelectedItemPosition(int)}所设置的值，当且仅当调用
      * {@link #setSelectedItemPosition(int)}设置新值后，该方法所返回的值才会改变
      * 如果你只是想获取滚轮静止时当前被选中的数据项所显示的数据在数据源中的位置，你可以通过
-     * {@link com.aigestudio.wheelpicker.WheelPicker.OnItemSelectedListener}回调监听或调用
+     * {@link com.markchan.carrier.widget.wheelpicker.WheelPicker.OnItemSelectedListener}回调监听或调用
      * {@link #getCurrentItemPosition()}
      * <p>
      * Get the position of current selected item in data source
@@ -85,7 +85,7 @@ public interface IWheelPicker {
      * {@link #setSelectedItemPosition(int)}
      * set a new value
      * If you only want to get the position of current selected item in data source, you can get it
-     * through {@link com.aigestudio.wheelpicker.WheelPicker.OnItemSelectedListener} or call
+     * through {@link com.markchan.carrier.widget.wheelpicker.WheelPicker.OnItemSelectedListener} or call
      * {@link #getCurrentItemPosition()} directly
      *
      * @return 当前被选中的数据项所显示的数据在数据源中的位置
@@ -98,8 +98,8 @@ public interface IWheelPicker {
      * 法重新将当前被选中的数据项所显示的数据在数据源中的位置设置为第三个，那么滚轮选择器会清除掉上一次滚动
      * 的相关数据参数，并将重置一系列的数据，重新将第三个数据作为滚轮选择器的起点，这个行为很可能会影响你之
      * 前所根据这些参数改变的一些属性，比如
-     * {@link com.aigestudio.wheelpicker.WheelPicker.OnWheelChangeListener}和
-     * {@link com.aigestudio.wheelpicker.WheelPicker.OnItemSelectedListener}监听器中方法参数的值，因
+     * {@link com.markchan.carrier.widget.wheelpicker.WheelPicker.OnWheelChangeListener}和
+     * {@link com.markchan.carrier.widget.wheelpicker.WheelPicker.OnItemSelectedListener}监听器中方法参数的值，因
      * 此你总该在调用该方法后考虑到相关影响
      * 你总该为该方法传入一个大于等于0小于数据源{@link #getData()}长度
      * 的值，否则会抛出异常
@@ -111,8 +111,8 @@ public interface IWheelPicker {
      * with a new value, WheelPicker will clear the related parameters last scroll set and reset
      * series of data, and make the position 3 as a new starting point of WheelPicker, this behavior
      * maybe influenced some attribute you set last time, such as parameters of method in
-     * {@link com.aigestudio.wheelpicker.WheelPicker.OnWheelChangeListener} and
-     * {@link com.aigestudio.wheelpicker.WheelPicker.OnItemSelectedListener}, so you must always
+     * {@link com.markchan.carrier.widget.wheelpicker.WheelPicker.OnWheelChangeListener} and
+     * {@link com.markchan.carrier.widget.wheelpicker.WheelPicker.OnItemSelectedListener}, so you must always
      * consider the influence when you call this method set a new value
      * You should always set a value which greater than or equal to 0 and less than data source's
      * length
@@ -204,7 +204,7 @@ public interface IWheelPicker {
      * 设置滚轮滚动状态改变监听器
      *
      * @param listener 滚轮滚动状态改变监听器
-     * @see com.aigestudio.wheelpicker.WheelPicker.OnWheelChangeListener
+     * @see com.markchan.carrier.widget.wheelpicker.WheelPicker.OnWheelChangeListener
      */
     void setOnWheelChangeListener(WheelPicker.OnWheelChangeListener listener);
 

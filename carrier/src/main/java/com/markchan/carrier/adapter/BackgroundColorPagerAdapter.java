@@ -2,11 +2,14 @@ package com.markchan.carrier.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.markchan.carrier.R;
 import com.markchan.carrier.domain.BackgroundColor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,21 +24,15 @@ public class BackgroundColorPagerAdapter extends PagerAdapter {
     private List<BackgroundColor> mData;
     private List<View> mViews;
 
-    public BackgroundColorPagerAdapter(Context context, List<View> views,
-            List<BackgroundColor> data) {
+    public BackgroundColorPagerAdapter(Context context, List<BackgroundColor> data) {
         mContext = context;
-        mViews = views;
         mData = data == null ? new ArrayList<BackgroundColor>() : data;
-//        mViews = new ArrayList<>();
-//        for (int i = 0; i < mData.size(); i++) {
-//            mViews.add(
-//                    LayoutInflater.from(mContext).inflate(R.layout.item_vp_background_color, null));
-//        }
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = mViews.get(position);
+        View view = LayoutInflater.from(mContext)
+                .inflate(R.layout.item_vp_background_color, container, false);
 
         TextView textView = (TextView) view.findViewById(R.id.bg_color_vp_item_tv);
         textView.setText(mData.get(position).getName());
@@ -43,7 +40,12 @@ public class BackgroundColorPagerAdapter extends PagerAdapter {
         view.findViewById(R.id.bg_color_vp_item_rl_root)
                 .setBackgroundColor(mData.get(position).getColor());
 
-//        mViews.add(view);
+        container.addView(view);
+        if (mViews == null) {
+            mViews = new ArrayList<>();
+        }
+        mViews.add(view);
+
         return view;
     }
 

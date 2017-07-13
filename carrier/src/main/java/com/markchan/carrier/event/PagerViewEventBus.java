@@ -67,4 +67,13 @@ public final class PagerViewEventBus {
             this.textureUrl = textureUrl;
         }
     }
+
+    public static class BackgroundColorEvent {
+
+        public final int backgroundColor;
+
+        public BackgroundColorEvent(int backgroundColor) {
+            this.backgroundColor = backgroundColor;
+        }
+    }
 }

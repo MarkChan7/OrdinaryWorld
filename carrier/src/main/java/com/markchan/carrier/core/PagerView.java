@@ -45,7 +45,7 @@ public class PagerView extends View {
     }
 
     public PagerView(Context context,
-            @Nullable AttributeSet attrs) {
+                     @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
@@ -56,7 +56,7 @@ public class PagerView extends View {
 
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
     public PagerView(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+                     int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -71,6 +71,8 @@ public class PagerView extends View {
     }
 
     private static final int DEFAULT_BACKGROUND_COLOR = Color.WHITE;
+
+    // A\nB\nC\nD\nE\nF\nG\na\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl\nm\nn\no\np\nq\nr\ns\nt\nu\nv\nw\nx\ny\nx
 
     private static final String DEFAULT_TEXT = "Like Sunday Like Raining\nToday is Sunnday";
     private static final float DEFAULT_TEXT_SIZE = SizeUtils.dp2px(22);
@@ -149,7 +151,7 @@ public class PagerView extends View {
     private boolean mResetOffsetFlag;
 
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+                      int defStyleRes) {
         mBackgroundColor = DEFAULT_BACKGROUND_COLOR;
 
         mText = DEFAULT_TEXT;
@@ -195,6 +197,11 @@ public class PagerView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
     }
 
+    float mLastAlphaMultiple;
+    float mLastRedMultiple;
+    float mLastGreenMultiple;
+    float mLastBlueMultiple;
+
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.setDrawFilter(
@@ -209,9 +216,11 @@ public class PagerView extends View {
             Matrix matrix = new Matrix();
             matrix.postScale(getWidth() * 1.0F / width, getHeight() * 1.0F / height);
             canvas.drawBitmap(mTextureBitmap, matrix, mBackgroundPaint);
+        } else if (mBackgroundBitmap != null && !mBackgroundBitmap.isRecycled()) {
+            // TODO: 17/7/13 drawable photo as background
+        } else {
+            canvas.drawColor(mBackgroundColor);
         }
-
-//        canvas.drawColor(mBackgroundColor);
 
         boolean typefaceDefaultFlag = true;
         if (!TextUtils.isEmpty(mTypefaceUrl)) {
@@ -243,8 +252,6 @@ public class PagerView extends View {
 
         FontMetricsInt fm = mTextPaint.getFontMetricsInt();
         int textHeight = fm.bottom - fm.top;
-
-//        mText = "A\nB\nC\nD\nE\nF\nG\na\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl\nm\nn\no\np\nq\nr\ns\nt\nu\nv\nw\nx\ny\nx";
 
         Vector<String> textLinesVector = TextHelper
                 .getTextLinesVector(mTextPaint, mText, TEXT_RECT_MAX_WIDTH, TEXT_RECT_MAX_HEIGHT);
@@ -379,5 +386,14 @@ public class PagerView extends View {
             mTextureBitmap = textureBitmap;
             invalidate();
         }
+    }
+
+    public int getPagerBackgroundColor() {
+        return mBackgroundColor;
+    }
+
+    public void setPagerBackgroundColor(int backgroundColor) {
+        mBackgroundColor = backgroundColor;
+        invalidate();
     }
 }

@@ -27,4 +27,21 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="bg_color_pure">#FFFFFFFF</color>
+    <color name="bg_color_black_clouds">#FFC4C9CC</color>
+    <color name="bg_color_black">#FF252525</color>
+    <color name="bg_color_midnight">#FF293751</color>
+    <color name="bg_color_vanilla">#FFF6EED9</color>
+    <color name="bg_color_matcha">#FFBFD6CA</color>
+    <color name="bg_color_caffee">#FFB698A3</color>
+    <color name="bg_color_red_mud">#FF6E3333</color>
+    <color name="bg_color_rose">#FFF45B4C</color>
+    <color name="bg_color_orange">#FFF68943</color>
+    <color name="bg_color_manguo">#FFFFD34C</color>
+    <color name="bg_color_honey_peach">#FFFF758D</color>
+    <color name="bg_color_lavender">#FFBB63DE</color>
+    <color name="bg_color_sunday">#FF5BBEF7</color>
+    <color name="bg_color_scallion">#FF4BCBB2</color>
+
 </resources>

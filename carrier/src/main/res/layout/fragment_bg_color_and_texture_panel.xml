@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:paddingTop="8dp"
               android:orientation="vertical">
 
     <TextView
@@ -12,18 +14,15 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/bg_color_frg_vp_bg_color"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#f0f" />
-
-    <!--<com.tmall.ultraviewpager.UltraViewPager-->
-    <!--android:id="@+id/bg_color_frg_vp_bg_color"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="48dp"-->
-    <!--android:background="@android:color/darker_gray" />-->
+        android:layout_height="32dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="120dp"
+        android:paddingRight="120dp"
+        android:clipToPadding="false" />
 
     <android.support.v4.widget.Space
-        android:layout_width="16dp"
-        android:layout_height="16dp" />
+        android:layout_width="0dp"
+        android:layout_height="32dp" />
 
     <TextView
         style="@style/BgColorAndTexturePanelLabelStyle"
@@ -31,19 +30,18 @@
         android:text="@string/bg_color_and_texture_panel_texture" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/bg_color_frg_vp_vein"
+        android:id="@+id/bg_color_frg_vp_texture"
         android:layout_width="match_parent"
-        android:layout_height="48dp" />
-
-    <!--<com.tmall.ultraviewpager.UltraViewPager-->
-    <!--android:id="@+id/bg_color_frg_vp_vein"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="48dp"-->
-    <!--android:background="@android:color/darker_gray" />-->
+        android:layout_height="32dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="120dp"
+        android:paddingRight="120dp"
+        android:clipToPadding="false" />
 
     <android.support.v4.widget.Space
-        android:layout_width="16dp"
-        android:layout_height="16dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/bg_color_frg_btn_confirm"

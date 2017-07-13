@@ -5,12 +5,16 @@ package com.markchan.carrier.domain;
  * @version 1.0
  * @since 17/7/12
  */
-public class Vein {
+public class Texture {
+
+    public static Texture createPureTexture(String name) {
+        return new Texture(name, null);
+    }
 
     private final String name;
     private final String url;
 
-    public Vein(String name, String url) {
+    public Texture(String name, String url) {
         this.name = name;
         this.url = url;
     }

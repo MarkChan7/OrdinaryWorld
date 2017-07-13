@@ -26,21 +26,21 @@
     <string name="font_manager_aty_name">字体管理</string>
     <string name="font_manager_item">字体下载与管理</string>
 
-    <string name="bg_color_pure">纯白</string>
-    <string name="bg_color_black_clouds">乌云</string>
-    <string name="bg_color_black">墨黑</string>
-    <string name="bg_color_midnight">午夜</string>
-    <string name="bg_color_vanilla">香草</string>
-    <string name="bg_color_matcha">抹茶</string>
-    <string name="bg_color_caffee">咖啡</string>
-    <string name="bg_color_red_mud">红泥</string>
-    <string name="bg_color_rose">玫瑰</string>
-    <string name="bg_color_orange">甜橙</string>
-    <string name="bg_color_manguo">芒果</string>
-    <string name="bg_color_honey_peach">蜜桃</string>
-    <string name="bg_color_lavender">薰衣草</string>
-    <string name="bg_color_sunday">晴天</string>
-    <string name="bg_color_scallion">青葱</string>
+    <string name="bg_color_name_pure">纯白</string>
+    <string name="bg_color_name_black_clouds">乌云</string>
+    <string name="bg_color_name_black">墨黑</string>
+    <string name="bg_color_name_midnight">午夜</string>
+    <string name="bg_color_name_vanilla">香草</string>
+    <string name="bg_color_name_matcha">抹茶</string>
+    <string name="bg_color_name_caffee">咖啡</string>
+    <string name="bg_color_name_red_mud">红泥</string>
+    <string name="bg_color_name_rose">玫瑰</string>
+    <string name="bg_color_name_orange">甜橙</string>
+    <string name="bg_color_name_manguo">芒果</string>
+    <string name="bg_color_name_honey_peach">蜜桃</string>
+    <string name="bg_color_name_lavender">薰衣草</string>
+    <string name="bg_color_name_sunday">晴天</string>
+    <string name="bg_color_name_scallion">青葱</string>
 
     <string name="texture_pure">纯平</string>
     <string name="texture_lime">石灰</string>

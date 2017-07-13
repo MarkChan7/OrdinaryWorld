@@ -21,8 +21,9 @@ import com.markchan.carrier.R;
 import com.markchan.carrier.core.PagerView;
 import com.markchan.carrier.event.BackToPanelsEvent;
 import com.markchan.carrier.event.PagerViewEventBus;
-import com.markchan.carrier.fragment.BackgroundColorPanelFragment;
+import com.markchan.carrier.fragment.BgColorAndTexturePanelFragment;
 import com.markchan.carrier.fragment.TextPanelFragment;
+import com.markchan.carrier.util.Scheme;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -53,12 +54,16 @@ public class PagerActivity extends AppCompatActivity {
     @BindView(R.id.pager_aty_fl_panel_container)
     FrameLayout mPanelContainerFrameLayout;
 
+    static {
+        System.loadLibrary("NativeImageProcessor");
+    }
+
     private boolean mInConcretePanel;
 
     private FragmentManager mFragmentManager;
 
     private TextPanelFragment mTextPanelFragment;
-    private BackgroundColorPanelFragment mBackgroundColorPanelFragment;
+    private BgColorAndTexturePanelFragment mBgColorAndTexturePanelFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,17 +111,25 @@ public class PagerActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPagerViewTextureEvent(PagerViewEventBus.TextureEvent event) {
-        Glide.with(this)
-                .load(R.drawable.texture_fibre)
-                .asBitmap()
-                .into(new SimpleTarget<Bitmap>() {
+        String textureUrl = event.textureUrl;
+        if (Scheme.ofUri(event.textureUrl) == Scheme.DRAWABLE) {
+            Glide.with(this)
+                    .load(Integer.parseInt(Scheme.DRAWABLE.crop(textureUrl)))
+                    .asBitmap()
+                    .into(new SimpleTarget<Bitmap>() {
 
-                    @Override
-                    public void onResourceReady(Bitmap resource,
-                            GlideAnimation<? super Bitmap> glideAnimation) {
-                        mPagerView.setTextureBitmap(resource);
-                    }
-                });
+                        @Override
+                        public void onResourceReady(Bitmap resource,
+                                                    GlideAnimation<? super Bitmap> glideAnimation) {
+                            mPagerView.setTextureBitmap(resource);
+                        }
+                    });
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onPagerViewBackgroundColorEvent(PagerViewEventBus.BackgroundColorEvent event) {
+        mPagerView.setPagerBackgroundColor(event.backgroundColor);
     }
 
     @OnClick({R.id.pager_aty_acib_discard, R.id.pager_aty_acib_save, R.id.pager_aty_ib_text_panel,
@@ -140,10 +153,10 @@ public class PagerActivity extends AppCompatActivity {
             case R.id.pager_aty_ib_bg_color_panel:
                 mPanelsRelativeLayout.setVisibility(View.INVISIBLE);
                 mPanelContainerFrameLayout.setVisibility(View.VISIBLE);
-                if (mBackgroundColorPanelFragment == null) {
-                    mBackgroundColorPanelFragment = new BackgroundColorPanelFragment();
+                if (mBgColorAndTexturePanelFragment == null) {
+                    mBgColorAndTexturePanelFragment = new BgColorAndTexturePanelFragment();
                 }
-                showPanel(mBackgroundColorPanelFragment);
+                showPanel(mBgColorAndTexturePanelFragment);
                 break;
             case R.id.pager_aty_ib_bg_photo_panel:
 

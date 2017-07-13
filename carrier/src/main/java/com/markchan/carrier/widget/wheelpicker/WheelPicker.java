@@ -19,7 +19,9 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.Scroller;
+
 import com.markchan.carrier.R;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,6 +35,8 @@ import java.util.List;
  * @version 1.1.0
  */
 public class WheelPicker extends View implements IWheelPicker, Runnable {
+
+    public static boolean DEBUG;
 
     /**
      * 滚动状态标识值
@@ -282,8 +286,6 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
      */
     private String fontPath;
 
-    private boolean isDebug;
-
     public WheelPicker(Context context) {
         this(context, null);
     }
@@ -343,12 +345,10 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
 
         mScroller = new Scroller(getContext());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.DONUT) {
-            ViewConfiguration conf = ViewConfiguration.get(getContext());
-            mMinimumVelocity = conf.getScaledMinimumFlingVelocity();
-            mMaximumVelocity = conf.getScaledMaximumFlingVelocity();
-            mTouchSlop = conf.getScaledTouchSlop();
-        }
+        ViewConfiguration conf = ViewConfiguration.get(getContext());
+        mMinimumVelocity = conf.getScaledMinimumFlingVelocity();
+        mMaximumVelocity = conf.getScaledMaximumFlingVelocity();
+        mTouchSlop = conf.getScaledTouchSlop();
         mRectDrawn = new Rect();
 
         mRectIndicatorHead = new Rect();
@@ -429,7 +429,7 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
         if (isCurved) {
             resultHeight = (int) (2 * resultHeight / Math.PI);
         }
-        if (isDebug) {
+        if (DEBUG) {
             Log.i(TAG, "Wheel's content size is (" + resultWidth + ":" + resultHeight + ")");
         }
 
@@ -437,7 +437,7 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
         // Consideration padding influence the view sizes
         resultWidth += getPaddingLeft() + getPaddingRight();
         resultHeight += getPaddingTop() + getPaddingBottom();
-        if (isDebug) {
+        if (DEBUG) {
             Log.i(TAG, "Wheel's size is (" + resultWidth + ":" + resultHeight + ")");
         }
 
@@ -468,7 +468,7 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
         // Set content region
         mRectDrawn.set(getPaddingLeft(), getPaddingTop(), getWidth() - getPaddingRight(),
                 getHeight() - getPaddingBottom());
-        if (isDebug) {
+        if (DEBUG) {
             Log.i(TAG, "Wheel's drawn rect size is (" + mRectDrawn.width() + ":" +
                     mRectDrawn.height() + ") and location is (" + mRectDrawn.left + ":" +
                     mRectDrawn.top + ")");
@@ -659,7 +659,7 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
                 canvas.drawText(data, mDrawnCenterX, drawnCenterY, mPaint);
                 canvas.restore();
             }
-            if (isDebug) {
+            if (DEBUG) {
                 canvas.save();
                 canvas.clipRect(mRectDrawn);
                 mPaint.setColor(0xFFEE3333);
@@ -688,7 +688,7 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
             canvas.drawRect(mRectIndicatorHead, mPaint);
             canvas.drawRect(mRectIndicatorFoot, mPaint);
         }
-        if (isDebug) {
+        if (DEBUG) {
             mPaint.setColor(0x4433EE33);
             mPaint.setStyle(Paint.Style.FILL);
             canvas.drawRect(0, 0, getPaddingLeft(), getHeight(), mPaint);
@@ -829,7 +829,7 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
             }
             int position = (-mScrollOffsetY / mItemHeight + mSelectedItemPosition) % mData.size();
             position = position < 0 ? position + mData.size() : position;
-            if (isDebug) {
+            if (DEBUG) {
                 Log.i(TAG, position + ":" + mData.get(position) + ":" + mScrollOffsetY);
             }
             mCurrentItemPosition = position;
@@ -1173,8 +1173,8 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
          * 当滚轮选择器数据项被选中时回调该方法
          * 滚动选择器滚动停止后会回调该方法并将当前选中的数据和数据在数据列表中对应的位置返回
          *
-         * @param picker 滚轮选择器
-         * @param data 当前选中的数据
+         * @param picker   滚轮选择器
+         * @param data     当前选中的数据
          * @param position 当前选中的数据在数据列表中的位置
          */
         void onItemSelected(WheelPicker picker, Object data, int position);
@@ -1199,7 +1199,7 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
          * scrolling from bottom to top, negative means WheelPicker is scrolling from top to bottom
          *
          * @param offset 当前滚轮滚动距离上一次滚轮滚动停止后偏移的距离 <p> Distance offset which between current scroll
-         * position and initial position
+         *               position and initial position
          */
         void onWheelScrolled(int offset);
 
@@ -1224,11 +1224,12 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
          * be called when they switch
          *
          * @param state 滚轮选择器滚动状态，其值仅可能为下列之一 {@link WheelPicker#SCROLL_STATE_IDLE} 表示滚动选择器处于静止状态
-         * {@link WheelPicker#SCROLL_STATE_DRAGGING} 表示滚动选择器处于拖动状态 {@link
-         * WheelPicker#SCROLL_STATE_SCROLLING} 表示滚动选择器处于滑动状态 <p> State of WheelPicker, only one of
-         * the following {@link WheelPicker#SCROLL_STATE_IDLE} Express WheelPicker in state of idle
-         * {@link WheelPicker#SCROLL_STATE_DRAGGING} Express WheelPicker in state of dragging {@link
-         * WheelPicker#SCROLL_STATE_SCROLLING} Express WheelPicker in state of scrolling
+         *              {@link WheelPicker#SCROLL_STATE_DRAGGING} 表示滚动选择器处于拖动状态 {@link
+         *              WheelPicker#SCROLL_STATE_SCROLLING} 表示滚动选择器处于滑动状态 <p> State of WheelPicker,
+         *              only one of the following {@link WheelPicker#SCROLL_STATE_IDLE} Express
+         *              WheelPicker in state of idle {@link WheelPicker#SCROLL_STATE_DRAGGING}
+         *              Express WheelPicker in state of dragging {@link WheelPicker#SCROLL_STATE_SCROLLING}
+         *              Express WheelPicker in state of scrolling
          */
         void onWheelScrollStateChanged(int state);
     }

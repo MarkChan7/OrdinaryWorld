@@ -1,7 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Fullscreen -->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -18,8 +21,7 @@
     </style>
 
     <style name="PanelStyle" parent="BaseWidgetStyle">
-        <item name="android:width">@dimen/panel_width</item>
-        <item name="android:height">@dimen/panel_height</item>
+        <item name="android:layout_width">@dimen/panel_width</item>
         <item name="android:paddingLeft">@dimen/panel_padding_left_and_right</item>
         <item name="android:paddingRight">@dimen/panel_padding_left_and_right</item>
         <item name="android:orientation">vertical</item>
@@ -31,7 +33,14 @@
         <item name="android:textColor">@color/panel_title_text_color</item>
     </style>
 
+    <style name="PanelIconStyle" parent="TransparentButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/panel_icon_height</item>
+    </style>
+
     <style name="CompleteButtonStyle" parent="TransparentButtonStyle">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:textColor">@color/complete_text_color</item>
     </style>
 
@@ -40,11 +49,15 @@
         <item name="android:paddingRight">8dp</item>
     </style>
 
+    <!--<item name="android:drawablePadding">-->
+        <!--@dimen/bg_color_and_texture_panel_label_drawable_padding-->
+    <!--</item>-->
     <style name="BgColorAndTexturePanelLabelStyle" parent="BaseWidgetStyle">
+        <item name="android:layout_height">32dp</item>
+        <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/bg_color_and_texture_panel_label_text_size</item>
         <item name="android:textColor">@color/bg_color_and_texture_panel_label_text_color</item>
         <item name="android:drawableBottom">@drawable/ic_arrow_down</item>
-        <item name="android:drawablePadding">@dimen/bg_color_and_texture_panel_label_drawable_padding</item>
     </style>
 
 </resources>
