@@ -447,11 +447,10 @@ public class PagerView extends View {
     }
 
     public void setText(String text) {
-        if (TextUtils.isEmpty(text)) {
-            text = DEFAULT_TEXT;
+        if (!TextUtils.isEmpty(text) && !text.equals(mText)) {
+            mText = text;
+            invalidate();
         }
-        mText = text;
-        invalidate();
     }
 
     public String getTypefaceUrl() {
@@ -459,9 +458,11 @@ public class PagerView extends View {
     }
 
     public void setTypefaceUrl(String typefaceUrl) {
-        mTempTypefaceUrl = mTypefaceUrl;
-        mTypefaceUrl = typefaceUrl.trim();
-        invalidate();
+        if (!typefaceUrl.equals(mTypefaceUrl)) {
+            mTempTypefaceUrl = mTypefaceUrl;
+            mTypefaceUrl = typefaceUrl.trim();
+            invalidate();
+        }
     }
 
     public float getTextSize() {
@@ -469,8 +470,10 @@ public class PagerView extends View {
     }
 
     public void setTextSize(float textSize) {
-        mTextSize = textSize;
-        invalidate();
+        if (textSize != mTextSize) {
+            mTextSize = textSize;
+            invalidate();
+        }
     }
 
     public int getTextColor() {
@@ -478,8 +481,10 @@ public class PagerView extends View {
     }
 
     public void setTextColor(int textColor) {
-        mTextColor = textColor;
-        invalidate();
+        if (textColor != mTextColor) {
+            mTextColor = textColor;
+            invalidate();
+        }
     }
 
     public int getTextAlpha() {
@@ -487,8 +492,10 @@ public class PagerView extends View {
     }
 
     public void setTextAlpha(int textAlpha) {
-        mTextAlpha = textAlpha;
-        invalidate();
+        if (textAlpha != mTextAlpha) {
+            mTextAlpha = textAlpha;
+            invalidate();
+        }
     }
 
     @Override
@@ -499,8 +506,10 @@ public class PagerView extends View {
 
     @Override
     public void setTextAlignment(@TextAlignment int textAlignment) {
-        mTextAlignment = textAlignment;
-        invalidate();
+        if (textAlignment != mTextAlignment) {
+            mTextAlignment = textAlignment;
+            invalidate();
+        }
     }
 
     public void resetTextLocation() {
@@ -513,7 +522,8 @@ public class PagerView extends View {
     }
 
     public void setTextureBitmap(Bitmap textureBitmap) {
-        if (textureBitmap != null && !textureBitmap.isRecycled()) {
+        if (textureBitmap != null && !textureBitmap.isRecycled()
+                && textureBitmap != mTextureBitmap) {
             mTextureBitmap = textureBitmap;
             invalidate();
         }
@@ -524,7 +534,9 @@ public class PagerView extends View {
     }
 
     public void setPagerBackgroundColor(int backgroundColor) {
-        mBackgroundColor = backgroundColor;
-        invalidate();
+        if (backgroundColor != mBackgroundColor) {
+            mBackgroundColor = backgroundColor;
+            invalidate();
+        }
     }
 }
