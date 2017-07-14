@@ -1,180 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/pager_aty_ll_root"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context=".activity.PagerActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/pager_aty_rl_root"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context=".activity.PagerActivity">
 
-    <RelativeLayout
-        android:id="@+id/pager_aty_rl_title_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_bar_height"
-        android:background="@color/title_bar_background">
-
-        <android.support.v7.widget.AppCompatImageButton
-            android:id="@+id/pager_aty_acib_discard"
-            style="@style/TransparentButtonStyle"
-            android:layout_width="@dimen/title_bar_height"
-            android:layout_height="@dimen/title_bar_height"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_discard_16dp" />
-
-        <TextView
-            android:id="@+id/pager_aty_tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/app_name"
-            android:textColor="@color/title_bar_title_text_color"
-            android:textSize="@dimen/title_bar_title_text_size" />
-
-        <android.support.v7.widget.AppCompatImageButton
-            android:id="@+id/pager_aty_acib_save"
-            style="@style/TransparentButtonStyle"
-            android:layout_width="@dimen/title_bar_height"
-            android:layout_height="@dimen/title_bar_height"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_save_16dp" />
-
-    </RelativeLayout>
-
-    <com.markchan.carrier.core.PagerView
-        android:id="@+id/pager_aty_pager_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/panel_background">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/pager_aty_rl_panels"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
+                android:id="@+id/pager_aty_rl_title_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:paddingBottom="16dp"
-                android:orientation="horizontal">
+                android:layout_height="@dimen/title_bar_height"
+                android:background="@color/title_bar_background">
 
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="16dp"
-                    android:layout_weight="1" />
+            <android.support.v7.widget.AppCompatImageButton
+                    android:id="@+id/pager_aty_acib_discard"
+                    style="@style/TransparentButtonStyle"
+                    android:layout_width="@dimen/title_bar_height"
+                    android:layout_height="@dimen/title_bar_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_discard_16dp" />
 
-                <LinearLayout style="@style/PanelStyle">
+            <TextView
+                    android:id="@+id/pager_aty_tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/app_name"
+                    android:textColor="@color/title_bar_title_text_color"
+                    android:textSize="@dimen/title_bar_title_text_size" />
 
-                    <TextView
-                        style="@style/PanelLabStyle"
-                        android:text="@string/pager_aty_panel_text" />
+            <android.support.v7.widget.AppCompatImageButton
+                    android:id="@+id/pager_aty_acib_save"
+                    style="@style/TransparentButtonStyle"
+                    android:layout_width="@dimen/title_bar_height"
+                    android:layout_height="@dimen/title_bar_height"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_save_16dp" />
 
-                    <android.support.v4.widget.Space
-                        android:layout_width="@dimen/panel_horizontal_space"
-                        android:layout_height="@dimen/panel_vertical_space" />
+        </RelativeLayout>
 
-                    <android.support.v7.widget.AppCompatImageButton
-                        android:id="@+id/pager_aty_ib_text_panel"
-                        style="@style/PanelIconStyle"
-                        android:contentDescription="@string/pager_aty_panel_text"
-                        android:src="@drawable/ic_text_52dp" />
+        <com.markchan.carrier.core.PagerView
+                android:id="@+id/pager_aty_pager_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-                </LinearLayout>
-
-                <android.support.v4.widget.Space
-                    android:layout_width="@dimen/panel_horizontal_space"
-                    android:layout_height="@dimen/panel_horizontal_space" />
-
-                <LinearLayout style="@style/PanelStyle">
-
-                    <TextView
-                        style="@style/PanelLabStyle"
-                        android:text="@string/pager_aty_panel_bg_color" />
-
-                    <android.support.v4.widget.Space
-                        android:layout_width="@dimen/panel_vertical_space"
-                        android:layout_height="@dimen/panel_vertical_space" />
-
-                    <android.support.v7.widget.AppCompatImageButton
-                        android:id="@+id/pager_aty_ib_bg_color_panel"
-                        style="@style/PanelIconStyle"
-                        android:contentDescription="@string/pager_aty_panel_bg_color"
-                        android:src="@drawable/ic_background_color_52dp" />
-
-                </LinearLayout>
-
-                <android.support.v4.widget.Space
-                    android:layout_width="@dimen/panel_horizontal_space"
-                    android:layout_height="@dimen/panel_horizontal_space" />
-
-                <LinearLayout style="@style/PanelStyle">
-
-                    <TextView
-                        style="@style/PanelLabStyle"
-                        android:text="@string/pager_aty_panel_bg_photo" />
-
-                    <android.support.v4.widget.Space
-                        android:layout_width="@dimen/panel_vertical_space"
-                        android:layout_height="@dimen/panel_vertical_space" />
-
-                    <android.support.v7.widget.AppCompatImageButton
-                        android:id="@+id/pager_aty_ib_bg_photo_panel"
-                        style="@style/PanelIconStyle"
-                        android:contentDescription="@string/pager_aty_panel_bg_photo"
-                        android:src="@drawable/ic_background_photo_52dp" />
-
-                </LinearLayout>
-
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="16dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/panel_background">
 
             <RelativeLayout
-                android:layout_width="@dimen/pager_aty_menu_width"
-                android:layout_height="@dimen/pager_aty_menu_height"
-                android:layout_alignParentBottom="true">
-
-                <android.support.v7.widget.AppCompatImageButton
-                    style="@style/TransparentButtonStyle"
+                    android:id="@+id/pager_aty_rl_panels"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_menu" />
+                    android:layout_height="match_parent">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:paddingBottom="16dp"
+                        android:orientation="horizontal">
+
+                    <android.support.v4.widget.Space
+                            android:layout_width="0dp"
+                            android:layout_height="16dp"
+                            android:layout_weight="1" />
+
+                    <LinearLayout style="@style/PanelStyle">
+
+                        <TextView
+                                style="@style/PanelLabStyle"
+                                android:text="@string/pager_aty_panel_text" />
+
+                        <android.support.v4.widget.Space
+                                android:layout_width="@dimen/panel_horizontal_space"
+                                android:layout_height="@dimen/panel_vertical_space" />
+
+                        <android.support.v7.widget.AppCompatImageButton
+                                android:id="@+id/pager_aty_ib_text_panel"
+                                style="@style/PanelIconStyle"
+                                android:contentDescription="@string/pager_aty_panel_text"
+                                android:src="@drawable/ic_text_52dp" />
+
+                    </LinearLayout>
+
+                    <android.support.v4.widget.Space
+                            android:layout_width="@dimen/panel_horizontal_space"
+                            android:layout_height="@dimen/panel_horizontal_space" />
+
+                    <LinearLayout style="@style/PanelStyle">
+
+                        <TextView
+                                style="@style/PanelLabStyle"
+                                android:text="@string/pager_aty_panel_bg_color" />
+
+                        <android.support.v4.widget.Space
+                                android:layout_width="@dimen/panel_vertical_space"
+                                android:layout_height="@dimen/panel_vertical_space" />
+
+                        <android.support.v7.widget.AppCompatImageButton
+                                android:id="@+id/pager_aty_ib_bg_color_panel"
+                                style="@style/PanelIconStyle"
+                                android:contentDescription="@string/pager_aty_panel_bg_color"
+                                android:src="@drawable/ic_background_color_52dp" />
+
+                    </LinearLayout>
+
+                    <android.support.v4.widget.Space
+                            android:layout_width="@dimen/panel_horizontal_space"
+                            android:layout_height="@dimen/panel_horizontal_space" />
+
+                    <LinearLayout style="@style/PanelStyle">
+
+                        <TextView
+                                style="@style/PanelLabStyle"
+                                android:text="@string/pager_aty_panel_bg_photo" />
+
+                        <android.support.v4.widget.Space
+                                android:layout_width="@dimen/panel_vertical_space"
+                                android:layout_height="@dimen/panel_vertical_space" />
+
+                        <android.support.v7.widget.AppCompatImageButton
+                                android:id="@+id/pager_aty_ib_bg_photo_panel"
+                                style="@style/PanelIconStyle"
+                                android:contentDescription="@string/pager_aty_panel_bg_photo"
+                                android:src="@drawable/ic_background_photo_52dp" />
+
+                    </LinearLayout>
+
+                    <android.support.v4.widget.Space
+                            android:layout_width="0dp"
+                            android:layout_height="16dp"
+                            android:layout_weight="1" />
+
+                </LinearLayout>
 
                 <RelativeLayout
-                    android:layout_width="36dp"
-                    android:layout_height="34dp"
-                    android:layout_alignParentRight="true">
+                        android:layout_width="@dimen/pager_aty_menu_width"
+                        android:layout_height="@dimen/pager_aty_menu_height"
+                        android:layout_alignParentBottom="true">
 
-                    <View
-                        android:layout_width="4dp"
-                        android:layout_height="4dp"
-                        android:layout_centerInParent="true"
-                        android:background="#ff0000" />
+                    <android.support.v7.widget.AppCompatImageButton
+                            style="@style/TransparentButtonStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_menu" />
+
+                    <RelativeLayout
+                            android:layout_width="36dp"
+                            android:layout_height="34dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true">
+
+                        <View
+                                android:layout_width="4dp"
+                                android:layout_height="4dp"
+                                android:layout_centerInParent="true"
+                                android:background="#ff0000" />
+                    </RelativeLayout>
+
                 </RelativeLayout>
 
             </RelativeLayout>
 
-        </RelativeLayout>
+            <FrameLayout
+                    android:id="@+id/pager_aty_fl_panel_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
 
-        <FrameLayout
-            android:id="@+id/pager_aty_fl_panel_container"
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/pager_aty_ll_input"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:maxHeight="80dp"
+            android:minHeight="56dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
-    </FrameLayout>
+        <EditText
+                android:id="@+id/pager_aty_et"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="#66666666"
+                android:textColor="#FFF0F0F0"
+                android:textSize="@dimen/pager_view_default_text_size" />
 
-</LinearLayout>
+        <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/pager_aty_acib_confirm"
+                style="@style/TransparentButtonStyle"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_save_16dp" />
+    </LinearLayout>
+
+</RelativeLayout>

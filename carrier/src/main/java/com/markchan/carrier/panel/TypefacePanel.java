@@ -2,7 +2,7 @@ package com.markchan.carrier.panel;
 
 import android.content.Context;
 import android.view.View;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.markchan.carrier.R;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.event.PagerViewEventBus;
@@ -60,6 +60,6 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
     public void onItemSelected(WheelPicker picker, Object data, int position) {
         EventBus.getDefault().post(new PagerViewEventBus.TypefaceEvent(
                 Scheme.ASSETS.wrap("font/code_light.otf" + (position % 2 == 0 ? "" : "x"))));
-        ToastUtils.showShortToast(position+"");
+        ToastUtils.showShort(position+"");
     }
 }

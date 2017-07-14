@@ -1,9 +1,7 @@
 package com.markchan.carrier;
 
 import android.app.Application;
-
-import com.blankj.utilcode.utils.Utils;
-
+import com.blankj.utilcode.util.Utils;
 import timber.log.Timber;
 import timber.log.Timber.DebugTree;
 

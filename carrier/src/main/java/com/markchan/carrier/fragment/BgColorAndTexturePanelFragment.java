@@ -9,10 +9,13 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.blankj.utilcode.utils.AppUtils;
-import com.blankj.utilcode.utils.ScreenUtils;
-import com.blankj.utilcode.utils.SizeUtils;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.markchan.carrier.R;
 import com.markchan.carrier.adapter.BackgroundColorPagerAdapter;
 import com.markchan.carrier.adapter.TexturePagerAdapter;
@@ -21,16 +24,9 @@ import com.markchan.carrier.domain.Texture;
 import com.markchan.carrier.event.BackToPanelsEvent;
 import com.markchan.carrier.event.PagerViewEventBus;
 import com.markchan.carrier.util.Scheme;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Mark on 2017/7/12.
@@ -53,7 +49,7 @@ public class BgColorAndTexturePanelFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+            @Nullable Bundle savedInstanceState) {
         View view = inflater
                 .inflate(R.layout.fragment_bg_color_and_texture_panel, container, false);
 
@@ -83,7 +79,7 @@ public class BgColorAndTexturePanelFragment extends Fragment {
 
             @Override
             public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
+                    int positionOffsetPixels) {
                 // no-op by default
             }
 
@@ -111,7 +107,7 @@ public class BgColorAndTexturePanelFragment extends Fragment {
             } else {
                 int drawableResId = getResources()
                         .getIdentifier(textureDrawableNameArr[i - 1], "drawable",
-                                AppUtils.getAppPackageName(getContext()));
+                                AppUtils.getAppPackageName());
                 mTextures.add(new Texture(textureName,
                         Scheme.DRAWABLE.wrap(drawableResId + "")));
             }
@@ -123,7 +119,7 @@ public class BgColorAndTexturePanelFragment extends Fragment {
 
             @Override
             public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
+                    int positionOffsetPixels) {
                 // no-op by default
             }
 
