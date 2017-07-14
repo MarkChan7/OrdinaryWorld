@@ -3,7 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="pager_view_default_text_size">18sp</dimen>
+    <dimen name="pager_view_default_text_size">22sp</dimen>
     <dimen name="pager_view_text_border_padding">8dp</dimen>
     <dimen name="pager_view_text_padding_left_and_right">12dp</dimen>
     <dimen name="pager_view_text_padding_top_and_bottom">8dp</dimen>
@@ -21,10 +21,10 @@
     <dimen name="panel_vertical_space">4dp</dimen>
     <dimen name="panel_horizontal_space">16dp</dimen>
 
-    <dimen name="text_panel_text_size_small">12sp</dimen>
-    <dimen name="text_panel_text_size_medium">16sp</dimen>
-    <dimen name="text_panel_text_size_standard">18sp</dimen>
-    <dimen name="text_panel_text_size_large">22sp</dimen>
+    <dimen name="text_panel_text_size_small">14sp</dimen>
+    <dimen name="text_panel_text_size_medium">18sp</dimen>
+    <dimen name="text_panel_text_size_standard">22sp</dimen>
+    <dimen name="text_panel_text_size_large">28sp</dimen>
 
     <dimen name="text_panel_text_size_diam_small">12dp</dimen>
     <dimen name="text_panel_text_size_diam_medium">16dp</dimen>

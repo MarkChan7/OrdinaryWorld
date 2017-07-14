@@ -9,6 +9,7 @@
                 tools:context=".activity.PagerActivity">
 
     <LinearLayout
+            android:id="@+id/pager_aty_ll_content_root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

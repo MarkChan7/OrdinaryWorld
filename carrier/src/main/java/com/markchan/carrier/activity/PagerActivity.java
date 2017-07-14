@@ -54,6 +54,8 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
 
     @BindView(R.id.pager_aty_rl_root)
     RelativeLayout mRootRelativeLayout;
+    @BindView(R.id.pager_aty_ll_content_root)
+    LinearLayout mContentRootRelativeLayout;
     @BindView(R.id.pager_aty_rl_title_bar)
     RelativeLayout mTitleBarRelativeLayout;
     @BindView(R.id.pager_aty_acib_discard)
@@ -98,6 +100,8 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
 
     private int mKeyBoardHeight;
 
+    private boolean mCloseKbByConfirmFlag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,22 +136,23 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
             @Override
             public void onTextTap(String text) {
                 mPagerText = text;
-                mInputLinearLayout.setVisibility(View.VISIBLE);
-                if (mKeyBoardHeight == 0) {
-                    KeyboardUtils.showSoftInput(mEditText);
-                } else {
-                    ViewAnimator.animate(mInputLinearLayout)
-                            .alpha(0.0F, 1.0F)
-                            .duration(200)
-                            .onStop(new Stop() {
 
-                                @Override
-                                public void onStop() {
-                                    KeyboardUtils.showSoftInput(mEditText);
-                                }
-                            })
-                            .start();
-                }
+                mInputLinearLayout.setVisibility(View.VISIBLE);
+                ViewAnimator.animate(mInputLinearLayout)
+                        .alpha(0.0F, 1.0F)
+                        .duration(mKeyBoardHeight == 0 ? 0 : 200)
+                        .onStop(new Stop() {
+
+                            @Override
+                            public void onStop() {
+                                KeyboardUtils.showSoftInput(mEditText);
+                            }
+                        })
+                        .thenAnimate(mContentRootRelativeLayout)
+                        .startDelay(80)
+                        .translationY(-getResources().getDimension(R.dimen.title_bar_height))
+                        .duration(120)
+                        .start();
             }
         });
 
@@ -206,6 +211,7 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
 
                 break;
             case R.id.pager_aty_acib_confirm:
+                mCloseKbByConfirmFlag = true;
                 ViewAnimator.animate(mInputLinearLayout)
                         .alpha(0.0F)
                         .duration(200)
@@ -214,6 +220,16 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
                             @Override
                             public void onStart() {
                                 KeyboardUtils.hideSoftInput(PagerActivity.this);
+                            }
+                        })
+                        .thenAnimate(mContentRootRelativeLayout)
+                        .translationY(0)
+                        .duration(200)
+                        .onStop(new Stop() {
+
+                            @Override
+                            public void onStop() {
+                                mCloseKbByConfirmFlag = false;
                             }
                         })
                         .start();
@@ -267,7 +283,15 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
         }
 
         if (height == 0) { // closed
-            mInputLinearLayout.setVisibility(View.GONE);
+            if (!mCloseKbByConfirmFlag) {
+                ViewAnimator.animate(mContentRootRelativeLayout)
+                        .translationY(0)
+                        .duration(200)
+                        .start();
+            }
+            if (mInputLinearLayout.getVisibility() != View.GONE) {
+                mInputLinearLayout.setVisibility(View.GONE);
+            }
         } else { // opened
             mEditText.setText(mPagerText);
             if (!mPagerText.isEmpty()) {
