@@ -27,9 +27,8 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
-import com.blankj.utilcode.utils.ScreenUtils;
-import com.blankj.utilcode.utils.SizeUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.github.lzyzsd.randomcolor.RandomColor;
 import com.markchan.carrier.R;
 import com.markchan.carrier.util.Scheme;
@@ -248,8 +247,8 @@ public class PagerView extends View {
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                ToastUtils.showShortToast("tap text");
-                if (mOnTextTapListener != null) {
+                if (mTextRect.contains((int) e.getX(), (int) e.getY())
+                        && mOnTextTapListener != null) {
                     mOnTextTapListener.onTextTap(mText);
                     return true;
                 }
@@ -286,8 +285,12 @@ public class PagerView extends View {
                 mLastTouchX = event.getX();
                 mLastTouchY = event.getY();
 
+                if (mTextRect.contains((int) mLastTouchX, (int) mLastTouchY)) {
+                    mShowDashRect = true;
+                    invalidate();
+                }
+
                 mDragging = false;
-                mShowDashRect = true;
                 break;
             case MotionEvent.ACTION_MOVE:
                 final float x = event.getX();
@@ -304,12 +307,15 @@ public class PagerView extends View {
                     mLastTouchX = x;
                     mLastTouchY = y;
 
+                    mShowDashRect = true;
                     invalidate();
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                mShowDashRect = false;
-                invalidate();
+                if (mShowDashRect) {
+                    mShowDashRect = false;
+                    invalidate();
+                }
                 break;
         }
 
