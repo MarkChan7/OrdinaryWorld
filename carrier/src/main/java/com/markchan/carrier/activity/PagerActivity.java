@@ -59,7 +59,7 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
     @BindView(R.id.pager_aty_rl_title_bar)
     RelativeLayout mTitleBarRelativeLayout;
     @BindView(R.id.pager_aty_acib_discard)
-    AppCompatImageButton mImageBtn;
+    AppCompatImageButton mDiscardImageBtn;
     @BindView(R.id.pager_aty_tv_title)
     TextView mTitleTextView;
     @BindView(R.id.pager_aty_acib_save)
@@ -192,23 +192,21 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
                 ToastUtils.showShort("Wait for minute");
                 break;
             case R.id.pager_aty_ib_text_panel:
-                mPanelsRelativeLayout.setVisibility(View.INVISIBLE);
-                mPanelContainerFrameLayout.setVisibility(View.VISIBLE);
                 if (mTextPanelFragment == null) {
                     mTextPanelFragment = new TextPanelFragment();
                 }
-                showPanel(mTextPanelFragment);
+                showPanel(getText(R.string.pager_aty_panel_text).toString(), mTextPanelFragment);
                 break;
             case R.id.pager_aty_ib_bg_color_panel:
-                mPanelsRelativeLayout.setVisibility(View.INVISIBLE);
-                mPanelContainerFrameLayout.setVisibility(View.VISIBLE);
                 if (mBgColorAndTexturePanelFragment == null) {
                     mBgColorAndTexturePanelFragment = new BgColorAndTexturePanelFragment();
                 }
-                showPanel(mBgColorAndTexturePanelFragment);
+                showPanel(getText(R.string.pager_aty_panel_bg_color).toString(),
+                        mBgColorAndTexturePanelFragment);
                 break;
             case R.id.pager_aty_ib_bg_photo_panel:
-
+                mTitleTextView.setText(getText(R.string.pager_aty_panel_bg_photo));
+                // TODO: 2017/7/15 Add a photo as background
                 break;
             case R.id.pager_aty_acib_confirm:
                 mCloseKbByConfirmFlag = true;
@@ -245,6 +243,9 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
     }
 
     private void backToPanels() {
+        mTitleTextView.setText(getText(R.string.app_name));
+        mDiscardImageBtn.setVisibility(View.VISIBLE);
+        mSaveImageBtn.setVisibility(View.VISIBLE);
         mPanelContainerFrameLayout.setVisibility(View.GONE);
         mPanelsRelativeLayout.setVisibility(View.VISIBLE);
         mInConcretePanel = false;
@@ -258,7 +259,15 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
         }
     }
 
-    private void showPanel(Fragment fragment) {
+    private void showPanel(String name, Fragment fragment) {
+        mTitleTextView.setText(name);
+
+        mDiscardImageBtn.setVisibility(View.INVISIBLE);
+        mSaveImageBtn.setVisibility(View.INVISIBLE);
+
+        mPanelsRelativeLayout.setVisibility(View.INVISIBLE);
+        mPanelContainerFrameLayout.setVisibility(View.VISIBLE);
+
         FragmentTransaction ft = mFragmentManager.beginTransaction();
         Fragment exitFragment = mFragmentManager
                 .findFragmentById(R.id.pager_aty_fl_panel_container);
