@@ -19,5 +19,6 @@ public class CarrierApplication extends Application {
         Utils.init(getApplicationContext());
         Timber.plant(new DebugTree());
         FlowManager.init(this);
+        Middleware.handleApplicationContext(this);
     }
 }

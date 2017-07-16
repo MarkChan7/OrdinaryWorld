@@ -13,7 +13,7 @@ public class JobExecutor implements ThreadExecutor {
 
     private final ExecutorService mThreadPoolExecutor;
 
-    JobExecutor() {
+    public JobExecutor() {
         mThreadPoolExecutor = Executors.newCachedThreadPool(new JobThreadFactory());
     }
 

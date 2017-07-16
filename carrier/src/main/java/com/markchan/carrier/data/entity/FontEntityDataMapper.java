@@ -10,16 +10,16 @@ import java.util.List;
  */
 public class FontEntityDataMapper {
 
-    public static Font transform(FontEntity fontData) {
+    public Font transform(FontEntity fontEntity) {
         Font font = null;
-        if (fontData != null) {
+        if (fontEntity != null) {
             font = new Font();
-            font.setId(fontData.getId());
-            font.setOrder(fontData.getOrder());
-            font.setDisplayName(fontData.getDisplayName());
-            font.setPostscriptName(fontData.getPostscriptName());
-            font.setThumbUrl(fontData.getThumbUrl());
-            font.setUrl(fontData.getUrl());
+            font.setId(fontEntity.getId());
+            font.setOrder(fontEntity.getOrder());
+            font.setDisplayName(fontEntity.getDisplayName());
+            font.setPostscriptName(fontEntity.getPostscriptName());
+            font.setThumbUrl(fontEntity.getThumbUrl());
+            font.setUrl(fontEntity.getUrl());
         }
         return font;
     }

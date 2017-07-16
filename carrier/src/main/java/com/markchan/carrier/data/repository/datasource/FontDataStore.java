@@ -1,6 +1,7 @@
 package com.markchan.carrier.data.repository.datasource;
 
 import com.markchan.carrier.data.entity.FontEntity;
+import io.reactivex.Observable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  */
 public interface FontDataStore {
 
-    FontEntity getFontEntity(final int fontId);
+    Observable<FontEntity> getFontEntity(final int fontId);
 
-    List<FontEntity> getFontEntities();
+    Observable<List<FontEntity>> getFontEntities();
 }

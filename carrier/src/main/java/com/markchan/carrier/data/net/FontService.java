@@ -10,6 +10,6 @@ import retrofit2.http.GET;
  */
 public interface FontService {
 
-    @GET
+    @GET("v1/font.json")
     Call<List<FontEntity>> getFontEntities();
 }

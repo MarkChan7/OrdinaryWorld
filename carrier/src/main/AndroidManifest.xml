@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.markchan.carrier">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -11,7 +17,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".activity.PagerActivity"
+                android:name=".presenter.view.activity.PagerActivity"
                 android:screenOrientation="portrait"
                 android:windowSoftInputMode="stateHidden|adjustNothing">
             <intent-filter>
@@ -20,8 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.FontManagerActivity" />
-        <activity android:name=".activity.SettingsActivity"></activity>
+        <activity android:name=".presenter.view.activity.FontManagerActivity" />
+        <activity android:name=".presenter.view.activity.SettingsActivity"></activity>
     </application>
 
 </manifest>

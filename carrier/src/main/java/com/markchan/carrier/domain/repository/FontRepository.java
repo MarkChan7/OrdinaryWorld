@@ -1,6 +1,7 @@
 package com.markchan.carrier.domain.repository;
 
 import com.markchan.carrier.domain.Font;
+import io.reactivex.Observable;
 import java.util.List;
 
 /**
@@ -8,5 +9,7 @@ import java.util.List;
  */
 public interface FontRepository {
 
-    List<Font> getFonts();
+    Observable<Font> getFont(final int fontId);
+
+    Observable<List<Font>> getFonts();
 }

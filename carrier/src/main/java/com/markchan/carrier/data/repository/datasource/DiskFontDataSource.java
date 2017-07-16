@@ -2,6 +2,7 @@ package com.markchan.carrier.data.repository.datasource;
 
 import com.markchan.carrier.data.cache.FontCache;
 import com.markchan.carrier.data.entity.FontEntity;
+import io.reactivex.Observable;
 import java.util.List;
 
 /**
@@ -16,12 +17,12 @@ public class DiskFontDataSource implements FontDataStore {
     }
 
     @Override
-    public FontEntity getFontEntity(int fontId) {
+    public Observable<FontEntity> getFontEntity(int fontId) {
         return mFontCache.getFontEntity(fontId);
     }
 
     @Override
-    public List<FontEntity> getFontEntities() {
+    public Observable<List<FontEntity>> getFontEntities() {
         return mFontCache.getFontEntities();
     }
 }

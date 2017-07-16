@@ -7,8 +7,13 @@ import com.liulishuo.filedownloader.FileDownloadSampleListener;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.markchan.carrier.data.database.FontDao;
 import com.markchan.carrier.data.entity.FontEntity;
-import com.markchan.carrier.util.CacheDirHelper;
+import com.markchan.carrier.data.exception.CacheDeletedException;
+import com.markchan.carrier.presenter.util.CacheDirHelper;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -28,23 +33,57 @@ public class FontCacheImpl implements FontCache {
     }
 
     @Override
-    public FontEntity getFontEntity(int fontId) {
-        FontEntity fontEntity = mFontDao.queryDownloadedFontEntityById(fontId);
+    public Observable<FontEntity> getFontEntity(int fontId) {
+        final FontEntity fontEntity = mFontDao.queryDownloadedFontEntityById(fontId);
         if (fontEntity != null) {
-            if (FileUtils.isFileExists(fontEntity.getFilePath())) {
-                return fontEntity;
-            } else {
+            if (!FileUtils.isFileExists(fontEntity.getFilePath())) {
                 fontEntity.setDownloaded(false);
                 fontEntity.setFilePath(null);
                 fontEntity.save();
+                return Observable.create(new ObservableOnSubscribe<FontEntity>() {
+
+                    @Override
+                    public void subscribe(ObservableEmitter<FontEntity> e) throws Exception {
+                        e.onError(new CacheDeletedException());
+                    }
+                });
             }
         }
-        return null;
+        return Observable.create(new ObservableOnSubscribe<FontEntity>() {
+
+            @Override
+            public void subscribe(ObservableEmitter<FontEntity> e) throws Exception {
+                e.onNext(fontEntity);
+                e.onComplete();
+            }
+        });
     }
 
     @Override
-    public List<FontEntity> getFontEntities() {
-        return null;
+    public Observable<List<FontEntity>> getFontEntities() {
+        final List<FontEntity> fontEntities = mFontDao.queryDownloadedFontEntities();
+        Iterator<FontEntity> iterator = fontEntities.iterator();
+        while (iterator.hasNext()) {
+            FontEntity fontEntity = iterator.next();
+            if (!FileUtils.isFileExists(fontEntity.getFilePath())) {
+                fontEntity.setDownloaded(false);
+                fontEntity.setFilePath(null);
+                fontEntity.save();
+                iterator.remove();
+            }
+        }
+        return Observable.create(new ObservableOnSubscribe<List<FontEntity>>() {
+
+            @Override
+            public void subscribe(ObservableEmitter<List<FontEntity>> e) throws Exception {
+                if (!fontEntities.isEmpty()) {
+                    e.onNext(fontEntities);
+                    e.onComplete();
+                } else {
+                    e.onComplete();
+                }
+            }
+        });
     }
 
     @Override
