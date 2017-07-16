@@ -4,7 +4,7 @@
     "order": 1,
     "display_name": "新青年",
     "postscript_name": "WenYue-XinQingNianTi-NC-W8",
-    "thumbnail_url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/thumbnail/font/xinqingnian.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/thumbnail/font/xinqingnian.png",
     "url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/font/xinqingnian.otf"
   },
   {
@@ -12,7 +12,7 @@
     "order": 2,
     "display_name": "童心",
     "postscript_name": "MFTongXin-Regular",
-    "thumbnail_url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/thumbnail/font/tongxin.jpg",
+    "thumbnail_url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/thumbnail/font/tongxin.png",
     "url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/font/tongxin.otf"
   },
   {
