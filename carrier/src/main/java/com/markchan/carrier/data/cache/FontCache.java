@@ -1,7 +1,6 @@
 package com.markchan.carrier.data.cache;
 
 import com.markchan.carrier.data.entity.FontEntity;
-import io.reactivex.Observable;
 import java.util.List;
 
 /**
@@ -9,13 +8,13 @@ import java.util.List;
  */
 public interface FontCache {
 
-    Observable<FontEntity> getFontEntity(final int fontId);
+    FontEntity getDownloadedFontEntity(final int fontId);
 
-    Observable<List<FontEntity>> getFontEntities();
+    List<FontEntity> getDownloadedFontEntities();
 
-    void putFontEntity(FontEntity fontEntity);
+    void setFontEntityDownloaded(FontEntity fontEntity);
 
-    boolean isCached(final int fontId);
+    boolean isDownloaded(final int fontId);
 
     void evictAll();
 }

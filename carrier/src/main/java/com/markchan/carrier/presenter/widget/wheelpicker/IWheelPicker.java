@@ -84,7 +84,7 @@ public interface IWheelPicker {
      * return will be changed if and only if call the
      * {@link #setSelectedItemPosition(int)}
      * set a new value
-     * If you only want to getFontEntity the position of current selected item in data source, you can getFontEntity it
+     * If you only want to getDownloadedFontEntity the position of current selected item in data source, you can getDownloadedFontEntity it
      * through {@link com.markchan.carrier.presenter.widget.wheelpicker.WheelPicker.OnItemSelectedListener} or call
      * {@link #getCurrentItemPosition()} directly
      *

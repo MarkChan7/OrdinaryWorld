@@ -1,5 +1,6 @@
 package com.markchan.carrier.data.net;
 
+import android.content.Context;
 import com.markchan.carrier.data.entity.FontEntity;
 import com.markchan.carrier.Constants;
 import java.io.IOException;
@@ -14,11 +15,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RestApiImpl implements RestApi {
 
+    private Context mContext;
     private Retrofit mRetrofit;
 
     private FontService mFontService;
 
-    public RestApiImpl() {
+    public RestApiImpl(Context context) {
+        mContext = context;
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_END_POINT)
                 .addConverterFactory(GsonConverterFactory.create())

@@ -29,7 +29,7 @@ public abstract class UseCase<T, Params> {
         if (observer == null) {
             throw new NullPointerException();
         }
-        final Observable<T> observable = this.buildUseCaseObservable(params)
+        final Observable<T> observable = buildUseCaseObservable(params)
                 .subscribeOn(Schedulers.from(mThreadExecutor))
                 .observeOn(mPostExecutionThread.getScheduler());
         addDisposable(observable.subscribeWith(observer));

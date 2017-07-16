@@ -33,23 +33,8 @@ public class CloudFontDataSource implements FontDataStore {
             @Override
             public void subscribe(ObservableEmitter<List<FontEntity>> e) throws Exception {
                 final List<FontEntity> fontEntities = mRestApi.getFontEntities();
-                if (fontEntities != null && !fontEntities.isEmpty()) {
-//                    Iterator<FontEntity> iterator = fontEntities.iterator();
-//                    while (iterator.hasNext()) {
-//                        FontEntity fontEntity = iterator.next();
-//                        FontEntity cachedFontEntity = mFontCache.getFontEntity(fontEntity.getId());
-//                        if (cachedFontEntity == null) {
-//                            fontEntity.insert();
-//                        } else {
-//                            iterator.remove();
-//                        }
-//                    }
-
-                    e.onNext(fontEntities);
-                    e.onComplete();
-                } else {
-                    e.onError(new Exception("Font enities is null or empty"));
-                }
+                e.onNext(fontEntities);
+                e.onComplete();
             }
         });
     }

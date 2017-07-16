@@ -9,26 +9,28 @@ import com.markchan.carrier.data.net.RestApi;
  */
 public class FontDataSourceFactory {
 
-    private final Context mContext;
     private final FontCache mFontCache;
     private final RestApi mRestApi;
 
     public FontDataSourceFactory(Context context, FontCache fontCache, RestApi restApi) {
-        mContext = context;
         mFontCache = fontCache;
         mRestApi = restApi;
     }
 
     public FontDataStore create(int fontId) {
-        FontDataStore fontDataStore = null;
+        FontDataStore fontDataStore;
 
-        if (mFontCache.isCached(fontId)) {
-            fontDataStore = new DiskFontDataSource(mFontCache);
+        if (mFontCache.isDownloaded(fontId)) {
+            fontDataStore = createDiskDataSource();
         } else {
             fontDataStore = createCloudDataSource();
         }
 
         return fontDataStore;
+    }
+
+    public FontDataStore createDiskDataSource() {
+        return new DiskFontDataSource(mFontCache);
     }
 
     public FontDataStore createCloudDataSource() {

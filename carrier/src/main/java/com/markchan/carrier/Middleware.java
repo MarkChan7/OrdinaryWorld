@@ -3,6 +3,7 @@ package com.markchan.carrier;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import com.markchan.carrier.data.cache.FontCacheImpl;
+import com.markchan.carrier.data.database.FontDao;
 import com.markchan.carrier.data.database.FontDapImpl;
 import com.markchan.carrier.data.entity.FontEntityDataMapper;
 import com.markchan.carrier.data.executor.JobExecutor;
@@ -43,6 +44,11 @@ public class Middleware {
     private Context mContext;
 
     /**
+     * data layer
+     */
+    private final FontDao mFontDao;
+
+    /**
      * domain layer
      */
     private FontRepository mFontRepository;
@@ -56,15 +62,22 @@ public class Middleware {
 
     public Middleware(Context context) {
         mContext = context.getApplicationContext();
+
+        mFontDao = new FontDapImpl();
+
         mFontRepository = new FontDataRepository(new FontDataSourceFactory(mContext,
-                new FontCacheImpl(mContext, new FontDapImpl()),
-                new RestApiImpl()),
+                new FontCacheImpl(mFontDao),
+                new RestApiImpl(mContext)),
                 new FontEntityDataMapper());
 
         mPostExecutionThread = new UiThread();
         mThreadExecutor = new JobExecutor();
 
         mFontModelDataMapper = new FontModelDataMapper();
+    }
+
+    public FontDao getFontDao() {
+        return mFontDao;
     }
 
     public FontRepository getFontRepository() {

@@ -27,5 +27,10 @@ public class FontManagerAdapter extends BaseQuickAdapter<FontModel, BaseViewHold
     protected void convert(BaseViewHolder helper, FontModel item) {
         mGlide.load(item.getThumbUrl())
                 .into((AppCompatImageView) helper.getView(R.id.font_list_item_aciv));
+        if (item.isDownloaded()) {
+            helper.setImageResource(R.id.font_list_item_acib, R.drawable.ic_download_success_26dp);
+        } else {
+            helper.setImageResource(R.id.font_list_item_acib, R.drawable.ic_download_26dp);
+        }
     }
 }

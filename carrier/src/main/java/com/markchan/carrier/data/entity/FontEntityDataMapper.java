@@ -20,6 +20,8 @@ public class FontEntityDataMapper {
             font.setPostscriptName(fontEntity.getPostscriptName());
             font.setThumbUrl(fontEntity.getThumbUrl());
             font.setUrl(fontEntity.getUrl());
+            font.setDownloaded(fontEntity.isDownloaded());
+            font.setFilePath(fontEntity.getFilePath());
         }
         return font;
     }
