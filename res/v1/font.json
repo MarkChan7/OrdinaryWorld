@@ -52,7 +52,7 @@
     "order": 7,
     "display_name": "隶书",
     "postscript_name": "STLibian-SC-Regular",
-    "thumbnail_url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/thumbnail/font/Lishu.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/thumbnail/font/lishu.png",
     "url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/font/lishu.ttf"
   },
   {
@@ -84,7 +84,7 @@
     "order": 11,
     "display_name": "钢笔",
     "postscript_name": "HanziPenSC-W3",
-    "thumbnail_url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/thumbnail/font/Pen.png",
+    "thumbnail_url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/thumbnail/font/pen.png",
     "url": "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/v1/font/pen.otf"
   },
   {
