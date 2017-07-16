@@ -4,8 +4,8 @@ import android.content.Context;
 import android.view.View;
 import com.blankj.utilcode.util.ToastUtils;
 import com.markchan.carrier.R;
-import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.event.PagerViewEventBus;
+import com.markchan.carrier.model.FontModel;
 import com.markchan.carrier.util.Scheme;
 import com.markchan.carrier.widget.wheelpicker.WheelPicker;
 import com.markchan.carrier.widget.wheelpicker.WheelPicker.OnItemSelectedListener;
@@ -21,7 +21,7 @@ import org.greenrobot.eventbus.EventBus;
 public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
 
     private WheelPicker mWheelPicker;
-    private List<Font> mFonts;
+    private List<FontModel> mFontModels;
 
     public TypefacePanel(Context context, View view) {
         super(context, view);
@@ -35,15 +35,15 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
 
     @Override
     protected void initData() {
-        mFonts = new ArrayList<>();
+        mFontModels = new ArrayList<>();
         String url = Scheme.ASSETS.wrap("font/code_light.otf");
         for (int i = 1; i <= 5; i++) {
-            Font font = new Font(("Font - " + i), url);
-            mFonts.add(font);
+            FontModel fontModel = new FontModel();
+            mFontModels.add(fontModel);
         }
         List<String> mFontNames = new ArrayList<>();
-        for (int i = 0; i < mFonts.size(); i++) {
-            mFontNames.add(mFonts.get(i).getName());
+        for (int i = 0; i < mFontModels.size(); i++) {
+            mFontNames.add(mFontModels.get(i).getDisplayName());
         }
         mWheelPicker.setData(mFontNames);
     }
@@ -60,6 +60,6 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
     public void onItemSelected(WheelPicker picker, Object data, int position) {
         EventBus.getDefault().post(new PagerViewEventBus.TypefaceEvent(
                 Scheme.ASSETS.wrap("font/code_light.otf" + (position % 2 == 0 ? "" : "x"))));
-        ToastUtils.showShort(position+"");
+        ToastUtils.showShort(position + "");
     }
 }

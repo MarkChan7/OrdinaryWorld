@@ -28,6 +28,15 @@
     <string name="font_manager_aty_name">字体管理</string>
     <string name="font_manager_item">字体下载与管理</string>
 
+    <string name="settings_aty_name">设置</string>
+    <string name="settings_aty_add_watermark">启动水印</string>
+    <string name="settings_aty_let_it_fame">让更多的朋友知道简图</string>
+    <string name="settings_aty_advice_new_function">提议新功能</string>
+    <string name="settings_aty_share_to_friends">把简图分享给朋友</string>
+    <string name="settings_aty_contact_us">联系我们</string>
+    <string name="settings_aty_open_url">打开官网</string>
+    <string name="settings_aty_follow_us">关注新浪微博: 简图app</string>
+
     <string name="bg_color_name_pure">纯白</string>
     <string name="bg_color_name_black_clouds">乌云</string>
     <string name="bg_color_name_black">墨黑</string>

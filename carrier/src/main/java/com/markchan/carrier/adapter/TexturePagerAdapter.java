@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.markchan.carrier.R;
-import com.markchan.carrier.domain.Texture;
+import com.markchan.carrier.model.TextureModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +21,12 @@ import java.util.List;
 public class TexturePagerAdapter extends PagerAdapter {
 
     private Context mContext;
-    private List<Texture> mData;
+    private List<TextureModel> mData;
     private List<View> mViews;
 
-    public TexturePagerAdapter(Context context, List<Texture> data) {
+    public TexturePagerAdapter(Context context, List<TextureModel> data) {
         mContext = context;
-        mData = data == null ? new ArrayList<Texture>() : data;
+        mData = data == null ? new ArrayList<TextureModel>() : data;
     }
 
     @Override

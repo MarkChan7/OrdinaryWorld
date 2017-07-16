@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.markchan.carrier.activity.SettingsActivity">
+
+    <RelativeLayout style="@style/TitleBarStyle">
+
+        <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/settings_aty_acib_back"
+                style="@style/TitleBarBackButtonStyle"
+                android:src="@drawable/ic_back" />
+
+        <android.support.v7.widget.AppCompatTextView
+                style="@style/TitleBarTitleStyle"
+                android:text="@string/settings_aty_name" />
+    </RelativeLayout>
+
+    <android.support.v4.widget.Space style="@style/SettingsFunctionsSpaceStyle" />
+
+    <View style="@style/SettingsFunctionDividerStyle" />
+
+    <LinearLayout style="@style/SettingsFunctionsStyle">
+
+        <RelativeLayout
+                android:id="@+id/settings_aty_ll_font_manager"
+                style="@style/SettingsFunctionStyle">
+
+            <android.support.v7.widget.AppCompatTextView
+                    style="@style/SettingsFunctionTextViewStyle"
+                    android:text="@string/font_manager_aty_name" />
+
+            <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_arrow_right_gray" />
+
+        </RelativeLayout>
+
+        <LinearLayout style="@style/SettingsFunctionStyle">
+
+            <LinearLayout
+                    android:id="@+id/settings_aty_ll_watermark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatTextView
+                        style="@style/SettingsFunctionTextViewStyle"
+                        android:text="@string/settings_aty_add_watermark" />
+
+                <TextView
+                        style="@style/SettingsFunctionSubTextViewStyle"
+                        android:text="@string/settings_aty_let_it_fame" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/SettingsFunctionDividerStyle" />
+
+    <android.support.v4.widget.Space style="@style/SettingsFunctionsSpaceStyle" />
+
+    <View style="@style/SettingsFunctionDividerStyle" />
+
+    <LinearLayout style="@style/SettingsFunctionsStyle">
+
+        <LinearLayout
+                android:id="@+id/settings_aty_ll_advice_new_function"
+                style="@style/SettingsFunctionStyle"
+                android:gravity="center">
+
+            <android.support.v7.widget.AppCompatTextView
+                    style="@style/SettingsFunctionTextViewStyle"
+                    android:text="@string/settings_aty_advice_new_function" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/settings_aty_ll_share_to_friends"
+                style="@style/SettingsFunctionStyle"
+                android:gravity="center">
+
+            <TextView
+                    style="@style/SettingsFunctionTextViewStyle"
+                    android:text="@string/settings_aty_share_to_friends" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/SettingsFunctionDividerStyle" />
+
+    <android.support.v4.widget.Space style="@style/SettingsFunctionsSpaceStyle" />
+
+    <View style="@style/SettingsFunctionDividerStyle" />
+
+    <LinearLayout style="@style/SettingsFunctionsStyle">
+
+        <LinearLayout
+                android:id="@+id/settings_aty_ll_contact_us"
+                style="@style/SettingsFunctionStyle"
+                android:gravity="center">
+
+            <android.support.v7.widget.AppCompatTextView
+                    style="@style/SettingsFunctionTextViewStyle"
+                    android:text="@string/settings_aty_contact_us" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/settings_aty_ll_open_url"
+                style="@style/SettingsFunctionStyle"
+                android:gravity="center">
+
+            <android.support.v7.widget.AppCompatTextView
+                    style="@style/SettingsFunctionTextViewStyle"
+                    android:text="@string/settings_aty_open_url" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/settings_aty_ll_follow_us"
+                style="@style/SettingsFunctionStyle"
+                android:gravity="center">
+
+            <android.support.v7.widget.AppCompatTextView
+                    style="@style/SettingsFunctionTextViewStyle"
+                    android:text="@string/settings_aty_follow_us" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/SettingsFunctionDividerStyle" />
+
+    <android.support.v4.widget.Space style="@style/SettingsFunctionsSpaceStyle" />
+
+    <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/settings_aty_tv_copyright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="Application Copyright" />
+
+</LinearLayout>

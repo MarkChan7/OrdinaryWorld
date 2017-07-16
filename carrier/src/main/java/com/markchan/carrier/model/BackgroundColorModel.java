@@ -1,16 +1,16 @@
-package com.markchan.carrier.domain;
+package com.markchan.carrier.model;
 
 /**
  * @author Mark Chan <a href="markchan2gm@gmail.com">Contact me.</a>
  * @version 1.0
  * @since 17/7/12
  */
-public class BackgroundColor {
+public class BackgroundColorModel {
 
     private final String name;
     private final int color;
 
-    public BackgroundColor(String name, int color) {
+    public BackgroundColorModel(String name, int color) {
         this.name = name;
         this.color = color;
     }

@@ -16,37 +16,23 @@
 
         <RelativeLayout
                 android:id="@+id/pager_aty_rl_title_bar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/title_bar_height"
-                android:background="@color/title_bar_background">
+                style="@style/TitleBarStyle">
 
             <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/pager_aty_acib_discard"
-                    style="@style/TransparentButtonStyle"
-                    android:layout_width="@dimen/title_bar_height"
-                    android:layout_height="@dimen/title_bar_height"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                    style="@style/TitleBarBackButtonStyle"
                     android:src="@drawable/ic_discard_16dp" />
 
-            <TextView
-                    android:id="@+id/pager_aty_tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/app_name"
-                    android:textColor="@color/title_bar_title_text_color"
-                    android:textSize="@dimen/title_bar_title_text_size" />
+            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/pager_aty_actv_title"
+                    style="@style/TitleBarTitleStyle"
+                    android:text="@string/app_name" />
 
             <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/pager_aty_acib_save"
-                    style="@style/TransparentButtonStyle"
-                    android:layout_width="@dimen/title_bar_height"
-                    android:layout_height="@dimen/title_bar_height"
+                    style="@style/TitleBarButtonStyle"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:src="@drawable/ic_save_16dp" />
 
         </RelativeLayout>
@@ -81,7 +67,7 @@
 
                     <LinearLayout style="@style/PanelStyle">
 
-                        <TextView
+                        <android.support.v7.widget.AppCompatTextView
                                 style="@style/PanelLabStyle"
                                 android:text="@string/pager_aty_panel_text" />
 
@@ -90,7 +76,7 @@
                                 android:layout_height="@dimen/panel_vertical_space" />
 
                         <android.support.v7.widget.AppCompatImageButton
-                                android:id="@+id/pager_aty_ib_text_panel"
+                                android:id="@+id/pager_aty_acib_text_panel"
                                 style="@style/PanelIconStyle"
                                 android:contentDescription="@string/pager_aty_panel_text"
                                 android:src="@drawable/ic_text_52dp" />
@@ -103,7 +89,7 @@
 
                     <LinearLayout style="@style/PanelStyle">
 
-                        <TextView
+                        <android.support.v7.widget.AppCompatTextView
                                 style="@style/PanelLabStyle"
                                 android:text="@string/pager_aty_panel_bg_color" />
 
@@ -112,7 +98,7 @@
                                 android:layout_height="@dimen/panel_vertical_space" />
 
                         <android.support.v7.widget.AppCompatImageButton
-                                android:id="@+id/pager_aty_ib_bg_color_panel"
+                                android:id="@+id/pager_aty_acib_bg_color_panel"
                                 style="@style/PanelIconStyle"
                                 android:contentDescription="@string/pager_aty_panel_bg_color"
                                 android:src="@drawable/ic_background_color_52dp" />
@@ -125,7 +111,7 @@
 
                     <LinearLayout style="@style/PanelStyle">
 
-                        <TextView
+                        <android.support.v7.widget.AppCompatTextView
                                 style="@style/PanelLabStyle"
                                 android:text="@string/pager_aty_panel_bg_photo" />
 
@@ -134,7 +120,7 @@
                                 android:layout_height="@dimen/panel_vertical_space" />
 
                         <android.support.v7.widget.AppCompatImageButton
-                                android:id="@+id/pager_aty_ib_bg_photo_panel"
+                                android:id="@+id/pager_aty_acib_bg_photo_panel"
                                 style="@style/PanelIconStyle"
                                 android:contentDescription="@string/pager_aty_panel_bg_photo"
                                 android:src="@drawable/ic_background_photo_52dp" />
@@ -154,16 +140,19 @@
                         android:layout_alignParentBottom="true">
 
                     <android.support.v7.widget.AppCompatImageButton
+                            android:id="@+id/pager_aty_acib_settings"
                             style="@style/TransparentButtonStyle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_menu" />
+                            android:src="@drawable/ic_settings" />
 
                     <RelativeLayout
+                            android:id="@+id/pager_aty_rl_settings_red_point"
                             android:layout_width="36dp"
                             android:layout_height="34dp"
                             android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true">
+                            android:layout_alignParentRight="true"
+                            android:visibility="gone">
 
                         <View
                                 android:layout_width="4dp"
@@ -196,8 +185,8 @@
             android:orientation="horizontal"
             android:visibility="gone">
 
-        <EditText
-                android:id="@+id/pager_aty_et"
+        <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/pager_aty_acet"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

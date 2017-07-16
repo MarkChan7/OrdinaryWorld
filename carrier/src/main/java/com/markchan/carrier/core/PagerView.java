@@ -41,6 +41,8 @@ import timber.log.Timber;
  */
 public class PagerView extends View {
 
+    public static boolean DEBUG = false;
+
     public PagerView(Context context) {
         this(context, null);
     }
@@ -71,7 +73,6 @@ public class PagerView extends View {
         // no-op by default
     }
 
-    // A\nB\nC\nD\nE\nF\nG\na\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl\nm\nn\no\np\nq\nr\ns\nt\nu\nv\nw\nx\ny\nx
     private static String DEFAULT_TEXT;
 
     private static float DEFAULT_TEXT_SIZE;
@@ -93,13 +94,13 @@ public class PagerView extends View {
 
     private static int MAX_TEXT_OFFSET;
 
-    public static boolean DEBUG = true;
-
     private static final int mWidth = ScreenUtils.getScreenWidth();
     private static final int mHeight = mWidth;
 
+    /** 文字区域, 包括padding */
     private Rect mTextBorder;
 
+    /** 文字绘制区域, 无padding */
     private Rect mTextRect;
 
     /** 文字 */
@@ -123,9 +124,10 @@ public class PagerView extends View {
     @TextAlignment
     private int mTextAlignment;
 
-    /** 文字相对顶部的偏移量 */
+    /** 文字顶部相在Y轴上的坐标 */
     private int mTextOffset;
 
+    /** 文字中心点在Y轴上的坐标 */
     private int mTextCenterY;
 
     /** 背景颜色 */
@@ -285,12 +287,12 @@ public class PagerView extends View {
                 mLastTouchX = event.getX();
                 mLastTouchY = event.getY();
 
+                mDragging = false;
+
                 if (mTextRect.contains((int) mLastTouchX, (int) mLastTouchY)) {
                     mShowDashRect = true;
                     invalidate();
                 }
-
-                mDragging = false;
                 break;
             case MotionEvent.ACTION_MOVE:
                 final float x = event.getX();
@@ -399,7 +401,7 @@ public class PagerView extends View {
             canvas.drawRect(mTextBorder, mHelperPaint);
         }
 
-        if (mShowDashRect) { // draw dash rectangle
+        if (mShowDashRect) {
             Path textBorderPath = new Path();
             textBorderPath.moveTo(mTextBorder.left, mTextBorder.top);
             textBorderPath.lineTo(mTextBorder.right, mTextBorder.top);
@@ -409,12 +411,13 @@ public class PagerView extends View {
             canvas.drawPath(textBorderPath, mTextBorderPaint);
         }
 
+        RandomColor randomColor = DEBUG ? new RandomColor() : null;
         for (int i = 0; i < textLinesVector.size(); i++) {
             mTextRect.top = mTextOffset + (i * textHeight);
             mTextRect.bottom = mTextRect.top + textHeight;
 
-            if (DEBUG) {
-                mHelperPaint.setColor(new RandomColor().randomColor());
+            if (randomColor != null) {
+                mHelperPaint.setColor(randomColor.randomColor());
                 canvas.drawRect(mTextRect, mHelperPaint);
             }
 

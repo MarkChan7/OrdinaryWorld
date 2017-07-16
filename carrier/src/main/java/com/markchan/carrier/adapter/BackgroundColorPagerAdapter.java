@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.markchan.carrier.R;
-import com.markchan.carrier.domain.BackgroundColor;
+import com.markchan.carrier.model.BackgroundColorModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +21,12 @@ import java.util.List;
 public class BackgroundColorPagerAdapter extends PagerAdapter {
 
     private Context mContext;
-    private List<BackgroundColor> mData;
+    private List<BackgroundColorModel> mData;
     private List<View> mViews;
 
-    public BackgroundColorPagerAdapter(Context context, List<BackgroundColor> data) {
+    public BackgroundColorPagerAdapter(Context context, List<BackgroundColorModel> data) {
         mContext = context;
-        mData = data == null ? new ArrayList<BackgroundColor>() : data;
+        mData = data == null ? new ArrayList<BackgroundColorModel>() : data;
     }
 
     @Override

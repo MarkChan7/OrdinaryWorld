@@ -20,6 +20,29 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="TitleBarStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/title_bar_height</item>
+        <item name="android:background">@color/title_bar_background</item>
+    </style>
+
+    <style name="TitleBarTitleStyle" parent="BaseWidgetStyle">
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textSize">@dimen/title_bar_title_text_size</item>
+        <item name="android:textColor">@color/title_bar_title_text_color</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TitleBarButtonStyle" parent="TransparentButtonStyle">
+        <item name="android:layout_width">@dimen/title_bar_height</item>
+        <item name="android:layout_height">@dimen/title_bar_height</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="TitleBarBackButtonStyle" parent="TitleBarButtonStyle">
+        <item name="android:layout_alignParentLeft">true</item>
+    </style>
+
     <style name="PanelStyle" parent="BaseWidgetStyle">
         <item name="android:layout_width">@dimen/panel_width</item>
         <item name="android:paddingLeft">@dimen/panel_padding_left_and_right</item>
@@ -50,7 +73,7 @@
     </style>
 
     <!--<item name="android:drawablePadding">-->
-        <!--@dimen/bg_color_and_texture_panel_label_drawable_padding-->
+    <!--@dimen/bg_color_and_texture_panel_label_drawable_padding-->
     <!--</item>-->
     <style name="BgColorAndTexturePanelLabelStyle" parent="BaseWidgetStyle">
         <item name="android:layout_height">32dp</item>
@@ -60,4 +83,41 @@
         <item name="android:drawableBottom">@drawable/ic_arrow_down</item>
     </style>
 
+    <style name="SettingsFunctionsStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:divider">@drawable/function_divider</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingLeft">@dimen/settings_aty_function_padding</item>
+    </style>
+
+    <style name="SettingsFunctionsSpaceStyle">
+        <item name="android:layout_width">@dimen/settings_aty_functions_space</item>
+        <item name="android:layout_height">@dimen/settings_aty_functions_space</item>
+    </style>
+
+    <style name="SettingsFunctionStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/settings_aty_function_height</item>
+        <item name="android:paddingRight">@dimen/settings_aty_function_padding</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="SettingsFunctionTextViewStyle" parent="BaseWidgetStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SettingsFunctionSubTextViewStyle" parent="BaseWidgetStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SettingsFunctionDividerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/settings_aty_function_divider_height</item>
+        <item name="android:background">@color/settings_aty_function_divider_color</item>
+    </style>
 </resources>

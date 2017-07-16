@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             tools:context="com.markchan.carrier.activity.FontManagerActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.markchan.carrier.activity.FontManagerActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout style="@style/TitleBarStyle">
+
+        <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/font_manager_aty_acib_back"
+                style="@style/TitleBarBackButtonStyle"
+                android:src="@drawable/ic_back" />
+
+        <android.support.v7.widget.AppCompatTextView
+                style="@style/TitleBarTitleStyle"
+                android:text="@string/font_manager_aty_name" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/font_manager_aty_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+</LinearLayout>

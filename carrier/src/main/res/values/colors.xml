@@ -25,6 +25,8 @@
 
     <color name="complete_text_color">#FFD824</color>
 
+    <color name="settings_aty_function_divider_color">#ccc</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 

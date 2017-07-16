@@ -19,8 +19,8 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.markchan.carrier.R;
 import com.markchan.carrier.adapter.BackgroundColorPagerAdapter;
 import com.markchan.carrier.adapter.TexturePagerAdapter;
-import com.markchan.carrier.domain.BackgroundColor;
-import com.markchan.carrier.domain.Texture;
+import com.markchan.carrier.model.BackgroundColorModel;
+import com.markchan.carrier.model.TextureModel;
 import com.markchan.carrier.event.BackToPanelsEvent;
 import com.markchan.carrier.event.PagerViewEventBus;
 import com.markchan.carrier.util.Scheme;
@@ -42,9 +42,9 @@ public class BgColorAndTexturePanelFragment extends Fragment {
 
     private Unbinder mUnbinder;
 
-    private List<BackgroundColor> mBackgroundColors;
+    private List<BackgroundColorModel> mBackgroundColorModels;
 
-    private List<Texture> mTextures;
+    private List<TextureModel> mTextureModels;
 
     @Nullable
     @Override
@@ -64,15 +64,15 @@ public class BgColorAndTexturePanelFragment extends Fragment {
 
         // ---------------------------------------------------------------------------------------------
 
-        mBackgroundColors = new ArrayList<>();
+        mBackgroundColorModels = new ArrayList<>();
         String[] colorNameArr = getResources()
                 .getStringArray(R.array.background_color_panel_array_color_name);
         int[] colorArr = getResources().getIntArray(R.array.background_color_panel_array_color);
         for (int i = 0; i < colorNameArr.length; i++) {
-            mBackgroundColors.add(new BackgroundColor(colorNameArr[i], colorArr[i]));
+            mBackgroundColorModels.add(new BackgroundColorModel(colorNameArr[i], colorArr[i]));
         }
         BackgroundColorPagerAdapter colorAdapter = new BackgroundColorPagerAdapter(getActivity(),
-                mBackgroundColors);
+                mBackgroundColorModels);
         mColorViewPager.setAdapter(colorAdapter);
         mColorViewPager.setOffscreenPageLimit(colorNameArr.length);
         mColorViewPager.addOnPageChangeListener(new OnPageChangeListener() {
@@ -86,7 +86,7 @@ public class BgColorAndTexturePanelFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 EventBus.getDefault().post(new PagerViewEventBus.BackgroundColorEvent(
-                        mBackgroundColors.get(position).getColor()));
+                        mBackgroundColorModels.get(position).getColor()));
             }
 
             @Override
@@ -95,7 +95,7 @@ public class BgColorAndTexturePanelFragment extends Fragment {
             }
         });
 
-        mTextures = new ArrayList<>();
+        mTextureModels = new ArrayList<>();
         String[] textureNameArr = getResources()
                 .getStringArray(R.array.background_color_panel_array_texture_name);
         String[] textureDrawableNameArr = getResources()
@@ -103,16 +103,16 @@ public class BgColorAndTexturePanelFragment extends Fragment {
         for (int i = 0; i < textureNameArr.length; i++) {
             String textureName = textureNameArr[i];
             if (i == 0) {
-                mTextures.add(Texture.createPureTexture(textureName));
+                mTextureModels.add(TextureModel.createPureTexture(textureName));
             } else {
                 int drawableResId = getResources()
                         .getIdentifier(textureDrawableNameArr[i - 1], "drawable",
                                 AppUtils.getAppPackageName());
-                mTextures.add(new Texture(textureName,
+                mTextureModels.add(new TextureModel(textureName,
                         Scheme.DRAWABLE.wrap(drawableResId + "")));
             }
         }
-        TexturePagerAdapter textureAdapter = new TexturePagerAdapter(getActivity(), mTextures);
+        TexturePagerAdapter textureAdapter = new TexturePagerAdapter(getActivity(), mTextureModels);
         mTextureViewPager.setAdapter(textureAdapter);
         mTextureViewPager.setOffscreenPageLimit(textureNameArr.length);
         mTextureViewPager.addOnPageChangeListener(new OnPageChangeListener() {
@@ -126,7 +126,7 @@ public class BgColorAndTexturePanelFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 EventBus.getDefault().post(new PagerViewEventBus.TextureEvent(
-                        mTextures.get(position).getUrl()));
+                        mTextureModels.get(position).getUrl()));
             }
 
             @Override

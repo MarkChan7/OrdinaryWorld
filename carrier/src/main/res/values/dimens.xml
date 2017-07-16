@@ -36,6 +36,11 @@
     <dimen name="bg_color_and_texture_panel_label_text_size">12sp</dimen>
     <dimen name="bg_color_and_texture_panel_label_drawable_padding">-4dp</dimen>
 
+    <dimen name="settings_aty_functions_space">36dp</dimen>
+    <dimen name="settings_aty_function_divider_height">1dp</dimen>
+    <dimen name="settings_aty_function_padding">16dp</dimen>
+    <dimen name="settings_aty_function_height">48dp</dimen>
+
     <dimen name="wheel_picker_item_default_text_size">24sp</dimen>
     <dimen name="wheel_picker_item_default_space">12dp</dimen>
     <dimen name="wheel_picker_indicator_size">2dp</dimen>

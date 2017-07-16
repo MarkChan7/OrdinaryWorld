@@ -1,5 +1,6 @@
 package com.markchan.carrier.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,17 +9,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -60,26 +61,28 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
     RelativeLayout mTitleBarRelativeLayout;
     @BindView(R.id.pager_aty_acib_discard)
     AppCompatImageButton mDiscardImageBtn;
-    @BindView(R.id.pager_aty_tv_title)
-    TextView mTitleTextView;
+    @BindView(R.id.pager_aty_actv_title)
+    AppCompatTextView mTitleTextView;
     @BindView(R.id.pager_aty_acib_save)
     AppCompatImageButton mSaveImageBtn;
     @BindView(R.id.pager_aty_pager_view)
     PagerView mPagerView;
-    @BindView(R.id.pager_aty_ib_text_panel)
-    AppCompatImageButton mTextPanelImageBtn;
-    @BindView(R.id.pager_aty_ib_bg_color_panel)
-    AppCompatImageButton mBackgroundColorPanelImageBtn;
-    @BindView(R.id.pager_aty_ib_bg_photo_panel)
-    AppCompatImageButton mBackgroundPhotoPanelImageBtn;
     @BindView(R.id.pager_aty_rl_panels)
     RelativeLayout mPanelsRelativeLayout;
+    @BindView(R.id.pager_aty_acib_text_panel)
+    AppCompatImageButton mTextPanelImageBtn;
+    @BindView(R.id.pager_aty_acib_bg_color_panel)
+    AppCompatImageButton mBackgroundColorPanelImageBtn;
+    @BindView(R.id.pager_aty_acib_bg_photo_panel)
+    AppCompatImageButton mBackgroundPhotoPanelImageBtn;
+    @BindView(R.id.pager_aty_rl_settings_red_point)
+    RelativeLayout mSettingsRedPointView;
     @BindView(R.id.pager_aty_fl_panel_container)
     FrameLayout mPanelContainerFrameLayout;
     @BindView(R.id.pager_aty_ll_input)
     LinearLayout mInputLinearLayout;
-    @BindView(R.id.pager_aty_et)
-    EditText mEditText;
+    @BindView(R.id.pager_aty_acet)
+    AppCompatEditText mEditText;
     @BindView(R.id.pager_aty_acib_confirm)
     AppCompatImageButton mConfirmImageBtn;
 
@@ -181,8 +184,8 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
     }
 
     @OnClick({R.id.pager_aty_acib_discard, R.id.pager_aty_acib_save, R.id.pager_aty_acib_confirm,
-            R.id.pager_aty_ib_text_panel,
-            R.id.pager_aty_ib_bg_color_panel, R.id.pager_aty_ib_bg_photo_panel})
+            R.id.pager_aty_acib_text_panel, R.id.pager_aty_acib_bg_color_panel,
+            R.id.pager_aty_acib_bg_photo_panel, R.id.pager_aty_acib_settings})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.pager_aty_acib_discard:
@@ -191,20 +194,20 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
             case R.id.pager_aty_acib_save:
                 ToastUtils.showShort("Wait for minute");
                 break;
-            case R.id.pager_aty_ib_text_panel:
+            case R.id.pager_aty_acib_text_panel:
                 if (mTextPanelFragment == null) {
                     mTextPanelFragment = new TextPanelFragment();
                 }
                 showPanel(getText(R.string.pager_aty_panel_text).toString(), mTextPanelFragment);
                 break;
-            case R.id.pager_aty_ib_bg_color_panel:
+            case R.id.pager_aty_acib_bg_color_panel:
                 if (mBgColorAndTexturePanelFragment == null) {
                     mBgColorAndTexturePanelFragment = new BgColorAndTexturePanelFragment();
                 }
                 showPanel(getText(R.string.pager_aty_panel_bg_color).toString(),
                         mBgColorAndTexturePanelFragment);
                 break;
-            case R.id.pager_aty_ib_bg_photo_panel:
+            case R.id.pager_aty_acib_bg_photo_panel:
                 mTitleTextView.setText(getText(R.string.pager_aty_panel_bg_photo));
                 // TODO: 2017/7/15 Add a photo as background
                 break;
@@ -231,6 +234,9 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
                             }
                         })
                         .start();
+                break;
+            case R.id.pager_aty_acib_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
             default:
                 break;
