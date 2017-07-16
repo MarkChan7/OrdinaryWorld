@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Mark on 2017/7/16.
  */
-public interface FontDao {
+public interface FontEntityDao {
 
     FontEntity queryFontEntityById(final int fontId);
 

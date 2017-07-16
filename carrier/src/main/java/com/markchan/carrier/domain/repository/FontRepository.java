@@ -12,4 +12,6 @@ public interface FontRepository {
     Observable<Font> getFont(final int fontId);
 
     Observable<List<Font>> getFonts();
+
+    Observable<List<Font>> getDownloadedFonts();
 }

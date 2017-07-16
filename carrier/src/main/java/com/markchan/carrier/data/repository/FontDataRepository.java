@@ -51,9 +51,12 @@ public class FontDataRepository implements FontRepository {
                     @Override
                     public List<FontEntity> apply(@NonNull List<FontEntity> clouds,
                             @NonNull List<FontEntity> disks) throws Exception {
-                        for (FontEntity fontEntity : disks) {
-                            if (clouds.contains(fontEntity)) {
-                                clouds.remove(fontEntity);
+                        for (FontEntity disk : disks) {
+                            for (FontEntity cloud : clouds) {
+                                if (disk.getId() == cloud.getId()) {
+                                    clouds.remove(cloud);
+                                    break;
+                                }
                             }
                         }
                         clouds.addAll(disks);
@@ -62,6 +65,19 @@ public class FontDataRepository implements FontRepository {
                     }
                 })
                 .map(new Function<List<FontEntity>, List<Font>>() {
+
+                    @Override
+                    public List<Font> apply(@NonNull List<FontEntity> fontEntities)
+                            throws Exception {
+                        return mFontEntityDataMapper.transform(fontEntities);
+                    }
+                });
+    }
+
+    @Override
+    public Observable<List<Font>> getDownloadedFonts() {
+        return mFontDataSourceFactory.createDiskDataSource().getFontEntities().map(
+                new Function<List<FontEntity>, List<Font>>() {
 
                     @Override
                     public List<Font> apply(@NonNull List<FontEntity> fontEntities)

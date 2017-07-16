@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Mark on 2017/7/16.
  */
-public class FontDapImpl implements FontDao {
+public class FontEntityDapImpl implements FontEntityDao {
 
     @Override
     public FontEntity queryFontEntityById(int fontId) {

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Mark on 2017/7/16.
  */
-public class GetFontList extends UseCase<List<Font>, Void> {
+public class GetFontList extends UseCase<List<Font>, GetFontList.Params> {
 
     private final FontRepository mFontRepository;
 
@@ -21,7 +21,28 @@ public class GetFontList extends UseCase<List<Font>, Void> {
     }
 
     @Override
-    Observable<List<Font>> buildUseCaseObservable(Void unused) {
-        return mFontRepository.getFonts();
+    Observable<List<Font>> buildUseCaseObservable(Params params) {
+        if (params.downloadStatus == Params.STATUS_DOWNLOADED) {
+            return mFontRepository.getDownloadedFonts();
+        } else {
+            return mFontRepository.getFonts();
+        }
+    }
+
+    public static final class Params {
+
+        public static final int STATUS_ALL = 0;
+        public static final int STATUS_DOWNLOADED = 1;
+        public static final int STATUS_ONLINE = 2;
+
+        private final int downloadStatus;
+
+        private Params(int downloadStatus) {
+            this.downloadStatus = downloadStatus;
+        }
+
+        public static Params forFonts(int downloadStatus) {
+            return new Params(downloadStatus);
+        }
     }
 }

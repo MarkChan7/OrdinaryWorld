@@ -1,7 +1,7 @@
 package com.markchan.carrier.data.cache;
 
 import com.blankj.utilcode.util.FileUtils;
-import com.markchan.carrier.data.database.FontDao;
+import com.markchan.carrier.data.database.FontEntityDao;
 import com.markchan.carrier.data.entity.FontEntity;
 import java.util.Iterator;
 import java.util.List;
@@ -11,18 +11,18 @@ import java.util.List;
  */
 public class FontCacheImpl implements FontCache {
 
-    private final FontDao mFontDao;
+    private final FontEntityDao mFontEntityDao;
 
-    public FontCacheImpl(FontDao fontDao) {
-        if (fontDao == null) {
+    public FontCacheImpl(FontEntityDao fontEntityDao) {
+        if (fontEntityDao == null) {
             throw new NullPointerException("Context or Font DAO can't be null");
         }
-        mFontDao = fontDao;
+        mFontEntityDao = fontEntityDao;
     }
 
     @Override
     public FontEntity getDownloadedFontEntity(int fontId) {
-        final FontEntity fontEntity = mFontDao.queryDownloadedFontEntityById(fontId);
+        final FontEntity fontEntity = mFontEntityDao.queryDownloadedFontEntityById(fontId);
         if (fontEntity != null) {
             if (!FileUtils.isFileExists(fontEntity.getFilePath())) {
                 fontEntity.setDownloaded(false);
@@ -36,7 +36,7 @@ public class FontCacheImpl implements FontCache {
 
     @Override
     public List<FontEntity> getDownloadedFontEntities() {
-        final List<FontEntity> fontEntities = mFontDao.queryDownloadedFontEntities();
+        final List<FontEntity> fontEntities = mFontEntityDao.queryDownloadedFontEntities();
         Iterator<FontEntity> iterator = fontEntities.iterator();
         while (iterator.hasNext()) {
             FontEntity fontEntity = iterator.next();
@@ -68,13 +68,13 @@ public class FontCacheImpl implements FontCache {
 
     @Override
     public boolean isDownloaded(int fontId) {
-        FontEntity fontEntity = mFontDao.queryDownloadedFontEntityById(fontId);
+        FontEntity fontEntity = mFontEntityDao.queryDownloadedFontEntityById(fontId);
         return isFontEntityExists(fontEntity);
     }
 
     @Override
     public void evictAll() {
-        List<FontEntity> fontEntities = mFontDao.queryDownloadedFontEntities();
+        List<FontEntity> fontEntities = mFontEntityDao.queryDownloadedFontEntities();
         if (fontEntities != null && !fontEntities.isEmpty()) {
             for (FontEntity fontEntity : fontEntities) {
                 if (FileUtils.deleteFile(fontEntity.getFilePath())) {

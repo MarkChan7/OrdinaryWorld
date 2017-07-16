@@ -23,6 +23,7 @@ import com.markchan.carrier.data.entity.FontEntity;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.interactor.DefaultObserver;
 import com.markchan.carrier.domain.interactor.GetFontList;
+import com.markchan.carrier.domain.interactor.GetFontList.Params;
 import com.markchan.carrier.presenter.mapper.FontModelDataMapper;
 import com.markchan.carrier.presenter.model.FontModel;
 import com.markchan.carrier.presenter.util.CacheDirHelper;
@@ -79,7 +80,8 @@ public class FontManagerActivity extends AppCompatActivity {
                                     FontModel f = getFontModelByUrlAndFilePath(task.getUrl(),
                                             task.getTargetFilePath());
                                     if (f != null) {
-                                        FontEntity fontEntity = Middleware.getDefault().getFontDao()
+                                        FontEntity fontEntity = Middleware.getDefault()
+                                                .getFontEntityDao()
                                                 .queryFontEntityById(f.getId());
                                         if (fontEntity != null) {
                                             fontEntity.setDownloaded(true);
@@ -119,7 +121,7 @@ public class FontManagerActivity extends AppCompatActivity {
                 Middleware.getDefault().getThreadExecutor(),
                 Middleware.getDefault().getPostExecutionThread());
 
-        useCase.execute(new FontListObserver(), null);
+        useCase.execute(new FontListObserver(), Params.forFonts(Params.STATUS_ALL));
     }
 
     private FontModel getFontModelByUrlAndFilePath(String url, String filePath) {

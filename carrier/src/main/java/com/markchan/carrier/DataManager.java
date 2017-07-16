@@ -1,6 +1,6 @@
 package com.markchan.carrier;
 
-import com.markchan.carrier.data.database.FontDao;
+import com.markchan.carrier.data.database.FontEntityDao;
 import com.markchan.carrier.presenter.config.ConfigManager;
 
 /**
@@ -21,9 +21,9 @@ public class DataManager {
         return INSTANCE;
     }
 
-    private final FontDao mFonDao;
+    private final FontEntityDao mFonDao;
 
     private DataManager() {
-        mFonDao = Middleware.getDefault().getFontDao();
+        mFonDao = Middleware.getDefault().getFontEntityDao();
     }
 }

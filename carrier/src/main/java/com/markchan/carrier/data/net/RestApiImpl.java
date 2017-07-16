@@ -1,8 +1,8 @@
 package com.markchan.carrier.data.net;
 
 import android.content.Context;
-import com.markchan.carrier.data.entity.FontEntity;
 import com.markchan.carrier.Constants;
+import com.markchan.carrier.data.entity.FontEntity;
 import java.io.IOException;
 import java.util.List;
 import retrofit2.Call;
@@ -16,8 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestApiImpl implements RestApi {
 
     private Context mContext;
-    private Retrofit mRetrofit;
 
+    private Retrofit mRetrofit;
     private FontService mFontService;
 
     public RestApiImpl(Context context) {

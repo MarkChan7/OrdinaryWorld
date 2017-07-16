@@ -9,6 +9,6 @@ public class FontEntityComparator implements Comparator<FontEntity> {
 
     @Override
     public int compare(FontEntity o1, FontEntity o2) {
-        return o1.getOrder() > o2.getOrder() ? 1 : o1.getOrder() == o2.getOrder() ? 0 : -1;
+        return o1.getOrder() > o2.getOrder() ? -1 : o1.getOrder() == o2.getOrder() ? 0 : 1;
     }
 }

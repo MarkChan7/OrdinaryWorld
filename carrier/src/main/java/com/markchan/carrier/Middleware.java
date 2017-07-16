@@ -3,21 +3,18 @@ package com.markchan.carrier;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import com.markchan.carrier.data.cache.FontCacheImpl;
-import com.markchan.carrier.data.database.FontDao;
-import com.markchan.carrier.data.database.FontDapImpl;
+import com.markchan.carrier.data.database.FontEntityDao;
+import com.markchan.carrier.data.database.FontEntityDapImpl;
 import com.markchan.carrier.data.entity.FontEntityDataMapper;
 import com.markchan.carrier.data.executor.JobExecutor;
 import com.markchan.carrier.data.net.RestApiImpl;
 import com.markchan.carrier.data.repository.FontDataRepository;
 import com.markchan.carrier.data.repository.datasource.FontDataSourceFactory;
-import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.executor.PostExecutionThread;
 import com.markchan.carrier.domain.executor.ThreadExecutor;
 import com.markchan.carrier.domain.repository.FontRepository;
 import com.markchan.carrier.presenter.UiThread;
 import com.markchan.carrier.presenter.mapper.FontModelDataMapper;
-import io.reactivex.Observable;
-import java.util.List;
 
 /**
  * Created by Mark on 2017/7/16.
@@ -46,7 +43,7 @@ public class Middleware {
     /**
      * data layer
      */
-    private final FontDao mFontDao;
+    private final FontEntityDao mFontEntityDao;
 
     /**
      * domain layer
@@ -60,13 +57,13 @@ public class Middleware {
      */
     private FontModelDataMapper mFontModelDataMapper;
 
-    public Middleware(Context context) {
+    private Middleware(Context context) {
         mContext = context.getApplicationContext();
 
-        mFontDao = new FontDapImpl();
+        mFontEntityDao = new FontEntityDapImpl();
 
         mFontRepository = new FontDataRepository(new FontDataSourceFactory(mContext,
-                new FontCacheImpl(mFontDao),
+                new FontCacheImpl(mFontEntityDao),
                 new RestApiImpl(mContext)),
                 new FontEntityDataMapper());
 
@@ -76,8 +73,8 @@ public class Middleware {
         mFontModelDataMapper = new FontModelDataMapper();
     }
 
-    public FontDao getFontDao() {
-        return mFontDao;
+    public FontEntityDao getFontEntityDao() {
+        return mFontEntityDao;
     }
 
     public FontRepository getFontRepository() {
@@ -94,11 +91,5 @@ public class Middleware {
 
     public FontModelDataMapper getFontModelDataMapper() {
         return mFontModelDataMapper;
-    }
-
-    // ---------------------------------------------------------------------------------------------
-
-    public Observable<List<Font>> getFontModels() {
-        return mFontRepository.getFonts();
     }
 }
