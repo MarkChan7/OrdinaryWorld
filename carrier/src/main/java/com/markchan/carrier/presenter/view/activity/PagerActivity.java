@@ -24,7 +24,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.blankj.utilcode.util.KeyboardUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -33,16 +32,16 @@ import com.github.florent37.viewanimator.AnimationListener.Start;
 import com.github.florent37.viewanimator.AnimationListener.Stop;
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.markchan.carrier.R;
-import com.markchan.carrier.Constants;
+import com.markchan.carrier.presenter.config.ConfigManager;
 import com.markchan.carrier.presenter.core.PagerView;
 import com.markchan.carrier.presenter.core.PagerView.OnTextTapListener;
 import com.markchan.carrier.presenter.event.BackToPanelsEvent;
 import com.markchan.carrier.presenter.event.PagerViewEventBus;
-import com.markchan.carrier.presenter.view.fragment.BgColorAndTexturePanelFragment;
-import com.markchan.carrier.presenter.view.fragment.TextPanelFragment;
 import com.markchan.carrier.presenter.util.Scheme;
 import com.markchan.carrier.presenter.util.keyboard.KeyboardHeightObserver;
 import com.markchan.carrier.presenter.util.keyboard.KeyboardHeightProvider;
+import com.markchan.carrier.presenter.view.fragment.BgColorAndTexturePanelFragment;
+import com.markchan.carrier.presenter.view.fragment.TextPanelFragment;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -112,7 +111,7 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
         ButterKnife.bind(this);
         mInflater = getLayoutInflater();
 
-        mKeyBoardHeight = SPUtils.getInstance().getInt(Constants.SP_KEY_KEY_BOARD_HEIGHT);
+        mKeyBoardHeight = ConfigManager.getDefault().getKeyboardHeight();
         mKeyboardHeightProvider = new KeyboardHeightProvider(this);
         mRootRelativeLayout.post(new Runnable() {
 
@@ -294,7 +293,7 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
                 || (mKeyBoardHeight != 0 && height != 0 && mKeyBoardHeight != height)) {
             mKeyBoardHeight = height;
             updateInputBottomMargin();
-            SPUtils.getInstance().put(Constants.SP_KEY_KEY_BOARD_HEIGHT, height);
+            ConfigManager.getDefault().setKeyboardHeight(height);
         }
 
         if (height == 0) { // closed
@@ -309,7 +308,7 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
             }
         } else { // opened
             mEditText.setText(mPagerText);
-            if (!mPagerText.isEmpty()) {
+            if (!TextUtils.isEmpty(mPagerText)) {
                 mEditText.setSelection(mPagerText.length());
             }
         }

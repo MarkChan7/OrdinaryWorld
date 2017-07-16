@@ -7,5 +7,10 @@ public interface Constants {
 
     String BASE_END_POINT = "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/";
 
-    String SP_KEY_KEY_BOARD_HEIGHT = "key_board_height";
+    interface SP_KEY {
+
+        String  KEY_BOARD_HEIGHT = "key_board_height";
+        String  IS_ADD_WATERMARK = "is_add_watermark";
+        String  IS_AUTO_SAVE = "is_auto_save";
+    }
 }
