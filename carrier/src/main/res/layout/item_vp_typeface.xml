@@ -9,9 +9,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:wheel_atmospheric="true"
+            app:wheel_curved="false"
+            app:wheel_cyclic="false"
+            app:wheel_item_align="center"
             app:wheel_item_text_color="#A7A7DB"
-            app:wheel_item_space="4dp"
-            app:wheel_item_text_size="24sp"
+            app:wheel_item_space="24dp"
+            app:wheel_item_text_size="18sp"
             app:wheel_selected_item_text_color="#536D8A" />
 
     <RelativeLayout

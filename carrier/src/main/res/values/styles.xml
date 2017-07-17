@@ -76,8 +76,10 @@
     <!--@dimen/bg_color_and_texture_panel_label_drawable_padding-->
     <!--</item>-->
     <style name="BgColorAndTexturePanelLabelStyle" parent="BaseWidgetStyle">
-        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
         <item name="android:textSize">@dimen/bg_color_and_texture_panel_label_text_size</item>
         <item name="android:textColor">@color/bg_color_and_texture_panel_label_text_color</item>
         <item name="android:drawableBottom">@drawable/ic_arrow_down</item>

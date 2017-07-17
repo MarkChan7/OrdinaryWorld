@@ -33,7 +33,9 @@ import com.markchan.carrier.R;
 import com.markchan.carrier.Scheme;
 import com.markchan.carrier.config.ConfigManager;
 import com.markchan.carrier.core.PagerView;
+import com.markchan.carrier.core.PagerView.OnDragTextListener;
 import com.markchan.carrier.core.PagerView.OnTextTapListener;
+import com.markchan.carrier.core.PagerView.TextAlignment;
 import com.markchan.carrier.event.BackToPanelsEvent;
 import com.markchan.carrier.event.PagerViewEventBus;
 import com.markchan.carrier.presenter.view.fragment.BgColorAndTexturePanelFragment;
@@ -158,6 +160,22 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
                         .translationY(-getResources().getDimension(R.dimen.title_bar_height))
                         .duration(120)
                         .start();
+            }
+        });
+
+        mPagerView.setOnDragTextListener(new OnDragTextListener() {
+
+            @Override
+            public void onDragText(@TextAlignment int textAlignment) {
+                if (!mInConcretePanel) {
+                    if (mTextPanelFragment == null) {
+                        mTextPanelFragment = new TextPanelFragment();
+                    }
+                    showPanel(getText(R.string.pager_aty_panel_text).toString(),
+                            mTextPanelFragment);
+                } else {
+                    mTextPanelFragment.showTextAlignmentPanel(textAlignment);
+                }
             }
         });
 

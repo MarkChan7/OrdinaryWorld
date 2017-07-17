@@ -549,6 +549,7 @@ public class WheelPicker extends View implements IWheelPicker, Runnable {
         if (null != mOnWheelChangeListener) {
             mOnWheelChangeListener.onWheelScrolled(mScrollOffsetY);
         }
+
         int drawnDataStartPos = -mScrollOffsetY / mItemHeight - mHalfDrawnItemCount;
         for (int drawnDataPos = drawnDataStartPos + mSelectedItemPosition,
                 drawnOffsetPos = -mHalfDrawnItemCount;

@@ -1,10 +1,11 @@
 package com.markchan.carrier.presenter.view.panel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
-
 import com.markchan.carrier.Middleware;
 import com.markchan.carrier.R;
+import com.markchan.carrier.core.PagerView;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.interactor.DefaultObserver;
 import com.markchan.carrier.domain.interactor.GetFontList;
@@ -12,13 +13,12 @@ import com.markchan.carrier.domain.interactor.GetFontList.Params;
 import com.markchan.carrier.event.PagerViewEventBus;
 import com.markchan.carrier.presenter.mapper.FontModelDataMapper;
 import com.markchan.carrier.presenter.model.FontModel;
+import com.markchan.carrier.presenter.view.activity.FontManagerActivity;
 import com.markchan.carrier.widget.wheelpicker.WheelPicker;
 import com.markchan.carrier.widget.wheelpicker.WheelPicker.OnItemSelectedListener;
-
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * @author Mark Chan <a href="markchan2gm@gmail.com">Contact me.</a>
@@ -42,8 +42,6 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
 
     @Override
     protected void initData() {
-        mFontModels = new ArrayList<>();
-
         GetFontList useCase = new GetFontList(Middleware.getDefault().getFontRepository(),
                 Middleware.getDefault().getThreadExecutor(),
                 Middleware.getDefault().getPostExecutionThread());
@@ -54,28 +52,18 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
     private final class FontListObserver extends DefaultObserver<List<Font>> {
 
         @Override
-        public void onComplete() {
-
-        }
-
-        @Override
-        public void onError(Throwable e) {
-
-        }
-
-        @Override
         public void onNext(List<Font> fonts) {
             if (fonts != null && !fonts.isEmpty()) {
                 FontModelDataMapper mapper = Middleware.getDefault()
                         .getFontModelDataMapper();
-                List<FontModel> fontModels = mapper.transform(fonts);
-
-                mFontModels.addAll(fontModels);
+                mFontModels = mapper.transform(fonts);
 
                 List<String> fontNames = new ArrayList<>();
-                for (FontModel fontModel : fontModels) {
+                fontNames.add("默认");
+                for (FontModel fontModel : mFontModels) {
                     fontNames.add(fontModel.getDisplayName());
                 }
+                fontNames.add("字体下载与管理");
                 mWheelPicker.setData(fontNames);
             }
         }
@@ -91,7 +79,15 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
 
     @Override
     public void onItemSelected(WheelPicker picker, Object data, int position) {
-        EventBus.getDefault()
-                .post(new PagerViewEventBus.TypefaceEvent(mFontModels.get(position).getUri()));
+        if (position == 0) { // default
+            EventBus.getDefault()
+                    .post(new PagerViewEventBus.TypefaceEvent(PagerView.FAKE_DEFAULT_TYPEFACE_URI));
+        } else if (position == mFontModels.size() + 1) { // font download and manager
+            mContext.startActivity(new Intent(mContext, FontManagerActivity.class));
+        } else {
+            EventBus.getDefault()
+                    .post(new PagerViewEventBus.TypefaceEvent(
+                            mFontModels.get(position - 1).getUri()));
+        }
     }
 }

@@ -3,11 +3,10 @@ package com.markchan.carrier.presenter.view.panel;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageButton;
-
 import com.markchan.carrier.R;
 import com.markchan.carrier.core.PagerView;
+import com.markchan.carrier.core.PagerView.TextAlignment;
 import com.markchan.carrier.event.PagerViewEventBus;
-
 import org.greenrobot.eventbus.EventBus;
 
 /**
@@ -34,6 +33,10 @@ public class TextAlignmentPanel extends AbsPanel {
         mRightAlignmentBtn.setOnClickListener(this);
         view.findViewById(R.id.text_alignment_vp_item_btn_restore_default_location)
                 .setOnClickListener(this);
+    }
+
+    public void setCurrentTextAlignment(@TextAlignment int textAlignment) {
+//        ToastUtils.showShort("" + textAlignment);
     }
 
     @Override

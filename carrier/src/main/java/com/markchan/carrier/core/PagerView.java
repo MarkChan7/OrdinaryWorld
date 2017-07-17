@@ -73,6 +73,8 @@ public class PagerView extends View {
         // no-op by default
     }
 
+    public static String FAKE_DEFAULT_TYPEFACE_URI = "typeface://default";
+
     private static String DEFAULT_TEXT;
 
     private static float DEFAULT_TEXT_SIZE;
@@ -180,6 +182,22 @@ public class PagerView extends View {
 
     public void setOnTextTapListener(OnTextTapListener onTextTapListener) {
         mOnTextTapListener = onTextTapListener;
+    }
+
+    private OnDragTextListener mOnDragTextListener;
+
+    public interface OnDragTextListener {
+
+        void onDragText(@TextAlignment int textAlignment);
+    }
+
+    public OnDragTextListener getOnDragTextListener() {
+        return mOnDragTextListener;
+    }
+
+    public void setOnDragTextListener(
+            OnDragTextListener onDragTextListener) {
+        mOnDragTextListener = onDragTextListener;
     }
 
     private void setupDefaultValue(Context context) {
@@ -304,6 +322,10 @@ public class PagerView extends View {
                 }
 
                 if (mDragging) {
+                    if (mOnDragTextListener != null) {
+                        mOnDragTextListener.onDragText(mTextAlignment);
+                    }
+
                     mTextCenterY += dy;
 
                     mLastTouchX = x;
@@ -348,21 +370,25 @@ public class PagerView extends View {
 
         boolean typefaceDefaultFlag = true;
         if (!TextUtils.isEmpty(mTypefaceUrl)) {
-            Scheme scheme = Scheme.ofUri(mTypefaceUrl);
-            if (scheme == Scheme.ASSETS || scheme == Scheme.FILE) {
-                try {
-                    String path = scheme.crop(mTypefaceUrl);
-                    Typeface typeface;
-                    if (scheme == Scheme.ASSETS) {
-                        typeface = Typeface.createFromAsset(getContext().getAssets(), path);
-                    } else {
-                        typeface = Typeface.createFromFile(path);
+            if (mTypefaceUrl.equals(FAKE_DEFAULT_TYPEFACE_URI)) {
+                mTextPaint.setTypeface(Typeface.DEFAULT);
+            } else {
+                Scheme scheme = Scheme.ofUri(mTypefaceUrl);
+                if (scheme == Scheme.ASSETS || scheme == Scheme.FILE) {
+                    try {
+                        String path = scheme.crop(mTypefaceUrl);
+                        Typeface typeface;
+                        if (scheme == Scheme.ASSETS) {
+                            typeface = Typeface.createFromAsset(getContext().getAssets(), path);
+                        } else {
+                            typeface = Typeface.createFromFile(path);
+                        }
+                        mTextPaint.setTypeface(typeface);
+                        mTempTypefaceUrl = null;
+                        typefaceDefaultFlag = false;
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    mTextPaint.setTypeface(typeface);
-                    mTempTypefaceUrl = null;
-                    typefaceDefaultFlag = false;
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         }

@@ -21,7 +21,8 @@
             <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/pager_aty_acib_discard"
                     style="@style/TitleBarBackButtonStyle"
-                    android:src="@drawable/ic_discard_16dp" />
+                    android:src="@drawable/ic_discard_16dp"
+                    android:visibility="gone" />
 
             <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/pager_aty_actv_title"
@@ -33,7 +34,8 @@
                     style="@style/TitleBarButtonStyle"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_save_16dp" />
+                    android:src="@drawable/ic_save_16dp"
+                    android:visibility="gone" />
 
         </RelativeLayout>
 

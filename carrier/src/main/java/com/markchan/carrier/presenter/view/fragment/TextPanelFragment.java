@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.markchan.carrier.R;
+import com.markchan.carrier.core.PagerView.TextAlignment;
 import com.markchan.carrier.presenter.view.adapter.TextPanelPagerAdapter;
 import com.markchan.carrier.event.BackToPanelsEvent;
 import com.markchan.carrier.presenter.view.panel.TextAlignmentPanel;
@@ -40,6 +41,15 @@ public class TextPanelFragment extends Fragment {
     private TextPanelPagerAdapter mTextPanelPagerAdapter;
     private List<View> mViews;
 
+    private TextAlignmentPanel mTextAlignmentPanel;
+
+    public void showTextAlignmentPanel(@TextAlignment int textAlignment) {
+        if (mViewPager != null) {
+            mViewPager.setCurrentItem(2, false);
+            mTextAlignmentPanel.setCurrentTextAlignment(textAlignment);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -61,7 +71,7 @@ public class TextPanelFragment extends Fragment {
 
         View textAlignmentPanelView = LayoutInflater.from(getActivity())
                 .inflate(R.layout.item_vp_text_alignment, container, false);
-        TextAlignmentPanel textAlignmentPanel = new TextAlignmentPanel(getActivity(),
+        mTextAlignmentPanel = new TextAlignmentPanel(getActivity(),
                 textAlignmentPanelView);
         mViews.add(textAlignmentPanelView);
 
