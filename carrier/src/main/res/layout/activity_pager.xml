@@ -37,7 +37,7 @@
 
         </RelativeLayout>
 
-        <com.markchan.carrier.presenter.core.PagerView
+        <com.markchan.carrier.core.PagerView
                 android:id="@+id/pager_aty_pager_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

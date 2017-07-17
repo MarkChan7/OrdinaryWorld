@@ -1,4 +1,4 @@
-package com.markchan.carrier.presenter.config;
+package com.markchan.carrier.config;
 
 /**
  * Created by Mark on 2017/7/16.

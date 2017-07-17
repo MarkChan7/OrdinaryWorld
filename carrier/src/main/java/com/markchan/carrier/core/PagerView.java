@@ -1,4 +1,4 @@
-package com.markchan.carrier.presenter.core;
+package com.markchan.carrier.core;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -31,8 +31,8 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.github.lzyzsd.randomcolor.RandomColor;
 import com.markchan.carrier.R;
-import com.markchan.carrier.presenter.util.Scheme;
-import com.markchan.carrier.presenter.util.TextHelper;
+import com.markchan.carrier.Scheme;
+import com.markchan.carrier.util.TextHelper;
 import java.util.Vector;
 import timber.log.Timber;
 

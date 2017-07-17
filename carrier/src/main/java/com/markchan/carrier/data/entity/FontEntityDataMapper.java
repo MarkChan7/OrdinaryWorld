@@ -1,6 +1,8 @@
 package com.markchan.carrier.data.entity;
 
+import com.markchan.carrier.Scheme;
 import com.markchan.carrier.domain.Font;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,13 +17,15 @@ public class FontEntityDataMapper {
         if (fontEntity != null) {
             font = new Font();
             font.setId(fontEntity.getId());
-            font.setOrder(fontEntity.getOrder());
             font.setDisplayName(fontEntity.getDisplayName());
             font.setPostscriptName(fontEntity.getPostscriptName());
             font.setThumbUrl(fontEntity.getThumbUrl());
-            font.setUrl(fontEntity.getUrl());
-            font.setDownloaded(fontEntity.isDownloaded());
-            font.setFilePath(fontEntity.getFilePath());
+            String uri = fontEntity.getUri();
+            if (Scheme.ofUri(uri) == Scheme.FILE) {
+                font.setUri(fontEntity.getUri());
+            } else {
+                font.setUri(fontEntity.getUrl());
+            }
         }
         return font;
     }

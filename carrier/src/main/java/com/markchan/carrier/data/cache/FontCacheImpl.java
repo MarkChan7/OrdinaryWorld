@@ -1,8 +1,12 @@
 package com.markchan.carrier.data.cache;
 
+import android.text.TextUtils;
+
 import com.blankj.utilcode.util.FileUtils;
+import com.markchan.carrier.Scheme;
 import com.markchan.carrier.data.database.FontEntityDao;
 import com.markchan.carrier.data.entity.FontEntity;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,11 +26,10 @@ public class FontCacheImpl implements FontCache {
 
     @Override
     public FontEntity getDownloadedFontEntity(int fontId) {
-        final FontEntity fontEntity = mFontEntityDao.queryDownloadedFontEntityById(fontId);
+        final FontEntity fontEntity = mFontEntityDao.queryFontEntityById(fontId);
         if (fontEntity != null) {
-            if (!FileUtils.isFileExists(fontEntity.getFilePath())) {
-                fontEntity.setDownloaded(false);
-                fontEntity.setFilePath(null);
+            if (!FileUtils.isFileExists(Scheme.FILE.crop(fontEntity.getUri()))) {
+                fontEntity.setUri(fontEntity.getUrl());
                 fontEntity.save();
                 return null;
             }
@@ -40,9 +43,8 @@ public class FontCacheImpl implements FontCache {
         Iterator<FontEntity> iterator = fontEntities.iterator();
         while (iterator.hasNext()) {
             FontEntity fontEntity = iterator.next();
-            if (!FileUtils.isFileExists(fontEntity.getFilePath())) {
-                fontEntity.setDownloaded(false);
-                fontEntity.setFilePath(null);
+            if (!FileUtils.isFileExists(Scheme.FILE.crop(fontEntity.getUri()))) {
+                fontEntity.setUri(fontEntity.getUrl());
                 fontEntity.save();
                 iterator.remove();
             }
@@ -52,18 +54,22 @@ public class FontCacheImpl implements FontCache {
 
     @Override
     public void setFontEntityDownloaded(final FontEntity fontEntity) {
-        if (isFontEntityExists(fontEntity)) {
-
-            fontEntity.setDownloaded(true);
-        } else {
-            fontEntity.setDownloaded(false);
-            fontEntity.setFilePath(null);
+        if (!isFontEntityExists(fontEntity)) {
+            fontEntity.setUri(fontEntity.getUrl());
         }
         fontEntity.save();
     }
 
     private boolean isFontEntityExists(FontEntity fontEntity) {
-        return fontEntity != null && !FileUtils.isFileExists(fontEntity.getFilePath());
+        if (fontEntity != null) {
+            String uri = fontEntity.getUri();
+            if (TextUtils.isEmpty(uri)) {
+                if (Scheme.ofUri(uri) == Scheme.FILE) {
+                    return FileUtils.isFileExists(Scheme.FILE.crop(uri));
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -77,9 +83,8 @@ public class FontCacheImpl implements FontCache {
         List<FontEntity> fontEntities = mFontEntityDao.queryDownloadedFontEntities();
         if (fontEntities != null && !fontEntities.isEmpty()) {
             for (FontEntity fontEntity : fontEntities) {
-                if (FileUtils.deleteFile(fontEntity.getFilePath())) {
-                    fontEntity.setDownloaded(false);
-                    fontEntity.setFilePath(null);
+                if (FileUtils.deleteFile(Scheme.FILE.crop(fontEntity.getUri()))) {
+                    fontEntity.setUri(fontEntity.getUrl());
                     fontEntity.update();
                 }
             }

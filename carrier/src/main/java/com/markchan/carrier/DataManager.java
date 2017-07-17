@@ -1,7 +1,7 @@
 package com.markchan.carrier;
 
 import com.markchan.carrier.data.database.FontEntityDao;
-import com.markchan.carrier.presenter.config.ConfigManager;
+import com.markchan.carrier.config.ConfigManager;
 
 /**
  * Created by Mark on 2017/7/16.

@@ -1,4 +1,4 @@
-package com.markchan.carrier.presenter.service;
+package com.markchan.carrier.service;
 
 import android.app.Service;
 import android.content.Intent;

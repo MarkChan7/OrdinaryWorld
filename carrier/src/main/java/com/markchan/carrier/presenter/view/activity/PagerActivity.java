@@ -20,9 +20,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
@@ -32,19 +30,24 @@ import com.github.florent37.viewanimator.AnimationListener.Start;
 import com.github.florent37.viewanimator.AnimationListener.Stop;
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.markchan.carrier.R;
-import com.markchan.carrier.presenter.config.ConfigManager;
-import com.markchan.carrier.presenter.core.PagerView;
-import com.markchan.carrier.presenter.core.PagerView.OnTextTapListener;
-import com.markchan.carrier.presenter.event.BackToPanelsEvent;
-import com.markchan.carrier.presenter.event.PagerViewEventBus;
-import com.markchan.carrier.presenter.util.Scheme;
-import com.markchan.carrier.presenter.util.keyboard.KeyboardHeightObserver;
-import com.markchan.carrier.presenter.util.keyboard.KeyboardHeightProvider;
+import com.markchan.carrier.Scheme;
+import com.markchan.carrier.config.ConfigManager;
+import com.markchan.carrier.core.PagerView;
+import com.markchan.carrier.core.PagerView.OnTextTapListener;
+import com.markchan.carrier.event.BackToPanelsEvent;
+import com.markchan.carrier.event.PagerViewEventBus;
 import com.markchan.carrier.presenter.view.fragment.BgColorAndTexturePanelFragment;
 import com.markchan.carrier.presenter.view.fragment.TextPanelFragment;
+import com.markchan.carrier.util.keyboard.KeyboardHeightObserver;
+import com.markchan.carrier.util.keyboard.KeyboardHeightProvider;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PagerActivity extends AppCompatActivity implements KeyboardHeightObserver {
 

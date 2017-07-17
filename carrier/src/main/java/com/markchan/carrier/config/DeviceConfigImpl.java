@@ -1,4 +1,4 @@
-package com.markchan.carrier.presenter.config;
+package com.markchan.carrier.config;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.markchan.carrier.Constants.SP_KEY;

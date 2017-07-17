@@ -1,4 +1,4 @@
-package com.markchan.carrier.presenter.widget.wheelpicker;
+package com.markchan.carrier.widget.wheelpicker;
 
 import android.content.Context;
 import android.content.res.TypedArray;

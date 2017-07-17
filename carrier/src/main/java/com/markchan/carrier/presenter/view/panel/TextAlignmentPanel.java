@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.markchan.carrier.R;
-import com.markchan.carrier.presenter.core.PagerView;
-import com.markchan.carrier.presenter.event.PagerViewEventBus;
+import com.markchan.carrier.core.PagerView;
+import com.markchan.carrier.event.PagerViewEventBus;
 
 import org.greenrobot.eventbus.EventBus;
 

@@ -1,6 +1,6 @@
-package com.markchan.carrier.presenter.event;
+package com.markchan.carrier.event;
 
-import com.markchan.carrier.presenter.core.PagerView.TextAlignment;
+import com.markchan.carrier.core.PagerView.TextAlignment;
 
 /**
  * @author Mark Chan <a href="markchan2gm@gmail.com">Contact me.</a>

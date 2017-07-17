@@ -15,7 +15,7 @@
  * along with Siebe Projects samples.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.markchan.carrier.presenter.util.keyboard;
+package com.markchan.carrier.util.keyboard;
 
 import android.app.Activity;
 import android.content.res.Configuration;

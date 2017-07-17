@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import com.markchan.carrier.R;
-import com.markchan.carrier.presenter.event.PagerViewEventBus;
+import com.markchan.carrier.event.PagerViewEventBus;
 import org.greenrobot.eventbus.EventBus;
 
 /**

@@ -1,4 +1,4 @@
-package com.markchan.carrier.presenter.util;
+package com.markchan.carrier.util;
 
 import android.content.Context;
 import android.os.Environment;

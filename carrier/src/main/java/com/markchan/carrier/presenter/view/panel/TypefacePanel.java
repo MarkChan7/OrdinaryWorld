@@ -2,21 +2,23 @@ package com.markchan.carrier.presenter.view.panel;
 
 import android.content.Context;
 import android.view.View;
+
 import com.markchan.carrier.Middleware;
 import com.markchan.carrier.R;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.interactor.DefaultObserver;
 import com.markchan.carrier.domain.interactor.GetFontList;
 import com.markchan.carrier.domain.interactor.GetFontList.Params;
-import com.markchan.carrier.presenter.event.PagerViewEventBus;
+import com.markchan.carrier.event.PagerViewEventBus;
 import com.markchan.carrier.presenter.mapper.FontModelDataMapper;
 import com.markchan.carrier.presenter.model.FontModel;
-import com.markchan.carrier.presenter.util.Scheme;
-import com.markchan.carrier.presenter.widget.wheelpicker.WheelPicker;
-import com.markchan.carrier.presenter.widget.wheelpicker.WheelPicker.OnItemSelectedListener;
+import com.markchan.carrier.widget.wheelpicker.WheelPicker;
+import com.markchan.carrier.widget.wheelpicker.WheelPicker.OnItemSelectedListener;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * @author Mark Chan <a href="markchan2gm@gmail.com">Contact me.</a>
@@ -68,14 +70,12 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
                         .getFontModelDataMapper();
                 List<FontModel> fontModels = mapper.transform(fonts);
 
+                mFontModels.addAll(fontModels);
+
                 List<String> fontNames = new ArrayList<>();
                 for (FontModel fontModel : fontModels) {
-                    FontModel wrapFontModel = new FontModel();
-                    wrapFontModel.setFilePath(Scheme.FILE.wrap(fontModel.getFilePath()));
-                    mFontModels.add(wrapFontModel);
                     fontNames.add(fontModel.getDisplayName());
                 }
-
                 mWheelPicker.setData(fontNames);
             }
         }
@@ -92,6 +92,6 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
     @Override
     public void onItemSelected(WheelPicker picker, Object data, int position) {
         EventBus.getDefault()
-                .post(new PagerViewEventBus.TypefaceEvent(mFontModels.get(position).getFilePath()));
+                .post(new PagerViewEventBus.TypefaceEvent(mFontModels.get(position).getUri()));
     }
 }

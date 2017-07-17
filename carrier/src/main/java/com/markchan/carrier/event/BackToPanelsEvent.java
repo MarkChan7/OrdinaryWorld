@@ -1,4 +1,4 @@
-package com.markchan.carrier.presenter.event;
+package com.markchan.carrier.event;
 
 /**
  * @author Mark Chan <a href="markchan2gm@gmail.com">Contact me.</a>

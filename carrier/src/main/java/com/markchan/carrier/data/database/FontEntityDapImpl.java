@@ -3,6 +3,7 @@ package com.markchan.carrier.data.database;
 import com.markchan.carrier.data.entity.FontEntity;
 import com.markchan.carrier.data.entity.FontEntity_Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
+
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class FontEntityDapImpl implements FontEntityDao {
         return SQLite.select()
                 .from(FontEntity.class)
                 .where(FontEntity_Table.id.eq(fontId))
-                .and(FontEntity_Table.isDownloaded.eq(true))
+                .and(FontEntity_Table.uri.like("file%"))
                 .querySingle();
     }
 
@@ -32,7 +33,7 @@ public class FontEntityDapImpl implements FontEntityDao {
         return SQLite.select()
                 .from(FontEntity.class)
                 .where(FontEntity_Table.id.eq(fontId))
-                .and(FontEntity_Table.isDownloaded.eq(false))
+                .and(FontEntity_Table.uri.like("http%"))
                 .querySingle();
     }
 
@@ -40,22 +41,25 @@ public class FontEntityDapImpl implements FontEntityDao {
     public List<FontEntity> queryFontEntities() {
         return SQLite.select()
                 .from(FontEntity.class)
+                .orderBy(FontEntity_Table.order.getNameAlias(), true)
                 .queryList();
     }
 
     @Override
     public List<FontEntity> queryDownloadedFontEntities() {
-        return SQLite.select()
-                .from(FontEntity.class)
-                .where(FontEntity_Table.isDownloaded.eq(true))
-                .queryList();
+        return queryFontEntitiesByScheme("file");
     }
 
     @Override
     public List<FontEntity> queryOnlineFontEntities() {
+        return queryFontEntitiesByScheme("http");
+    }
+
+    private List<FontEntity> queryFontEntitiesByScheme(String scheme) {
         return SQLite.select()
                 .from(FontEntity.class)
-                .where(FontEntity_Table.isDownloaded.eq(false))
+                .where(FontEntity_Table.uri.like(scheme + "%"))
+                .orderBy(FontEntity_Table.order.getNameAlias(), true)
                 .queryList();
     }
 }

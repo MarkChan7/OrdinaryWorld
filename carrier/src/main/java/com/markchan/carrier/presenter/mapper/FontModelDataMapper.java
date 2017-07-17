@@ -19,9 +19,7 @@ public class FontModelDataMapper {
             fontModel.setDisplayName(font.getDisplayName());
             fontModel.setPostscriptName(font.getPostscriptName());
             fontModel.setThumbUrl(font.getThumbUrl());
-            fontModel.setUrl(font.getUrl());
-            fontModel.setDownloaded(font.isDownloaded());
-            fontModel.setFilePath(font.getFilePath());
+            fontModel.setUri(font.getUri());
         }
         return fontModel;
     }

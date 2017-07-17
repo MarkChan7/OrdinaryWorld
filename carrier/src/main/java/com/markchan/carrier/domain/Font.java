@@ -6,27 +6,20 @@ package com.markchan.carrier.domain;
 public class Font {
 
     private int id;
-    private int order;
     private String displayName;
     private String postscriptName;
     private String thumbUrl;
-    private String url;
-    private boolean isDownloaded;
-    private String filePath;
+    private String uri;
 
     public Font() {
     }
 
-    public Font(int id, int order, String displayName, String postscriptName, String thumbUrl,
-            String url, boolean isDownloaded, String filePath) {
+    public Font(int id, String displayName, String postscriptName, String thumbUrl, String uri) {
         this.id = id;
-        this.order = order;
         this.displayName = displayName;
         this.postscriptName = postscriptName;
         this.thumbUrl = thumbUrl;
-        this.url = url;
-        this.isDownloaded = isDownloaded;
-        this.filePath = filePath;
+        this.uri = uri;
     }
 
     public int getId() {
@@ -35,14 +28,6 @@ public class Font {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getOrder() {
-        return order;
-    }
-
-    public void setOrder(int order) {
-        this.order = order;
     }
 
     public String getDisplayName() {
@@ -69,27 +54,11 @@ public class Font {
         this.thumbUrl = thumbUrl;
     }
 
-    public String getUrl() {
-        return url;
+    public String getUri() {
+        return uri;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public boolean isDownloaded() {
-        return isDownloaded;
-    }
-
-    public void setDownloaded(boolean downloaded) {
-        isDownloaded = downloaded;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

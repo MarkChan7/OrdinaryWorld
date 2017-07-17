@@ -29,21 +29,20 @@ public class FontEntity extends BaseModel {
     @Column
     private String url;
     @Column
-    private boolean isDownloaded;
-    @Column
-    private String filePath;
+    private String uri;
 
     public FontEntity() {
     }
 
     public FontEntity(int id, int order, String displayName, String postscriptName,
-            String thumbUrl, String url) {
+                      String thumbUrl, String url, String uri) {
         this.id = id;
         this.order = order;
         this.displayName = displayName;
         this.postscriptName = postscriptName;
         this.thumbUrl = thumbUrl;
         this.url = url;
+        this.uri = uri;
     }
 
     public int getId() {
@@ -94,19 +93,11 @@ public class FontEntity extends BaseModel {
         this.url = url;
     }
 
-    public boolean isDownloaded() {
-        return isDownloaded;
+    public String getUri() {
+        return uri;
     }
 
-    public void setDownloaded(boolean downloaded) {
-        isDownloaded = downloaded;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

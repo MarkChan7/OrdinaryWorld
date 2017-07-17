@@ -13,7 +13,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.markchan.carrier.R;
 import com.markchan.carrier.presenter.view.adapter.TextPanelPagerAdapter;
-import com.markchan.carrier.presenter.event.BackToPanelsEvent;
+import com.markchan.carrier.event.BackToPanelsEvent;
 import com.markchan.carrier.presenter.view.panel.TextAlignmentPanel;
 import com.markchan.carrier.presenter.view.panel.TextColorAndAlphaPanel;
 import com.markchan.carrier.presenter.view.panel.TextSizePanel;

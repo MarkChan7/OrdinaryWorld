@@ -1,4 +1,4 @@
-package com.markchan.carrier.presenter.util;
+package com.markchan.carrier.util;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

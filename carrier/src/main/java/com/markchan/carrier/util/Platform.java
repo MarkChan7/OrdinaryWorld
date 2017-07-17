@@ -1,4 +1,4 @@
-package com.markchan.carrier.presenter.util;
+package com.markchan.carrier.util;
 
 import android.os.Build;
 import android.os.Handler;

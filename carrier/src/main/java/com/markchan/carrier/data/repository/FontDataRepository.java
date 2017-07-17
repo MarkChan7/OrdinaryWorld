@@ -1,18 +1,18 @@
 package com.markchan.carrier.data.repository;
 
 import com.markchan.carrier.data.entity.FontEntity;
-import com.markchan.carrier.data.entity.FontEntityComparator;
 import com.markchan.carrier.data.entity.FontEntityDataMapper;
 import com.markchan.carrier.data.repository.datasource.FontDataSourceFactory;
 import com.markchan.carrier.data.repository.datasource.FontDataStore;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.repository.FontRepository;
+
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by Mark on 2017/7/16.
@@ -54,13 +54,11 @@ public class FontDataRepository implements FontRepository {
                         for (FontEntity disk : disks) {
                             for (FontEntity cloud : clouds) {
                                 if (disk.getId() == cloud.getId()) {
-                                    clouds.remove(cloud);
+                                    clouds.set(clouds.indexOf(cloud), disk);
                                     break;
                                 }
                             }
                         }
-                        clouds.addAll(disks);
-                        Collections.sort(clouds, new FontEntityComparator());
                         return clouds;
                     }
                 })

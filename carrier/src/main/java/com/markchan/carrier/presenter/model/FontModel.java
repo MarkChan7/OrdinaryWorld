@@ -9,22 +9,18 @@ public class FontModel {
     private String displayName;
     private String postscriptName;
     private String thumbUrl;
-    private String url;
-    private boolean isDownloaded;
-    private String filePath;
+    private String uri;
 
     public FontModel() {
     }
 
     public FontModel(int id, String displayName, String postscriptName, String thumbUrl,
-            String url, boolean isDownloaded, String filePath) {
+                     String uri) {
         this.id = id;
         this.displayName = displayName;
         this.postscriptName = postscriptName;
         this.thumbUrl = thumbUrl;
-        this.url = url;
-        this.isDownloaded = isDownloaded;
-        this.filePath = filePath;
+        this.uri = uri;
     }
 
     public int getId() {
@@ -59,27 +55,11 @@ public class FontModel {
         this.thumbUrl = thumbUrl;
     }
 
-    public String getUrl() {
-        return url;
+    public String getUri() {
+        return uri;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public boolean isDownloaded() {
-        return isDownloaded;
-    }
-
-    public void setDownloaded(boolean downloaded) {
-        isDownloaded = downloaded;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

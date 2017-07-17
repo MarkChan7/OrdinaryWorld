@@ -1,8 +1,8 @@
-package com.markchan.carrier.presenter.core;
+package com.markchan.carrier.core;
 
 import android.graphics.Rect;
 import android.support.annotation.ColorInt;
-import com.markchan.carrier.presenter.core.PagerView.TextAlignment;
+import com.markchan.carrier.core.PagerView.TextAlignment;
 
 /**
  * Created by Mark on 2017/7/15.
