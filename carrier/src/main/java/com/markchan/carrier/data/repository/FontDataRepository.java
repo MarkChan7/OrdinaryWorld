@@ -56,6 +56,8 @@ public class FontDataRepository implements FontRepository {
                                 if (disk.getId() == cloud.getId()) {
                                     clouds.set(clouds.indexOf(cloud), disk);
                                     break;
+                                } else {
+                                    cloud.save();
                                 }
                             }
                         }
