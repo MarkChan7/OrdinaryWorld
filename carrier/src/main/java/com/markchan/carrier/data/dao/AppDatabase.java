@@ -1,4 +1,4 @@
-package com.markchan.carrier.data.database;
+package com.markchan.carrier.data.dao;
 
 import com.raizlabs.android.dbflow.annotation.Database;
 

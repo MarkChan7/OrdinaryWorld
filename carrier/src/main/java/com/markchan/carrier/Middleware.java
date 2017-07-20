@@ -2,14 +2,18 @@ package com.markchan.carrier;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import com.markchan.carrier.data.cache.FontCacheImpl;
-import com.markchan.carrier.data.database.FontEntityDao;
-import com.markchan.carrier.data.database.FontEntityDapImpl;
+
+import com.markchan.carrier.data.cache.FontEntityCache;
+import com.markchan.carrier.data.cache.FontEntityCacheImpl;
+import com.markchan.carrier.data.dao.FontEntityDao;
+import com.markchan.carrier.data.dao.FontEntityDapImpl;
 import com.markchan.carrier.data.entity.FontEntityDataMapper;
 import com.markchan.carrier.data.executor.JobExecutor;
+import com.markchan.carrier.data.net.RestApi;
 import com.markchan.carrier.data.net.RestApiImpl;
 import com.markchan.carrier.data.repository.FontDataRepository;
 import com.markchan.carrier.data.repository.datasource.FontDataSourceFactory;
+import com.markchan.carrier.domain.dao.FontDao;
 import com.markchan.carrier.domain.executor.PostExecutionThread;
 import com.markchan.carrier.domain.executor.ThreadExecutor;
 import com.markchan.carrier.domain.repository.FontRepository;
@@ -43,12 +47,17 @@ public class Middleware {
     /**
      * data layer
      */
+    private final FontEntityDataMapper mFontEntityDataMapper;
     private final FontEntityDao mFontEntityDao;
+    private final RestApi mRestApi;
+    private final FontEntityCache mFontEntityCache;
+    private final FontDataSourceFactory mFontDataSourceFactory;
 
     /**
      * domain layer
      */
     private FontRepository mFontRepository;
+    private FontDao mFontDao;
     private PostExecutionThread mPostExecutionThread;
     private ThreadExecutor mThreadExecutor;
 
@@ -60,12 +69,14 @@ public class Middleware {
     private Middleware(Context context) {
         mContext = context.getApplicationContext();
 
-        mFontEntityDao = new FontEntityDapImpl();
+        mFontEntityDataMapper = new FontEntityDataMapper();
+        mFontEntityDao = new FontEntityDapImpl(mFontEntityDataMapper);
+        mRestApi = new RestApiImpl(mContext);
+        mFontEntityCache = new FontEntityCacheImpl(mFontEntityDao);
+        mFontDataSourceFactory = new FontDataSourceFactory(mContext, mFontEntityCache, mRestApi, mFontEntityDao);
 
-        mFontRepository = new FontDataRepository(new FontDataSourceFactory(mContext,
-                new FontCacheImpl(mFontEntityDao),
-                new RestApiImpl(mContext)),
-                new FontEntityDataMapper());
+        mFontRepository = new FontDataRepository(mFontDataSourceFactory, mFontEntityDataMapper);
+        mFontDao = mFontEntityDao;
 
         mPostExecutionThread = new UiThread();
         mThreadExecutor = new JobExecutor();

@@ -1,7 +1,7 @@
 package com.markchan.carrier.data.entity;
 
 import com.google.gson.annotations.SerializedName;
-import com.markchan.carrier.data.database.AppDatabase;
+import com.markchan.carrier.data.dao.AppDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;

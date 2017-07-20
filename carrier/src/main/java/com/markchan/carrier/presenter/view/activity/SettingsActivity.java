@@ -1,12 +1,13 @@
 package com.markchan.carrier.presenter.view.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.markchan.carrier.R;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.markchan.carrier.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -47,7 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.settings_aty_ll_font_manager:
-                startActivity(new Intent(this, FontManagerActivity.class));
+                FontManagerActivity.navigateToFontManagerActivity(this);
                 break;
             case R.id.settings_aty_ll_watermark:
                 break;

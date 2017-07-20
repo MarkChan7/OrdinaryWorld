@@ -1,6 +1,6 @@
 package com.markchan.carrier;
 
-import com.markchan.carrier.data.database.FontEntityDao;
+import com.markchan.carrier.data.dao.FontEntityDao;
 import com.markchan.carrier.config.ConfigManager;
 
 /**

@@ -40,4 +40,28 @@ public class FontEntityDataMapper {
         }
         return fonts;
     }
+
+    public FontEntity retransform(Font font) {
+        FontEntity fontEntity = null;
+        if (font != null) {
+            fontEntity = new FontEntity();
+            fontEntity.setId(font.getId());
+            fontEntity.setDisplayName(font.getDisplayName());
+            fontEntity.setPostscriptName(font.getPostscriptName());
+            fontEntity.setThumbUrl(font.getThumbUrl());
+            fontEntity.setUri(font.getUri());
+        }
+        return fontEntity;
+    }
+
+    public List<FontEntity> retransform(Collection<Font> fontCollection) {
+        final List<FontEntity> fontEntities = new ArrayList<>();
+        for (Font font : fontCollection) {
+            final FontEntity fontEntity = retransform(font);
+            if (fontEntity != null) {
+                fontEntities.add(fontEntity);
+            }
+        }
+        return fontEntities;
+    }
 }

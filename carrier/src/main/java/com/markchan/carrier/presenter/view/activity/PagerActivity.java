@@ -40,6 +40,7 @@ import com.markchan.carrier.event.BackToPanelsEvent;
 import com.markchan.carrier.event.PagerViewEventBus;
 import com.markchan.carrier.presenter.view.fragment.BgColorAndTexturePanelFragment;
 import com.markchan.carrier.presenter.view.fragment.TextPanelFragment;
+import com.markchan.carrier.service.FontSyncService;
 import com.markchan.carrier.util.keyboard.KeyboardHeightObserver;
 import com.markchan.carrier.util.keyboard.KeyboardHeightProvider;
 
@@ -128,6 +129,8 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
         initView();
 
         mFragmentManager = getSupportFragmentManager();
+
+        FontSyncService.startFontSyncService(this);
     }
 
     private void updateInputBottomMargin() {
@@ -376,7 +379,7 @@ public class PagerActivity extends AppCompatActivity implements KeyboardHeightOb
 
                         @Override
                         public void onResourceReady(Bitmap resource,
-                                GlideAnimation<? super Bitmap> glideAnimation) {
+                                                    GlideAnimation<? super Bitmap> glideAnimation) {
                             mPagerView.setTextureBitmap(resource);
                         }
                     });

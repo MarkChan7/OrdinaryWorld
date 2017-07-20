@@ -1,8 +1,8 @@
 package com.markchan.carrier.presenter.view.panel;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
+
 import com.markchan.carrier.Middleware;
 import com.markchan.carrier.R;
 import com.markchan.carrier.core.PagerView;
@@ -16,9 +16,11 @@ import com.markchan.carrier.presenter.model.FontModel;
 import com.markchan.carrier.presenter.view.activity.FontManagerActivity;
 import com.markchan.carrier.widget.wheelpicker.WheelPicker;
 import com.markchan.carrier.widget.wheelpicker.WheelPicker.OnItemSelectedListener;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * @author Mark Chan <a href="markchan2gm@gmail.com">Contact me.</a>
@@ -46,7 +48,7 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
                 Middleware.getDefault().getThreadExecutor(),
                 Middleware.getDefault().getPostExecutionThread());
 
-        useCase.execute(new FontListObserver(), Params.forFonts(Params.STATUS_DOWNLOADED));
+        useCase.execute(new FontListObserver(), Params.forFonts(Params.DATA_SOURCE_DOWNLOADED));
     }
 
     private final class FontListObserver extends DefaultObserver<List<Font>> {
@@ -83,7 +85,7 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
             EventBus.getDefault()
                     .post(new PagerViewEventBus.TypefaceEvent(PagerView.FAKE_DEFAULT_TYPEFACE_URI));
         } else if (position == mFontModels.size() + 1) { // font download and manager
-            mContext.startActivity(new Intent(mContext, FontManagerActivity.class));
+            FontManagerActivity.navigateToFontManagerActivity(mContext);
         } else {
             EventBus.getDefault()
                     .post(new PagerViewEventBus.TypefaceEvent(

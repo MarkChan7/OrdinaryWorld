@@ -11,7 +11,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
 
 /**
@@ -23,7 +22,7 @@ public class FontDataRepository implements FontRepository {
     private final FontEntityDataMapper mFontEntityDataMapper;
 
     public FontDataRepository(FontDataSourceFactory fontDataSourceFactory,
-            FontEntityDataMapper fontEntityDataMapper) {
+                              FontEntityDataMapper fontEntityDataMapper) {
         mFontDataSourceFactory = fontDataSourceFactory;
         mFontEntityDataMapper = fontEntityDataMapper;
     }
@@ -41,42 +40,8 @@ public class FontDataRepository implements FontRepository {
     }
 
     @Override
-    public Observable<List<Font>> getFonts() {
-        final FontDataStore diskDataSource = mFontDataSourceFactory.createDiskDataSource();
-        final FontDataStore cloudDataSource = mFontDataSourceFactory.createCloudDataSource();
-
-        return Observable.zip(cloudDataSource.getFontEntities(), diskDataSource.getFontEntities(),
-                new BiFunction<List<FontEntity>, List<FontEntity>, List<FontEntity>>() {
-
-                    @Override
-                    public List<FontEntity> apply(@NonNull List<FontEntity> clouds,
-                            @NonNull List<FontEntity> disks) throws Exception {
-                        for (FontEntity disk : disks) {
-                            for (FontEntity cloud : clouds) {
-                                if (disk.getId() == cloud.getId()) {
-                                    clouds.set(clouds.indexOf(cloud), disk);
-                                    break;
-                                } else {
-                                    cloud.save();
-                                }
-                            }
-                        }
-                        return clouds;
-                    }
-                })
-                .map(new Function<List<FontEntity>, List<Font>>() {
-
-                    @Override
-                    public List<Font> apply(@NonNull List<FontEntity> fontEntities)
-                            throws Exception {
-                        return mFontEntityDataMapper.transform(fontEntities);
-                    }
-                });
-    }
-
-    @Override
-    public Observable<List<Font>> getDownloadedFonts() {
-        return mFontDataSourceFactory.createDiskDataSource().getFontEntities().map(
+    public Observable<List<Font>> getFonts(int dataSource) {
+        return mFontDataSourceFactory.createByDataSource(dataSource).getFontEntities().map(
                 new Function<List<FontEntity>, List<Font>>() {
 
                     @Override
@@ -85,5 +50,36 @@ public class FontDataRepository implements FontRepository {
                         return mFontEntityDataMapper.transform(fontEntities);
                     }
                 });
+
+//        final FontDataStore diskDataSource = mFontDataSourceFactory.createDiskDataSource();
+//        final FontDataStore cloudDataSource = mFontDataSourceFactory.createCloudDataSource();
+//        return Observable.zip(cloudDataSource.getFontEntities(), diskDataSource.getFontEntities(),
+//                new BiFunction<List<FontEntity>, List<FontEntity>, List<FontEntity>>() {
+//
+//                    @Override
+//                    public List<FontEntity> apply(@NonNull List<FontEntity> clouds,
+//                                                  @NonNull List<FontEntity> disks)
+//                            throws Exception {
+//                        for (FontEntity disk : disks) {
+//                            for (FontEntity cloud : clouds) {
+//                                if (disk.getId() == cloud.getId()) {
+//                                    clouds.set(clouds.indexOf(cloud), disk);
+//                                    break;
+//                                } else {
+//                                    cloud.save();
+//                                }
+//                            }
+//                        }
+//                        return clouds;
+//                    }
+//                })
+//                .map(new Function<List<FontEntity>, List<Font>>() {
+//
+//                    @Override
+//                    public List<Font> apply(@NonNull List<FontEntity> fontEntities)
+//                            throws Exception {
+//                        return mFontEntityDataMapper.transform(fontEntities);
+//                    }
+//                });
     }
 }
