@@ -2,6 +2,7 @@ package com.markchan.carrier.presenter.mapper;
 
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.presenter.model.FontModel;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public class FontModelDataMapper {
 
-    public static FontModel transform(Font font) {
+    public FontModel transform(Font font) {
         FontModel fontModel = null;
         if (font != null) {
             fontModel = new FontModel();
@@ -33,5 +34,29 @@ public class FontModelDataMapper {
             }
         }
         return fontModels;
+    }
+
+    public Font retransform(FontModel fontModel) {
+        Font font = null;
+        if (fontModel != null) {
+            font = new Font();
+            font.setId(fontModel.getId());
+            font.setDisplayName(fontModel.getDisplayName());
+            font.setPostscriptName(fontModel.getPostscriptName());
+            font.setThumbUrl(fontModel.getThumbUrl());
+            font.setUri(fontModel.getUri());
+        }
+        return font;
+    }
+
+    public List<Font> retransform(Collection<FontModel> fontModelCollection) {
+        final List<Font> fonts = new ArrayList<>();
+        for (FontModel fontModel : fontModelCollection) {
+            final Font font = retransform(fontModel);
+            if (font != null) {
+                fonts.add(font);
+            }
+        }
+        return fonts;
     }
 }

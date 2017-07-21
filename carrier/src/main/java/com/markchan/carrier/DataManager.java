@@ -1,7 +1,11 @@
 package com.markchan.carrier;
 
-import com.markchan.carrier.data.dao.FontEntityDao;
 import com.markchan.carrier.config.ConfigManager;
+import com.markchan.carrier.domain.Font;
+import com.markchan.carrier.domain.cache.FontCache;
+import com.markchan.carrier.domain.dao.FontDao;
+import com.markchan.carrier.presenter.mapper.FontModelDataMapper;
+import com.markchan.carrier.presenter.model.FontModel;
 
 /**
  * Created by Mark on 2017/7/16.
@@ -21,9 +25,33 @@ public class DataManager {
         return INSTANCE;
     }
 
-    private final FontEntityDao mFonDao;
+    private final FontDao mFonDao;
+    private final FontCache mFontCache;
+    private final FontModelDataMapper mFontModelDataMapper;
 
     private DataManager() {
-        mFonDao = Middleware.getDefault().getFontEntityDao();
+        mFonDao = Middleware.getDefault().getFontDao();
+        mFontModelDataMapper = Middleware.getDefault().getFontModelDataMapper();
+        mFontCache = Middleware.getDefault().getFontCache();
+    }
+
+    public boolean updateFont(FontModel fontModel) {
+        if (fontModel != null) {
+            Font font = mFontModelDataMapper.retransform(fontModel);
+            if (font != null) {
+                return mFonDao.updateFont(font);
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteFont(FontModel fontModel) {
+        if (fontModel != null) {
+            Font font = mFontModelDataMapper.retransform(fontModel);
+            if (font != null) {
+                return mFontCache.deleteDownloadedFont(font);
+            }
+        }
+        return false;
     }
 }

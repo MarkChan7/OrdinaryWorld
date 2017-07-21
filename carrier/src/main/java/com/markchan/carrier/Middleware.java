@@ -13,6 +13,7 @@ import com.markchan.carrier.data.net.RestApi;
 import com.markchan.carrier.data.net.RestApiImpl;
 import com.markchan.carrier.data.repository.FontDataRepository;
 import com.markchan.carrier.data.repository.datasource.FontDataSourceFactory;
+import com.markchan.carrier.domain.cache.FontCache;
 import com.markchan.carrier.domain.dao.FontDao;
 import com.markchan.carrier.domain.executor.PostExecutionThread;
 import com.markchan.carrier.domain.executor.ThreadExecutor;
@@ -58,6 +59,7 @@ public class Middleware {
      */
     private FontRepository mFontRepository;
     private FontDao mFontDao;
+    private FontCache mFontCache;
     private PostExecutionThread mPostExecutionThread;
     private ThreadExecutor mThreadExecutor;
 
@@ -72,9 +74,11 @@ public class Middleware {
         mFontEntityDataMapper = new FontEntityDataMapper();
         mFontEntityDao = new FontEntityDapImpl(mFontEntityDataMapper);
         mRestApi = new RestApiImpl(mContext);
-        mFontEntityCache = new FontEntityCacheImpl(mFontEntityDao);
-        mFontDataSourceFactory = new FontDataSourceFactory(mContext, mFontEntityCache, mRestApi, mFontEntityDao);
+        mFontEntityCache = new FontEntityCacheImpl(mFontEntityDao, mFontEntityDataMapper);
+        mFontDataSourceFactory = new FontDataSourceFactory(mContext, mFontEntityCache, mRestApi,
+                mFontEntityDao);
 
+        mFontCache = mFontEntityCache;
         mFontRepository = new FontDataRepository(mFontDataSourceFactory, mFontEntityDataMapper);
         mFontDao = mFontEntityDao;
 
@@ -84,8 +88,12 @@ public class Middleware {
         mFontModelDataMapper = new FontModelDataMapper();
     }
 
-    public FontEntityDao getFontEntityDao() {
-        return mFontEntityDao;
+    public FontDao getFontDao() {
+        return mFontDao;
+    }
+
+    public FontCache getFontCache() {
+        return mFontCache;
     }
 
     public FontRepository getFontRepository() {

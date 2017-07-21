@@ -9,7 +9,7 @@ import com.markchan.carrier.domain.Font;
  */
 public interface FontDao {
 
-    boolean update(Font font);
+    boolean updateFont(Font font);
 
-    boolean delete(Font font);
+    boolean deleteFont(Font font);
 }

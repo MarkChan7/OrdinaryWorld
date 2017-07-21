@@ -69,5 +69,6 @@
     <string name="texture_powder">粉末</string>
     <string name="texture_fibre">纤维</string>
     <string name="texture_jean">牛仔</string>
+    <string name="default_typeface">默认</string>
 
 </resources>

@@ -8,8 +8,8 @@ import com.markchan.carrier.data.net.RestApi;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 /**
  * Created by Mark on 2017/7/16.
@@ -20,7 +20,8 @@ public class CloudFontDataSource implements FontDataStore {
     private final FontEntityCache mFontEntityCache;
     private final FontEntityDao mFontEntityDao;
 
-    public CloudFontDataSource(RestApi restApi, FontEntityCache fontEntityCache, FontEntityDao fontEntityDao) {
+    public CloudFontDataSource(RestApi restApi, FontEntityCache fontEntityCache,
+                               FontEntityDao fontEntityDao) {
         mRestApi = restApi;
         mFontEntityCache = fontEntityCache;
         mFontEntityDao = fontEntityDao;
@@ -33,21 +34,21 @@ public class CloudFontDataSource implements FontDataStore {
 
     @Override
     public Observable<List<FontEntity>> getFontEntities() {
-        return Observable.create(new ObservableOnSubscribe<List<FontEntity>>() {
+        return mRestApi.getFontEntities()
+                .map(new Function<List<FontEntity>, List<FontEntity>>() {
 
-            @Override
-            public void subscribe(ObservableEmitter<List<FontEntity>> e) throws Exception {
-                final List<FontEntity> fontEntities = mRestApi.getFontEntities();
-                if (fontEntities != null && !fontEntities.isEmpty()) {
-                    for (FontEntity fontEntity : fontEntities) {
-                        if (!mFontEntityCache.isDownloaded(fontEntity.getId())) {
-                            mFontEntityDao.insertFontEntity(fontEntity);
+                    @Override
+                    public List<FontEntity> apply(@NonNull List<FontEntity> fontEntities)
+                            throws Exception {
+                        if (fontEntities != null && !fontEntities.isEmpty()) {
+                            for (FontEntity fontEntity : fontEntities) {
+                                if (!mFontEntityCache.isFontEntityDownloaded(fontEntity.getId())) {
+                                    mFontEntityDao.insertOrUpdateFontEntity(fontEntity);
+                                }
+                            }
                         }
+                        return fontEntities;
                     }
-                    e.onNext(fontEntities);
-                    e.onComplete();
-                }
-            }
-        });
+                });
     }
 }

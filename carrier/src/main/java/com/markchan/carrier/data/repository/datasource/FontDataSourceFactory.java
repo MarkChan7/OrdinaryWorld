@@ -12,9 +12,9 @@ import com.markchan.carrier.domain.interactor.GetFontList.Params;
  */
 public class FontDataSourceFactory {
 
-    private final FontEntityCache mFontEntityCache;
-    private final RestApi mRestApi;
     private final FontEntityDao mFontEntityDao;
+    private final RestApi mRestApi;
+    private final FontEntityCache mFontEntityCache;
 
     public FontDataSourceFactory(Context context, FontEntityCache fontEntityCache, RestApi restApi,
                                  FontEntityDao fontEntityDao) {
@@ -23,11 +23,13 @@ public class FontDataSourceFactory {
         mFontEntityDao = fontEntityDao;
     }
 
-    public FontDataStore create(int fontId) {
+    public FontDataStore create(final int fontId) {
         FontDataStore fontDataStore;
 
-        if (mFontEntityCache.isDownloaded(fontId)) {
+        if (mFontEntityCache.isFontEntityDownloaded(fontId)) {
             fontDataStore = createDiskDataSource();
+        } else if (mFontEntityDao.queryFontEntityById(fontId) != null) {
+            fontDataStore = createDatabaseSource();
         } else {
             fontDataStore = createCloudDataSource();
         }
@@ -35,7 +37,7 @@ public class FontDataSourceFactory {
         return fontDataStore;
     }
 
-    public FontDataStore createByDataSource(int dataSource) {
+    public FontDataStore createByDataSource(final int dataSource) {
         if (dataSource == Params.DATA_SOURCE_DOWNLOADED) {
             return createDiskDataSource();
         } else if (dataSource == Params.DATA_SOURCE_ONLINE) {
@@ -43,6 +45,10 @@ public class FontDataSourceFactory {
         } else {
             return new DatabaseFontDataSource(mFontEntityDao);
         }
+    }
+
+    private FontDataStore createDatabaseSource() {
+        return new DatabaseFontDataSource(mFontEntityDao);
     }
 
     private FontDataStore createDiskDataSource() {

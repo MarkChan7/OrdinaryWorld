@@ -27,13 +27,16 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.github.lzyzsd.randomcolor.RandomColor;
 import com.markchan.carrier.R;
-import com.markchan.carrier.Scheme;
 import com.markchan.carrier.util.TextHelper;
+import com.markchan.carrier.util.TypefaceHelper;
+
 import java.util.Vector;
+
 import timber.log.Timber;
 
 /**
@@ -48,7 +51,7 @@ public class PagerView extends View {
     }
 
     public PagerView(Context context,
-            @Nullable AttributeSet attrs) {
+                     @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
@@ -59,7 +62,7 @@ public class PagerView extends View {
 
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
     public PagerView(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+                     int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -223,7 +226,7 @@ public class PagerView extends View {
     }
 
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+                      int defStyleRes) {
         setupDefaultValue(context);
 
         mText = DEFAULT_TEXT;
@@ -373,22 +376,11 @@ public class PagerView extends View {
             if (mTypefaceUrl.equals(FAKE_DEFAULT_TYPEFACE_URI)) {
                 mTextPaint.setTypeface(Typeface.DEFAULT);
             } else {
-                Scheme scheme = Scheme.ofUri(mTypefaceUrl);
-                if (scheme == Scheme.ASSETS || scheme == Scheme.FILE) {
-                    try {
-                        String path = scheme.crop(mTypefaceUrl);
-                        Typeface typeface;
-                        if (scheme == Scheme.ASSETS) {
-                            typeface = Typeface.createFromAsset(getContext().getAssets(), path);
-                        } else {
-                            typeface = Typeface.createFromFile(path);
-                        }
-                        mTextPaint.setTypeface(typeface);
-                        mTempTypefaceUrl = null;
-                        typefaceDefaultFlag = false;
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                Typeface typeface = TypefaceHelper.createTypeface(getContext(), mTypefaceUrl);
+                if (typeface != null) {
+                    mTextPaint.setTypeface(typeface);
+                    mTempTypefaceUrl = null;
+                    typefaceDefaultFlag = false;
                 }
             }
         }

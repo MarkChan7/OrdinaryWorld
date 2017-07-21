@@ -21,10 +21,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter.OnItemClickListener;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadSampleListener;
 import com.liulishuo.filedownloader.FileDownloader;
+import com.markchan.carrier.DataManager;
 import com.markchan.carrier.Middleware;
 import com.markchan.carrier.R;
 import com.markchan.carrier.Scheme;
-import com.markchan.carrier.data.entity.FontEntity;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.interactor.DefaultObserver;
 import com.markchan.carrier.domain.interactor.GetFontList;
@@ -43,8 +43,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class FontManagerActivity extends AppCompatActivity {
-
-    private static final String EXTRA_IS_COME_FROM_PAGER_ACTIVITY = "is_come_from_pager_activity";
 
     @BindView(R.id.font_manager_aty_acib_back)
     AppCompatImageButton mBackImageBtn;
@@ -69,41 +67,50 @@ public class FontManagerActivity extends AppCompatActivity {
 
         mFontModels = new ArrayList<>();
         mAdapter = new FontManagerAdapter(mFontModels, Glide.with(this));
-
         mAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
 
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 final FontModel fontModel = mFontModels.get(position);
-                String uri = fontModel.getUri();
-                Scheme scheme = Scheme.ofUri(uri);
-                if (scheme == Scheme.FILE) {
-                    new AlertDialog.Builder(FontManagerActivity.this)
-                            .setMessage("是否删除字体[" + fontModel.getDisplayName() + "]")
-                            .setPositiveButton("确定", new OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    ToastUtils.showShort("模拟删除");
-                                }
-                            })
-                            .setNegativeButton("取消", null)
-                            .show();
+                if (mAdapter.removeDownloadedFontModel(fontModel)) {
+                    ToastUtils.showShort("Just remove");
                 } else {
-                    new AlertDialog.Builder(FontManagerActivity.this)
-                            .setMessage("是否要下载字体[" + fontModel.getDisplayName() + "]")
-                            .setPositiveButton("确定", new OnClickListener() {
+                    String uri = fontModel.getUri();
+                    Scheme scheme = Scheme.ofUri(uri);
+                    if (scheme == Scheme.FILE) {
+                        new AlertDialog.Builder(FontManagerActivity.this)
+                                .setMessage("是否删除字体[" + fontModel.getDisplayName() + "]")
+                                .setPositiveButton("确定", new OnClickListener() {
 
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    downloadFont(fontModel);
-                                }
-                            })
-                            .setNegativeButton("取消", null)
-                            .show();
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (DataManager.getDefault().deleteFont(fontModel)) {
+                                            ToastUtils.showShort("删除字体成功!");
+                                        } else {
+                                            ToastUtils.showShort("删除字体失败");
+                                        }
+                                    }
+                                })
+                                .setNegativeButton("取消", null)
+                                .show();
+                    } else {
+                        new AlertDialog.Builder(FontManagerActivity.this)
+                                .setMessage("是否要下载字体[" + fontModel.getDisplayName() + "]")
+                                .setPositiveButton("确定", new OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        downloadFont(fontModel);
+                                        mAdapter.addDownloadingFontModel(fontModel);
+                                    }
+                                })
+                                .setNegativeButton("取消", null)
+                                .show();
+                    }
                 }
             }
         });
+
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
@@ -140,12 +147,18 @@ public class FontManagerActivity extends AppCompatActivity {
 
                     @Override
                     protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-
+                        FontModel f = getFontModelByUrlAndFilePath(task.getUrl(),
+                                task.getTargetFilePath());
+                        if (f != null) {
+                            mAdapter.setDownloadingFontModelProgress(f,
+                                    (int) (soFarBytes * 1.0F / totalBytes * 100));
+                        }
                     }
 
                     @Override
                     protected void error(BaseDownloadTask task, Throwable e) {
                         ToastUtils.showShort("Download font error");
+                        mAdapter.addDownloadingFontModel(fontModel);
                     }
 
                     @Override
@@ -154,29 +167,15 @@ public class FontManagerActivity extends AppCompatActivity {
                         FontModel f = getFontModelByUrlAndFilePath(task.getUrl(),
                                 task.getTargetFilePath());
                         if (f != null) {
-                            FontEntity fontEntity = Middleware.getDefault()
-                                    .getFontEntityDao()
-                                    .queryFontEntityById(f.getId());
+                            String oldUri = fontModel.getUri();
                             String uri = Scheme.FILE.wrap(targetFilePath);
-                            if (fontEntity != null) {
-                                fontEntity.setUri(uri);
-                            } else {
-                                fontEntity = new FontEntity();
-                                fontEntity.setId(fontModel.getId());
-                                fontEntity.setDisplayName(fontModel.getDisplayName());
-                                fontEntity.setPostscriptName(
-                                        fontModel.getPostscriptName());
-                                fontEntity.setThumbUrl(fontModel.getThumbUrl());
-                                fontEntity.setUrl(fontModel.getUri());
-                                fontEntity.setUri(uri);
-                            }
-                            if (fontEntity.save()) {
-                                int index = mFontModels.indexOf(f);
-                                f.setUri(uri);
-                                mFontModels.set(index, f);
-                                mAdapter.notifyDataSetChanged();
-
+                            fontModel.setUri(uri);
+                            if (DataManager.getDefault().updateFont(fontModel)) {
+                                mAdapter.removeDownloadingFontModel(fontModel, true);
                                 ToastUtils.showShort("Download Success");
+                            } else {
+                                fontModel.setUri(oldUri);
+                                mAdapter.removeDownloadingFontModel(fontModel, false);
                             }
                         }
                     }
@@ -205,16 +204,6 @@ public class FontManagerActivity extends AppCompatActivity {
     }
 
     private final class FontListObserver extends DefaultObserver<List<Font>> {
-
-        @Override
-        public void onComplete() {
-
-        }
-
-        @Override
-        public void onError(Throwable e) {
-
-        }
 
         @Override
         public void onNext(List<Font> fonts) {

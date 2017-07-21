@@ -20,12 +20,16 @@ public class FontEntityDapImpl implements FontEntityDao {
     }
 
     @Override
-    public boolean update(Font font) {
-        return mFontEntityDataMapper.retransform(font).update();
+    public boolean updateFont(Font font) {
+        SQLite.update(FontEntity.class)
+                .set(FontEntity_Table.uri.eq(font.getUri()))
+                .where(FontEntity_Table.id.eq(font.getId()))
+                .execute();
+        return true;
     }
 
     @Override
-    public boolean delete(Font font) {
+    public boolean deleteFont(Font font) {
         return mFontEntityDataMapper.retransform(font).delete();
     }
 
@@ -45,7 +49,10 @@ public class FontEntityDapImpl implements FontEntityDao {
 
     @Override
     public boolean insertOrReplaceFontEntity(FontEntity fontEntity) {
-        return fontEntity.delete();
+        if (fontEntity.exists()) {
+            fontEntity.delete();
+        }
+        return fontEntity.insert() > -1;
     }
 
     @Override

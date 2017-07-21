@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.FileUtils;
 import com.markchan.carrier.Scheme;
 import com.markchan.carrier.data.dao.FontEntityDao;
 import com.markchan.carrier.data.entity.FontEntity;
+import com.markchan.carrier.data.entity.FontEntityDataMapper;
 import com.markchan.carrier.domain.Font;
 
 import java.util.Iterator;
@@ -17,32 +18,35 @@ import java.util.List;
 public class FontEntityCacheImpl implements FontEntityCache {
 
     private final FontEntityDao mFontEntityDao;
+    private final FontEntityDataMapper mFontEntityDataMapper;
+
+    public FontEntityCacheImpl(FontEntityDao fontEntityDao,
+                               FontEntityDataMapper fontEntityDataMapper) {
+        if (fontEntityDao == null) {
+            throw new NullPointerException("Context or Font DAO can't be null");
+        }
+        mFontEntityDao = fontEntityDao;
+        mFontEntityDataMapper = fontEntityDataMapper;
+    }
 
     @Override
     public boolean setFontDownloaded(Font font) {
-        return false;
+        return setFontEntityDownloaded(mFontEntityDataMapper.retransform(font));
     }
 
     @Override
     public boolean deleteDownloadedFont(Font font) {
-        return false;
+        return deleteDownloadedFontEntity(mFontEntityDataMapper.retransform(font));
     }
 
     @Override
     public void deleteAllDownloadedFonts() {
-
+        deleteAllDownloadedFontEntities();
     }
 
     // DOMAIN
     // ---------------------------------------------------------------------------------------------
     // DATA
-
-    public FontEntityCacheImpl(FontEntityDao fontEntityDao) {
-        if (fontEntityDao == null) {
-            throw new NullPointerException("Context or Font DAO can't be null");
-        }
-        mFontEntityDao = fontEntityDao;
-    }
 
     @Override
     public FontEntity getDownloadedFontEntity(int fontId) {
@@ -82,6 +86,15 @@ public class FontEntityCacheImpl implements FontEntityCache {
 
     @Override
     public boolean deleteDownloadedFontEntity(FontEntity fontEntity) {
+        if (fontEntity != null) {
+            try {
+                if (FileUtils.deleteFile(Scheme.FILE.crop(fontEntity.getUri()))) {
+                    return mFontEntityDao.deleteFontEntity(fontEntity);
+                }
+            } catch (Exception ignored) {
+                ;
+            }
+        }
         return false;
     }
 
@@ -98,7 +111,7 @@ public class FontEntityCacheImpl implements FontEntityCache {
     }
 
     @Override
-    public boolean isDownloaded(int fontId) {
+    public boolean isFontEntityDownloaded(int fontId) {
         FontEntity fontEntity = mFontEntityDao.queryFontEntityById(fontId);
         return isFontEntityExists(fontEntity);
     }

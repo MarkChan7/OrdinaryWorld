@@ -1,8 +1,13 @@
 package com.markchan.carrier.presenter.view.panel;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter.OnItemChildClickListener;
 import com.markchan.carrier.Middleware;
 import com.markchan.carrier.R;
 import com.markchan.carrier.core.PagerView;
@@ -14,6 +19,7 @@ import com.markchan.carrier.event.PagerViewEventBus;
 import com.markchan.carrier.presenter.mapper.FontModelDataMapper;
 import com.markchan.carrier.presenter.model.FontModel;
 import com.markchan.carrier.presenter.view.activity.FontManagerActivity;
+import com.markchan.carrier.presenter.view.adapter.TypefaceAdapter;
 import com.markchan.carrier.widget.wheelpicker.WheelPicker;
 import com.markchan.carrier.widget.wheelpicker.WheelPicker.OnItemSelectedListener;
 
@@ -32,6 +38,9 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
     private WheelPicker mWheelPicker;
     private List<FontModel> mFontModels;
 
+    private RecyclerView mRecyclerView;
+    private TypefaceAdapter mAdapter;
+
     public TypefacePanel(Context context, View view) {
         super(context, view);
     }
@@ -40,6 +49,27 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
     protected void initView(View view) {
         mWheelPicker = (WheelPicker) view.findViewById(R.id.typeface_vp_item_wp);
         mWheelPicker.setOnItemSelectedListener(this);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.typeface_vp_item_rv);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mFontModels = new ArrayList<>();
+        mAdapter = new TypefaceAdapter(mFontModels);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.addHeaderView(
+                LayoutInflater.from(mContext).inflate(R.layout.item_list_typeface_header, null));
+        View footerView = LayoutInflater.from(mContext)
+                .inflate(R.layout.item_list_typeface_footer, null);
+        mAdapter.addFooterView(footerView);
+        mAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                if (adapter.getItemViewType(position) == BaseQuickAdapter.FOOTER_VIEW) {
+                    FontManagerActivity.navigateToFontManagerActivity(mContext);
+                }
+            }
+        });
     }
 
     @Override
@@ -56,18 +86,28 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
         @Override
         public void onNext(List<Font> fonts) {
             if (fonts != null && !fonts.isEmpty()) {
-                FontModelDataMapper mapper = Middleware.getDefault()
-                        .getFontModelDataMapper();
-                mFontModels = mapper.transform(fonts);
-
-                List<String> fontNames = new ArrayList<>();
-                fontNames.add("默认");
-                for (FontModel fontModel : mFontModels) {
-                    fontNames.add(fontModel.getDisplayName());
+                FontModelDataMapper mapper = Middleware.getDefault().getFontModelDataMapper();
+                List<FontModel> fontModels = mapper.transform(fonts);
+                if (fontModels != null && !fontModels.isEmpty()) {
+                    mFontModels.clear();
+                    mFontModels.addAll(fontModels);
+                    mAdapter.notifyDataSetChanged();
                 }
-                fontNames.add("字体下载与管理");
-                mWheelPicker.setData(fontNames);
             }
+
+//            if (fonts != null && !fonts.isEmpty()) {
+//                FontModelDataMapper mapper = Middleware.getDefault()
+//                        .getFontModelDataMapper();
+//                mFontModels = mapper.transform(fonts);
+//
+//                List<String> fontNames = new ArrayList<>();
+//                fontNames.add("默认");
+//                for (FontModel fontModel : mFontModels) {
+//                    fontNames.add(fontModel.getDisplayName());
+//                }
+//                fontNames.add("字体下载与管理");
+//                mWheelPicker.setData(fontNames);
+//            }
         }
     }
 

@@ -18,7 +18,7 @@ public interface FontEntityCache extends FontCache {
 
     boolean deleteDownloadedFontEntity(FontEntity fontEntity);
 
-    boolean isDownloaded(final int fontId);
+    boolean isFontEntityDownloaded(final int fontId);
 
     void deleteAllDownloadedFontEntities();
 }
