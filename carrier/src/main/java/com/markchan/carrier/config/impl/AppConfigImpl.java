@@ -1,18 +1,19 @@
-package com.markchan.carrier.config;
+package com.markchan.carrier.config.impl;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.markchan.carrier.Constants.SP_KEY;
+import com.markchan.carrier.config.AppConfig;
 
 /**
  * Created by Mark on 2017/7/16.
  */
-class AppConfigImpl implements AppConfig {
+public class AppConfigImpl implements AppConfig {
 
     private static final String CONFIG_NAME = "jiantu";
 
     private SPUtils mSP;
 
-    AppConfigImpl() {
+    public AppConfigImpl() {
         mSP = SPUtils.getInstance(CONFIG_NAME);
     }
 

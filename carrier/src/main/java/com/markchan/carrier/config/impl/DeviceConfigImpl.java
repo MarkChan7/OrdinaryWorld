@@ -1,18 +1,19 @@
-package com.markchan.carrier.config;
+package com.markchan.carrier.config.impl;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.markchan.carrier.Constants.SP_KEY;
+import com.markchan.carrier.config.DeviceConfig;
 
 /**
  * Created by Mark on 2017/7/16.
  */
-class DeviceConfigImpl implements DeviceConfig {
+public class DeviceConfigImpl implements DeviceConfig {
 
     private static final String CONFIG_NAME = "device";
 
     private SPUtils mSP;
 
-    DeviceConfigImpl() {
+    public DeviceConfigImpl() {
         mSP = SPUtils.getInstance(CONFIG_NAME);
     }
 

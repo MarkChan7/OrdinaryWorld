@@ -1,5 +1,8 @@
 package com.markchan.carrier.config;
 
+import com.markchan.carrier.config.impl.AppConfigImpl;
+import com.markchan.carrier.config.impl.DeviceConfigImpl;
+
 /**
  * Created by Mark on 2017/7/16.
  */

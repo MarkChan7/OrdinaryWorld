@@ -3,7 +3,7 @@ package com.markchan.carrier.config;
 /**
  * Created by Mark on 2017/7/16.
  */
-  interface AppConfig {
+public  interface AppConfig {
 
     void setAddWatermark(boolean isAddWatermark);
 
