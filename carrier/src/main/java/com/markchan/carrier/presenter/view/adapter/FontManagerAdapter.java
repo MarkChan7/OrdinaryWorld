@@ -7,9 +7,9 @@ import com.bumptech.glide.RequestManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.markchan.carrier.R;
-import com.markchan.carrier.Scheme;
+import com.markchan.carrier.domain.Scheme;
 import com.markchan.carrier.presenter.model.FontModel;
-import com.markchan.carrier.widget.ProgressWheel;
+import com.markchan.carrier.presenter.widget.ProgressWheel;
 
 import java.util.ArrayList;
 import java.util.HashMap;

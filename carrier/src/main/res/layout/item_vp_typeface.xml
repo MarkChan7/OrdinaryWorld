@@ -4,7 +4,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <com.markchan.carrier.widget.wheelpicker.WheelPicker
+    <com.markchan.carrier.presenter.widget.wheelpicker.WheelPicker
         android:id="@+id/typeface_vp_item_wp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

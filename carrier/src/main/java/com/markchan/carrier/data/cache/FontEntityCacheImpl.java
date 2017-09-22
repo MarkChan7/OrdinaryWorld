@@ -3,7 +3,7 @@ package com.markchan.carrier.data.cache;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.FileUtils;
-import com.markchan.carrier.Scheme;
+import com.markchan.carrier.domain.Scheme;
 import com.markchan.carrier.data.dao.FontEntityDao;
 import com.markchan.carrier.data.entity.FontEntity;
 import com.markchan.carrier.data.entity.FontEntityDataMapper;

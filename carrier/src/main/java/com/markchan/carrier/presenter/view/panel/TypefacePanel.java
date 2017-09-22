@@ -8,20 +8,20 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter.OnItemChildClickListener;
-import com.markchan.carrier.Middleware;
+import com.markchan.carrier.presenter.Middleware;
 import com.markchan.carrier.R;
-import com.markchan.carrier.core.PagerView;
+import com.markchan.carrier.presenter.core.PagerView;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.interactor.DefaultObserver;
 import com.markchan.carrier.domain.interactor.GetFontList;
 import com.markchan.carrier.domain.interactor.GetFontList.Params;
-import com.markchan.carrier.event.PagerViewEventBus;
+import com.markchan.carrier.presenter.event.PagerViewEventBus;
 import com.markchan.carrier.presenter.mapper.FontModelDataMapper;
 import com.markchan.carrier.presenter.model.FontModel;
 import com.markchan.carrier.presenter.view.activity.FontManagerActivity;
 import com.markchan.carrier.presenter.view.adapter.TypefaceAdapter;
-import com.markchan.carrier.widget.wheelpicker.WheelPicker;
-import com.markchan.carrier.widget.wheelpicker.WheelPicker.OnItemSelectedListener;
+import com.markchan.carrier.presenter.widget.wheelpicker.WheelPicker;
+import com.markchan.carrier.presenter.widget.wheelpicker.WheelPicker.OnItemSelectedListener;
 
 import org.greenrobot.eventbus.EventBus;
 

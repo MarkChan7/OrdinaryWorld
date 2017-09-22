@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.markchan.carrier.R;
 import com.markchan.carrier.presenter.model.FontModel;
-import com.markchan.carrier.util.TypefaceHelper;
+import com.markchan.carrier.presenter.util.TypefaceHelper;
 
 import java.util.List;
 

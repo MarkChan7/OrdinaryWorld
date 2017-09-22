@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.markchan.carrier.Constants;
+import com.markchan.carrier.presenter.Constants;
 import com.markchan.carrier.data.entity.FontEntity;
 import com.markchan.carrier.data.exception.NetworkConnectionException;
 

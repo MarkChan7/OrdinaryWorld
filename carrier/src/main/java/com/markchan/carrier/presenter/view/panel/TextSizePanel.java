@@ -5,7 +5,7 @@ import android.support.v7.widget.AppCompatImageButton;
 import android.view.View;
 
 import com.markchan.carrier.R;
-import com.markchan.carrier.event.PagerViewEventBus;
+import com.markchan.carrier.presenter.event.PagerViewEventBus;
 
 import org.greenrobot.eventbus.EventBus;
 

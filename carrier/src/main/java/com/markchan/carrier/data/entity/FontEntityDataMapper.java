@@ -1,6 +1,6 @@
 package com.markchan.carrier.data.entity;
 
-import com.markchan.carrier.Scheme;
+import com.markchan.carrier.domain.Scheme;
 import com.markchan.carrier.domain.Font;
 
 import java.util.ArrayList;
