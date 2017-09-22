@@ -10,7 +10,7 @@ import com.markchan.carrier.data.dao.FontEntityDapImpl;
 import com.markchan.carrier.data.entity.FontEntityDataMapper;
 import com.markchan.carrier.data.executor.JobExecutor;
 import com.markchan.carrier.data.net.RestApi;
-import com.markchan.carrier.data.net.RestApiImpl;
+import com.markchan.carrier.data.net.impl.RestApiImpl;
 import com.markchan.carrier.data.repository.FontDataRepository;
 import com.markchan.carrier.data.repository.datasource.FontDataSourceFactory;
 import com.markchan.carrier.domain.cache.FontCache;

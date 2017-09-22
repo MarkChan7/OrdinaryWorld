@@ -50,8 +50,7 @@ public class PagerView extends View {
         this(context, null);
     }
 
-    public PagerView(Context context,
-                     @Nullable AttributeSet attrs) {
+    public PagerView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
@@ -62,7 +61,7 @@ public class PagerView extends View {
 
     @RequiresApi(api = VERSION_CODES.LOLLIPOP)
     public PagerView(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-                     int defStyleRes) {
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs, defStyleAttr, defStyleRes);
     }
@@ -226,7 +225,7 @@ public class PagerView extends View {
     }
 
     private void init(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
-                      int defStyleRes) {
+            int defStyleRes) {
         setupDefaultValue(context);
 
         mText = DEFAULT_TEXT;

@@ -11,29 +11,29 @@ public class AppConfigImpl implements AppConfig {
 
     private static final String CONFIG_NAME = "jiantu";
 
-    private SPUtils mSP;
+    private SPUtils mSp;
 
     public AppConfigImpl() {
-        mSP = SPUtils.getInstance(CONFIG_NAME);
+        mSp = SPUtils.getInstance(CONFIG_NAME);
     }
 
     @Override
     public void setAddWatermark(boolean isAddWatermark) {
-        mSP.put(SP_KEY.IS_ADD_WATERMARK, isAddWatermark);
+        mSp.put(SP_KEY.IS_ADD_WATERMARK, isAddWatermark);
     }
 
     @Override
     public boolean isAddWatermark() {
-        return mSP.getBoolean(SP_KEY.IS_ADD_WATERMARK);
+        return mSp.getBoolean(SP_KEY.IS_ADD_WATERMARK);
     }
 
     @Override
     public void setAutoSave(boolean isAutoSave) {
-        mSP.put(SP_KEY.IS_AUTO_SAVE, isAutoSave);
+        mSp.put(SP_KEY.IS_AUTO_SAVE, isAutoSave);
     }
 
     @Override
     public boolean isAutoSave() {
-        return mSP.getBoolean(SP_KEY.IS_AUTO_SAVE);
+        return mSp.getBoolean(SP_KEY.IS_AUTO_SAVE);
     }
 }

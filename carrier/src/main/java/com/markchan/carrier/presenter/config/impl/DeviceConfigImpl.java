@@ -11,19 +11,19 @@ public class DeviceConfigImpl implements DeviceConfig {
 
     private static final String CONFIG_NAME = "device";
 
-    private SPUtils mSP;
+    private SPUtils mSp;
 
     public DeviceConfigImpl() {
-        mSP = SPUtils.getInstance(CONFIG_NAME);
+        mSp = SPUtils.getInstance(CONFIG_NAME);
     }
 
     @Override
     public void setKeyboardHeight(int keyboardHeight) {
-        mSP.put(SP_KEY.KEY_BOARD_HEIGHT, keyboardHeight);
+        mSp.put(SP_KEY.KEY_BOARD_HEIGHT, keyboardHeight);
     }
 
     @Override
     public int getKeyboardHeight() {
-        return mSP.getInt(SP_KEY.KEY_BOARD_HEIGHT, 0);
+        return mSp.getInt(SP_KEY.KEY_BOARD_HEIGHT, 0);
     }
 }

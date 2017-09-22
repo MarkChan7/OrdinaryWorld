@@ -1,27 +1,32 @@
-package com.markchan.carrier.data.net;
+package com.markchan.carrier.data.net.impl;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
-import com.markchan.carrier.presenter.Constants;
+import com.markchan.carrier.data.CarrierDataConstant;
 import com.markchan.carrier.data.entity.FontEntity;
 import com.markchan.carrier.data.exception.NetworkConnectionException;
-
-import java.util.List;
-
+import com.markchan.carrier.data.net.RestApi;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
 
 /**
  * Created by Mark on 2017/7/16.
  */
 public class RestApiImpl implements RestApi {
+
+    interface FontService {
+
+        @GET("v1/jiantu_font.json")
+        Call<List<FontEntity>> getFontEntities();
+    }
 
     private Context mContext;
 
@@ -31,7 +36,7 @@ public class RestApiImpl implements RestApi {
     public RestApiImpl(Context context) {
         mContext = context;
         mRetrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_END_POINT)
+                .baseUrl(CarrierDataConstant.BASE_END_POINT)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

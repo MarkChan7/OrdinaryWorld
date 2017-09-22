@@ -5,8 +5,6 @@ package com.markchan.carrier.presenter;
  */
 public interface Constants {
 
-    String BASE_END_POINT = "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/";
-
     interface SP_KEY {
 
         String  KEY_BOARD_HEIGHT = "key_board_height";
