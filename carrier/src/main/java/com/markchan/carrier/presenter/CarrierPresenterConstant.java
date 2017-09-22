@@ -3,7 +3,7 @@ package com.markchan.carrier.presenter;
 /**
  * Created by Mark on 2017/7/15.
  */
-public interface Constants {
+public interface CarrierPresenterConstant {
 
     interface SP_KEY {
 
