@@ -7,7 +7,8 @@ import com.markchan.carrier.data.cache.FontEntityCache;
 import com.markchan.carrier.data.cache.FontEntityCacheImpl;
 import com.markchan.carrier.data.dao.FontEntityDao;
 import com.markchan.carrier.data.dao.FontEntityDapImpl;
-import com.markchan.carrier.data.entity.FontEntityDataMapper;
+import com.markchan.carrier.data.mapper.FontEntityAdapterDataMapper;
+import com.markchan.carrier.data.mapper.FontEntityDataMapper;
 import com.markchan.carrier.data.executor.JobExecutor;
 import com.markchan.carrier.data.net.RestApi;
 import com.markchan.carrier.data.net.impl.RestApiImpl;
@@ -48,6 +49,7 @@ public class Middleware {
      * data layer
      */
     private final FontEntityDataMapper mFontEntityDataMapper;
+    private final FontEntityAdapterDataMapper mFontEntityAdapterDataMapper;
     private final FontEntityDao mFontEntityDao;
     private final RestApi mRestApi;
     private final FontEntityCache mFontEntityCache;
@@ -71,8 +73,9 @@ public class Middleware {
         mContext = context.getApplicationContext();
 
         mFontEntityDataMapper = new FontEntityDataMapper();
+        mFontEntityAdapterDataMapper = new FontEntityAdapterDataMapper();
         mFontEntityDao = new FontEntityDapImpl(mFontEntityDataMapper);
-        mRestApi = new RestApiImpl(mContext);
+        mRestApi = new RestApiImpl(mContext, mFontEntityAdapterDataMapper);
         mFontEntityCache = new FontEntityCacheImpl(mFontEntityDao, mFontEntityDataMapper);
         mFontDataSourceFactory = new FontDataSourceFactory(mContext, mFontEntityCache, mRestApi,
                 mFontEntityDao);

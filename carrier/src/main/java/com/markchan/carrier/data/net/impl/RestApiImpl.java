@@ -5,7 +5,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import com.markchan.carrier.data.CarrierDataConstant;
 import com.markchan.carrier.data.entity.FontEntity;
+import com.markchan.carrier.data.entity.adapter.FontEntityAdapter;
 import com.markchan.carrier.data.exception.NetworkConnectionException;
+import com.markchan.carrier.data.mapper.FontEntityAdapterDataMapper;
 import com.markchan.carrier.data.net.RestApi;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -25,22 +27,21 @@ public class RestApiImpl implements RestApi {
     interface FontService {
 
         @GET("v1/jiantu_font.json")
-        Call<List<FontEntity>> getFontEntities();
+        Call<List<FontEntityAdapter>> getFontEntities();
     }
 
-    private Context mContext;
+    private final Context mContext;
+    private final FontService mFontService;
+    private final FontEntityAdapterDataMapper mAdapterDataMapper;
 
-    private Retrofit mRetrofit;
-    private FontService mFontService;
-
-    public RestApiImpl(Context context) {
+    public RestApiImpl(Context context, FontEntityAdapterDataMapper adapterDataMapper) {
         mContext = context;
-        mRetrofit = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(CarrierDataConstant.BASE_END_POINT)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-        mFontService = mRetrofit.create(FontService.class);
+        mFontService = retrofit.create(FontService.class);
+        mAdapterDataMapper = adapterDataMapper;
     }
 
     @Override
@@ -50,13 +51,13 @@ public class RestApiImpl implements RestApi {
             @Override
             public void subscribe(ObservableEmitter<List<FontEntity>> e) throws Exception {
                 if (isNetworkConnected()) {
-                    Call<List<FontEntity>> call = mFontService.getFontEntities();
+                    Call<List<FontEntityAdapter>> call = mFontService.getFontEntities();
                     try {
-                        Response<List<FontEntity>> response = call.execute();
+                        Response<List<FontEntityAdapter>> response = call.execute();
                         if (response.isSuccessful()) {
-                            List<FontEntity> fontEntities = response.body();
-                            if (fontEntities != null && !fontEntities.isEmpty()) {
-                                e.onNext(fontEntities);
+                            List<FontEntityAdapter> adapters = response.body();
+                            if (adapters != null && !adapters.isEmpty()) {
+                                e.onNext(mAdapterDataMapper.transform(adapters));
                                 e.onComplete();
                             } else {
                                 e.onError(new NetworkConnectionException());

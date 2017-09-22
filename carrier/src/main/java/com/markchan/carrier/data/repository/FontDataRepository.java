@@ -1,7 +1,7 @@
 package com.markchan.carrier.data.repository;
 
 import com.markchan.carrier.data.entity.FontEntity;
-import com.markchan.carrier.data.entity.FontEntityDataMapper;
+import com.markchan.carrier.data.mapper.FontEntityDataMapper;
 import com.markchan.carrier.data.repository.datasource.FontDataSourceFactory;
 import com.markchan.carrier.data.repository.datasource.FontDataStore;
 import com.markchan.carrier.domain.Font;

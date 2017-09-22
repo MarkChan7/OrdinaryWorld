@@ -1,7 +1,7 @@
 package com.markchan.carrier.data.dao;
 
 import com.markchan.carrier.data.entity.FontEntity;
-import com.markchan.carrier.data.entity.FontEntityDataMapper;
+import com.markchan.carrier.data.mapper.FontEntityDataMapper;
 import com.markchan.carrier.data.entity.FontEntity_Table;
 import com.markchan.carrier.domain.Font;
 import com.raizlabs.android.dbflow.sql.language.SQLite;

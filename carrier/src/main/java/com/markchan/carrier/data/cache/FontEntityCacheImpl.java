@@ -6,7 +6,7 @@ import com.blankj.utilcode.util.FileUtils;
 import com.markchan.carrier.domain.Scheme;
 import com.markchan.carrier.data.dao.FontEntityDao;
 import com.markchan.carrier.data.entity.FontEntity;
-import com.markchan.carrier.data.entity.FontEntityDataMapper;
+import com.markchan.carrier.data.mapper.FontEntityDataMapper;
 import com.markchan.carrier.domain.Font;
 
 import java.util.Iterator;

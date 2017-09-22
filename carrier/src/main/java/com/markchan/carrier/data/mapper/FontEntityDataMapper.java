@@ -1,5 +1,6 @@
-package com.markchan.carrier.data.entity;
+package com.markchan.carrier.data.mapper;
 
+import com.markchan.carrier.data.entity.FontEntity;
 import com.markchan.carrier.domain.Scheme;
 import com.markchan.carrier.domain.Font;
 
