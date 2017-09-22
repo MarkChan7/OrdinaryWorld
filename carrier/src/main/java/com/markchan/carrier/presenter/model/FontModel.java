@@ -5,7 +5,7 @@ package com.markchan.carrier.presenter.model;
  */
 public class FontModel {
 
-    private int id;
+    private Long id;
     private String displayName;
     private String postscriptName;
     private String thumbUrl;
@@ -14,8 +14,8 @@ public class FontModel {
     public FontModel() {
     }
 
-    public FontModel(int id, String displayName, String postscriptName, String thumbUrl,
-                     String uri) {
+    public FontModel(Long id, String displayName, String postscriptName, String thumbUrl,
+            String uri) {
         this.id = id;
         this.displayName = displayName;
         this.postscriptName = postscriptName;
@@ -23,11 +23,11 @@ public class FontModel {
         this.uri = uri;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

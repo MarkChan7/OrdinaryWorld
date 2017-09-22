@@ -10,9 +10,9 @@ import com.google.gson.annotations.SerializedName;
 public class FontEntityAdapter {
 
     @SerializedName("id")
-    private int id;
+    private long id;
     @SerializedName("order")
-    private int order;
+    private long order;
     @SerializedName("display_name")
     private String displayName;
     @SerializedName("postscript_name")
@@ -25,7 +25,7 @@ public class FontEntityAdapter {
     public FontEntityAdapter() {
     }
 
-    public FontEntityAdapter(int id, int order, String displayName, String postscriptName,
+    public FontEntityAdapter(long id, long order, String displayName, String postscriptName,
             String thumbUrl, String url) {
         this.id = id;
         this.order = order;
@@ -35,19 +35,19 @@ public class FontEntityAdapter {
         this.url = url;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getOrder() {
+    public long getOrder() {
         return order;
     }
 
-    public void setOrder(int order) {
+    public void setOrder(long order) {
         this.order = order;
     }
 

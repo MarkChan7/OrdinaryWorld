@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter.OnItemChildClickListener;
-import com.markchan.carrier.presenter.Middleware;
+import com.markchan.carrier.Middleware;
 import com.markchan.carrier.R;
 import com.markchan.carrier.presenter.core.PagerView;
 import com.markchan.carrier.domain.Font;

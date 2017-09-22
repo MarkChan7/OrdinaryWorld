@@ -7,5 +7,7 @@ package com.markchan.carrier.data;
  */
 public interface CarrierDataConstant {
 
+    String DB_NAME = "carrier_data";
+
     String BASE_END_POINT = "https://raw.githubusercontent.com/MarkChan7/OrdinaryWorld/master/res/";
 }

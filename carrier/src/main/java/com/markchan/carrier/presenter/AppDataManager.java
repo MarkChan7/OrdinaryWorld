@@ -1,5 +1,6 @@
 package com.markchan.carrier.presenter;
 
+import com.markchan.carrier.Middleware;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.cache.FontCache;
 import com.markchan.carrier.domain.dao.FontDao;
@@ -9,15 +10,15 @@ import com.markchan.carrier.presenter.model.FontModel;
 /**
  * Created by Mark on 2017/7/16.
  */
-public class DataManager {
+public class AppDataManager {
 
-    private static DataManager INSTANCE;
+    private static AppDataManager INSTANCE;
 
-    public static DataManager getDefault() {
+    public static AppDataManager getDefault() {
         if (INSTANCE == null) {
             synchronized (ConfigManager.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new DataManager();
+                    INSTANCE = new AppDataManager();
                 }
             }
         }
@@ -28,7 +29,7 @@ public class DataManager {
     private final FontCache mFontCache;
     private final FontModelDataMapper mFontModelDataMapper;
 
-    private DataManager() {
+    private AppDataManager() {
         mFonDao = Middleware.getDefault().getFontDao();
         mFontModelDataMapper = Middleware.getDefault().getFontModelDataMapper();
         mFontCache = Middleware.getDefault().getFontCache();

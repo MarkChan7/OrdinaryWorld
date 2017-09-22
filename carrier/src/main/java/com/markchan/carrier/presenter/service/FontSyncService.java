@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.markchan.carrier.presenter.Middleware;
+import com.markchan.carrier.Middleware;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.interactor.DefaultObserver;
 import com.markchan.carrier.domain.interactor.GetFontList;

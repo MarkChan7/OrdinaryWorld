@@ -3,6 +3,7 @@ package com.markchan.carrier.data.repository.datasource;
 import com.markchan.carrier.data.dao.FontEntityDao;
 import com.markchan.carrier.data.entity.FontEntity;
 
+import com.markchan.carrier.domain.CarrierDomainConstant.DATA_SOURCE;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -40,7 +41,7 @@ public class DatabaseFontDataSource implements FontDataStore {
 
             @Override
             public void subscribe(ObservableEmitter<List<FontEntity>> e) throws Exception {
-                e.onNext(mFontEntityDao.queryFontEntities());
+                e.onNext(mFontEntityDao.queryFontEntities(DATA_SOURCE.ALL));
                 e.onComplete();
             }
         });

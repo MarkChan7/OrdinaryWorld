@@ -21,8 +21,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter.OnItemClickListener;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadSampleListener;
 import com.liulishuo.filedownloader.FileDownloader;
-import com.markchan.carrier.presenter.DataManager;
-import com.markchan.carrier.presenter.Middleware;
+import com.markchan.carrier.presenter.AppDataManager;
+import com.markchan.carrier.Middleware;
 import com.markchan.carrier.R;
 import com.markchan.carrier.domain.Scheme;
 import com.markchan.carrier.domain.Font;
@@ -84,7 +84,7 @@ public class FontManagerActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        if (DataManager.getDefault().deleteFont(fontModel)) {
+                                        if (AppDataManager.getDefault().deleteFont(fontModel)) {
                                             ToastUtils.showShort("删除字体成功!");
                                         } else {
                                             ToastUtils.showShort("删除字体失败");
@@ -170,7 +170,7 @@ public class FontManagerActivity extends AppCompatActivity {
                             String oldUri = fontModel.getUri();
                             String uri = Scheme.FILE.wrap(targetFilePath);
                             fontModel.setUri(uri);
-                            if (DataManager.getDefault().updateFont(fontModel)) {
+                            if (AppDataManager.getDefault().updateFont(fontModel)) {
                                 mAdapter.removeDownloadingFontModel(fontModel, true);
                                 ToastUtils.showShort("Download Success");
                             } else {

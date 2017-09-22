@@ -1,17 +1,15 @@
 package com.markchan.carrier.data.repository;
 
+import android.support.annotation.NonNull;
 import com.markchan.carrier.data.entity.FontEntity;
 import com.markchan.carrier.data.mapper.FontEntityDataMapper;
 import com.markchan.carrier.data.repository.datasource.FontDataSourceFactory;
 import com.markchan.carrier.data.repository.datasource.FontDataStore;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.repository.FontRepository;
-
-import java.util.List;
-
 import io.reactivex.Observable;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
+import java.util.List;
 
 /**
  * Created by Mark on 2017/7/16.

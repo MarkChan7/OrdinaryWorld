@@ -1,15 +1,14 @@
-package com.markchan.carrier.presenter;
+package com.markchan.carrier;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-
 import com.markchan.carrier.data.cache.FontEntityCache;
 import com.markchan.carrier.data.cache.FontEntityCacheImpl;
 import com.markchan.carrier.data.dao.FontEntityDao;
-import com.markchan.carrier.data.dao.FontEntityDapImpl;
+import com.markchan.carrier.data.dao.impl.FontEntityDaoImpl;
+import com.markchan.carrier.data.executor.JobExecutor;
 import com.markchan.carrier.data.mapper.FontEntityAdapterDataMapper;
 import com.markchan.carrier.data.mapper.FontEntityDataMapper;
-import com.markchan.carrier.data.executor.JobExecutor;
 import com.markchan.carrier.data.net.RestApi;
 import com.markchan.carrier.data.net.impl.RestApiImpl;
 import com.markchan.carrier.data.repository.FontDataRepository;
@@ -19,6 +18,7 @@ import com.markchan.carrier.domain.dao.FontDao;
 import com.markchan.carrier.domain.executor.PostExecutionThread;
 import com.markchan.carrier.domain.executor.ThreadExecutor;
 import com.markchan.carrier.domain.repository.FontRepository;
+import com.markchan.carrier.presenter.UiThread;
 import com.markchan.carrier.presenter.mapper.FontModelDataMapper;
 
 /**
@@ -74,7 +74,7 @@ public class Middleware {
 
         mFontEntityDataMapper = new FontEntityDataMapper();
         mFontEntityAdapterDataMapper = new FontEntityAdapterDataMapper();
-        mFontEntityDao = new FontEntityDapImpl(mFontEntityDataMapper);
+        mFontEntityDao = new FontEntityDaoImpl(context, mFontEntityDataMapper);
         mRestApi = new RestApiImpl(mContext, mFontEntityAdapterDataMapper);
         mFontEntityCache = new FontEntityCacheImpl(mFontEntityDao, mFontEntityDataMapper);
         mFontDataSourceFactory = new FontDataSourceFactory(mContext, mFontEntityCache, mRestApi,

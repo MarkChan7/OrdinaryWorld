@@ -1,63 +1,59 @@
 package com.markchan.carrier.data.entity;
 
-import com.google.gson.annotations.SerializedName;
-import com.markchan.carrier.data.dao.AppDatabase;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.NotNull;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.DaoException;
 
 /**
  * Created by Mark on 2017/7/16.
  */
-@Table(database = AppDatabase.class)
-public class FontEntity extends BaseModel {
+@Entity(active = true)
+public class FontEntity {
 
-    @PrimaryKey
-    private int id;
-    @Column
-    private int order;
-    @Column
-    @SerializedName("display_name")
+    @Id
+    private Long id;
+    private long order;
     private String displayName;
-    @SerializedName("postscript_name")
-    @Column
     private String postscriptName;
-    @Column
-    @SerializedName("thumbnail_url")
     private String thumbUrl;
-    @Column
-    private String url;
-    @Column
+    @NotNull
     private String uri;
+    /** Used to resolve relations */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
+    /** Used for active entity operations. */
+    @Generated(hash = 968580428)
+    private transient FontEntityDao myDao;
 
     public FontEntity() {
     }
 
-    public FontEntity(int id, int order, String displayName, String postscriptName,
-                      String thumbUrl, String url, String uri) {
+    @Generated(hash = 1455807242)
+    public FontEntity(Long id, long order, String displayName,
+            String postscriptName, String thumbUrl, @NotNull String uri) {
         this.id = id;
         this.order = order;
         this.displayName = displayName;
         this.postscriptName = postscriptName;
         this.thumbUrl = thumbUrl;
-        this.url = url;
         this.uri = uri;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getOrder() {
+    public long getOrder() {
         return order;
     }
 
-    public void setOrder(int order) {
+    public void setOrder(long order) {
         this.order = order;
     }
 
@@ -85,19 +81,54 @@ public class FontEntity extends BaseModel {
         this.thumbUrl = thumbUrl;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getUri() {
         return uri;
     }
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 128553479)
+    public void delete() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.delete(this);
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 1942392019)
+    public void refresh() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.refresh(this);
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 713229351)
+    public void update() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.update(this);
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 240359045)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getFontEntityDao() : null;
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface FontEntityCache extends FontCache {
 
-    FontEntity getDownloadedFontEntity(final int fontId);
+    FontEntity getDownloadedFontEntity(final long fontId);
 
     List<FontEntity> getDownloadedFontEntities();
 
@@ -18,7 +18,7 @@ public interface FontEntityCache extends FontCache {
 
     boolean deleteDownloadedFontEntity(FontEntity fontEntity);
 
-    boolean isFontEntityDownloaded(final int fontId);
+    boolean isFontEntityDownloaded(final long fontId);
 
     void deleteAllDownloadedFontEntities();
 }

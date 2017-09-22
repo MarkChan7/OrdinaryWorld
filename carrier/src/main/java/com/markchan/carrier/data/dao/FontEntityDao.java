@@ -14,19 +14,11 @@ public interface FontEntityDao extends FontDao {
 
     boolean updateFontEntity(FontEntity fontEntity);
 
-    boolean insertOrReplaceFontEntity(FontEntity fontEntity);
-
-    boolean insertOrUpdateFontEntity(FontEntity fontEntity);
+    boolean save(FontEntity fontEntity);
 
     boolean deleteFontEntity(FontEntity fontEntity);
 
-    FontEntity queryFontEntityById(final int fontId);
+    FontEntity queryFontEntityById(final long fontId);
 
-    FontEntity queryDownloadedFontEntityById(final int fontId);
-
-    List<FontEntity> queryFontEntities();
-
-    List<FontEntity> queryDownloadedFontEntities();
-
-    List<FontEntity> queryOnlineFontEntities();
+    List<FontEntity> queryFontEntities(final int dataSource);
 }

@@ -1,9 +1,8 @@
-package com.markchan.carrier.presenter;
+package com.markchan.carrier;
 
 import android.app.Application;
 import com.blankj.utilcode.util.Utils;
 import com.liulishuo.filedownloader.FileDownloader;
-import com.raizlabs.android.dbflow.config.FlowManager;
 import timber.log.Timber;
 import timber.log.Timber.DebugTree;
 
@@ -19,7 +18,6 @@ public class CarrierApplication extends Application {
         super.onCreate();
         Utils.init(getApplicationContext());
         Timber.plant(new DebugTree());
-        FlowManager.init(this);
         FileDownloader.setup(this);
         Middleware.handleApplicationContext(this);
     }
