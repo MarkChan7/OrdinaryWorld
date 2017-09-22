@@ -5,13 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-
 import com.markchan.carrier.Middleware;
+import com.markchan.carrier.domain.CarrierDomainConstant.DATA_SOURCE;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.interactor.DefaultObserver;
 import com.markchan.carrier.domain.interactor.GetFontList;
-import com.markchan.carrier.domain.interactor.GetFontList.Params;
-
 import java.util.List;
 
 /**
@@ -42,7 +40,7 @@ public class FontSyncService extends Service {
                                      // no-op by default
                                  }
                              },
-                GetFontList.Params.forFonts(Params.DATA_SOURCE_ONLINE));
+                GetFontList.Params.create(DATA_SOURCE.ONLINE));
 
         return super.onStartCommand(intent, flags, startId);
     }

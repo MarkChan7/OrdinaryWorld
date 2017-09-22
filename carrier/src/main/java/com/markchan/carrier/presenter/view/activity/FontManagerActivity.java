@@ -12,7 +12,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -21,26 +23,22 @@ import com.chad.library.adapter.base.BaseQuickAdapter.OnItemClickListener;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadSampleListener;
 import com.liulishuo.filedownloader.FileDownloader;
-import com.markchan.carrier.presenter.AppDataManager;
 import com.markchan.carrier.Middleware;
 import com.markchan.carrier.R;
-import com.markchan.carrier.domain.Scheme;
+import com.markchan.carrier.domain.CarrierDomainConstant.DATA_SOURCE;
 import com.markchan.carrier.domain.Font;
+import com.markchan.carrier.domain.Scheme;
 import com.markchan.carrier.domain.interactor.DefaultObserver;
 import com.markchan.carrier.domain.interactor.GetFontList;
 import com.markchan.carrier.domain.interactor.GetFontList.Params;
+import com.markchan.carrier.presenter.AppDataManager;
 import com.markchan.carrier.presenter.mapper.FontModelDataMapper;
 import com.markchan.carrier.presenter.model.FontModel;
-import com.markchan.carrier.presenter.view.adapter.FontManagerAdapter;
 import com.markchan.carrier.presenter.util.CacheDirHelper;
-
+import com.markchan.carrier.presenter.view.adapter.FontManagerAdapter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class FontManagerActivity extends AppCompatActivity {
 
@@ -134,7 +132,7 @@ public class FontManagerActivity extends AppCompatActivity {
                 Middleware.getDefault().getThreadExecutor(),
                 Middleware.getDefault().getPostExecutionThread());
 
-        useCase.execute(new FontListObserver(), Params.forFonts(Params.DATA_SOURCE_DATABASE));
+        useCase.execute(new FontListObserver(), Params.create(DATA_SOURCE.ALL));
     }
 
     private void downloadFont(final FontModel fontModel) {

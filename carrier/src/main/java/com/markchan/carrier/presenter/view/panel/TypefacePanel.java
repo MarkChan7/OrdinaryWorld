@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter.OnItemChildClickListener;
 import com.markchan.carrier.Middleware;
 import com.markchan.carrier.R;
+import com.markchan.carrier.domain.CarrierDomainConstant.DATA_SOURCE;
 import com.markchan.carrier.presenter.core.PagerView;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.interactor.DefaultObserver;
@@ -78,7 +79,7 @@ public class TypefacePanel extends AbsPanel implements OnItemSelectedListener {
                 Middleware.getDefault().getThreadExecutor(),
                 Middleware.getDefault().getPostExecutionThread());
 
-        useCase.execute(new FontListObserver(), Params.forFonts(Params.DATA_SOURCE_DOWNLOADED));
+        useCase.execute(new FontListObserver(), Params.create(DATA_SOURCE.ASSET_AND_SDCARD));
     }
 
     private final class FontListObserver extends DefaultObserver<List<Font>> {

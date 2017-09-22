@@ -1,11 +1,10 @@
 package com.markchan.carrier.data.repository.datasource;
 
 import android.content.Context;
-
 import com.markchan.carrier.data.cache.FontEntityCache;
 import com.markchan.carrier.data.dao.FontEntityDao;
 import com.markchan.carrier.data.net.RestApi;
-import com.markchan.carrier.domain.interactor.GetFontList.Params;
+import com.markchan.carrier.domain.CarrierDomainConstant.DATA_SOURCE;
 
 /**
  * Created by Mark on 2017/7/16.
@@ -17,7 +16,7 @@ public class FontDataSourceFactory {
     private final FontEntityCache mFontEntityCache;
 
     public FontDataSourceFactory(Context context, FontEntityCache fontEntityCache, RestApi restApi,
-                                 FontEntityDao fontEntityDao) {
+            FontEntityDao fontEntityDao) {
         mFontEntityCache = fontEntityCache;
         mRestApi = restApi;
         mFontEntityDao = fontEntityDao;
@@ -38,9 +37,9 @@ public class FontDataSourceFactory {
     }
 
     public FontDataStore createByDataSource(final int dataSource) {
-        if (dataSource == Params.DATA_SOURCE_DOWNLOADED) {
+        if (dataSource == DATA_SOURCE.ASSET_AND_SDCARD) {
             return createDiskDataSource();
-        } else if (dataSource == Params.DATA_SOURCE_ONLINE) {
+        } else if (dataSource == DATA_SOURCE.ONLINE) {
             return createCloudDataSource();
         } else {
             return new DatabaseFontDataSource(mFontEntityDao);

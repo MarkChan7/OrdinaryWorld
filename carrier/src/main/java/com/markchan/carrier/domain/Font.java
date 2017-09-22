@@ -14,8 +14,7 @@ public class Font {
     public Font() {
     }
 
-    public Font(Long id, String displayName, String postscriptName, String thumbUrl,
-            String uri) {
+    public Font(Long id, String displayName, String postscriptName, String thumbUrl, String uri) {
         this.id = id;
         this.displayName = displayName;
         this.postscriptName = postscriptName;

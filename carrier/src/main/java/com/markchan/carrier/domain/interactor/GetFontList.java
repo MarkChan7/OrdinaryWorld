@@ -17,7 +17,7 @@ public class GetFontList extends UseCase<List<Font>, GetFontList.Params> {
     private final FontRepository mFontRepository;
 
     public GetFontList(FontRepository fontRepository, ThreadExecutor threadExecutor,
-                       PostExecutionThread postExecutionThread) {
+            PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
         mFontRepository = fontRepository;
     }
@@ -29,18 +29,14 @@ public class GetFontList extends UseCase<List<Font>, GetFontList.Params> {
 
     public static final class Params {
 
-        public static final int DATA_SOURCE_DATABASE = 0;
-        public static final int DATA_SOURCE_DOWNLOADED = 1;
-        public static final int DATA_SOURCE_ONLINE = 2;
+        public static Params create(int dataSource) {
+            return new Params(dataSource);
+        }
 
         private final int dataSource;
 
         private Params(int dataSource) {
             this.dataSource = dataSource;
-        }
-
-        public static Params forFonts(int dataSource) {
-            return new Params(dataSource);
         }
     }
 }

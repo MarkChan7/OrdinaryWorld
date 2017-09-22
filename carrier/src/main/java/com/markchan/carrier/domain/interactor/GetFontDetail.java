@@ -29,14 +29,14 @@ public class GetFontDetail extends UseCase<Font, GetFontDetail.Params> {
 
     public static final class Params {
 
+        public static Params create(int fontId) {
+            return new Params(fontId);
+        }
+
         private final int fontId;
 
         private Params(int fontId) {
             this.fontId = fontId;
-        }
-
-        public static Params forFont(int fontId) {
-            return new Params(fontId);
         }
     }
 }
