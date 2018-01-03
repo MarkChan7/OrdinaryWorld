@@ -31,7 +31,7 @@ import com.github.florent37.viewanimator.AnimationListener.Stop;
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.markchan.carrier.R;
 import com.markchan.carrier.domain.Scheme;
-import com.markchan.carrier.presenter.ConfigManager;
+import com.markchan.carrier.presenter.config.ConfigManager;
 import com.markchan.carrier.presenter.core.PagerView;
 import com.markchan.carrier.presenter.core.PagerView.OnDragTextListener;
 import com.markchan.carrier.presenter.core.PagerView.OnTextTapListener;

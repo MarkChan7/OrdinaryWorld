@@ -1,7 +1,5 @@
-package com.markchan.carrier.presenter;
+package com.markchan.carrier.presenter.config;
 
-import com.markchan.carrier.presenter.config.AppConfig;
-import com.markchan.carrier.presenter.config.DeviceConfig;
 import com.markchan.carrier.presenter.config.impl.AppConfigImpl;
 import com.markchan.carrier.presenter.config.impl.DeviceConfigImpl;
 

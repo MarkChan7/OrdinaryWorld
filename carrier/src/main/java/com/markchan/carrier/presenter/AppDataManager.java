@@ -4,6 +4,7 @@ import com.markchan.carrier.Middleware;
 import com.markchan.carrier.domain.Font;
 import com.markchan.carrier.domain.cache.FontCache;
 import com.markchan.carrier.domain.dao.FontDao;
+import com.markchan.carrier.presenter.config.ConfigManager;
 import com.markchan.carrier.presenter.mapper.FontModelDataMapper;
 import com.markchan.carrier.presenter.model.FontModel;
 
